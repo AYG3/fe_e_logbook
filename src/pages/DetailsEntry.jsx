@@ -9,6 +9,7 @@ const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
   const [extra, setExtra] = useState('');
   const [extraText, setExtraText] = useState('')
+  const [textArea, setTextArea] = useState()
   const { entryId } = useParams();
 
   const [day, setDay] = useState('');
@@ -169,6 +170,7 @@ const DetailsEntry = () => {
         <textarea
           name="extra"
           rows="3"
+          ref={textArea}
             onChange={(e) => setExtraText(e.target.value)}
           className=" border-2 border-slate-300 w-full md:w-2/3 outline-none p-2 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
           placeholder="Enter extra info here"
