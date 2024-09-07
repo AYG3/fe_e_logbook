@@ -34,6 +34,8 @@ const DetailsEntry = () => {
     fetchEntry();
   }, [id]);
 
+    
+
   if (!entry) {
     return <div>Loading...</div>;
   }
