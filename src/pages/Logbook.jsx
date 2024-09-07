@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MdOutlineDelete } from "react-icons/md";
+import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Logbook = () => {
   const [entries, setEntries] = useState();
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -26,7 +26,7 @@ const Logbook = () => {
           }
         );
 
-        setUser(res.data);
+        // setUser(res.data);
         console.log("User data: ", res.data);
       } catch (error) {
         console.log("Error fetching user details", error);
@@ -62,11 +62,17 @@ const Logbook = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto">
-      <div className=" flex flex-col  p-4">
-        <h1 className="text-3xl mb-5  "> E-logbook</h1>
+    <div className="overflow-x-auto ">
 
-        <table className="w-full border border-seperate border-spacing-2 table-auto ">
+      <div className=" flex flex-col  p-4">
+        <h1 className="text-3xl"> E-logbook</h1>
+        <div className="flex justify-end">
+          <Link to="logbook/create" className="text-3xl my-8 ">
+            <MdOutlineAddBox className="text-4xl text-sky-800 " />
+          </Link>
+        </div>
+
+        <table className="w-full border border-separate border-spacing-2 table-auto ">
           <thead>
             <tr>
               <th className="border border-slate-600 rounded-md">No</th>
@@ -93,13 +99,13 @@ const Logbook = () => {
 
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
-                      <Link to="" className="text-2x1 text-green-800">
+                      <Link to={`/details/${entry._id}`} className="text-2x1 text-green-800">
                         <BsInfoCircle />
                       </Link>
-                      <Link to="" className="text-2x1 text-yellow-600">
+                      <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
                         <AiOutlineEdit />
                       </Link>
-                      <Link to="" className="text-2x1 text-red-600">
+                      <Link to={`/delete/${entry._id}`} className="text-2x1 text-red-600">
                         <MdOutlineDelete />
                       </Link>
                     </div>

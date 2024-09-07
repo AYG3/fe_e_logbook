@@ -33,7 +33,7 @@ const CreateEntry = () => {
             }
         }).then(() => {
             console.log('Entry created successfully')
-            navigate('/')
+            navigate('/logbooks')
         })
         .catch((error) => {
             console.log(error)
