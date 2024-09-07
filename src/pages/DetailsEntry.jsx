@@ -85,6 +85,10 @@ const DetailsEntry = () => {
     }
   };
 
+  const handleEditExtra = (e) => {
+    setTextArea(e.target.value)
+  }
+
   if (!entry) {
     return <div>Loading...</div>;
   }
@@ -148,7 +152,9 @@ const DetailsEntry = () => {
                 <p className="my-4 text-slate-600">{line}</p>
                 <div className="space-x-4 flex ">
                   <button className="py-1 px-3 rounded-sm bg-yellow-100 hover:bg-yellow-200">
-                    <AiOutlineEdit className="text-yellow-500" />
+                    <AiOutlineEdit
+                    onClick={handleEditExtra}
+                    className="text-yellow-500" />
                   </button>
                   <button className="py-1 px-3 rounded-sm bg-red-100 hover:bg-red-200">
                     <MdOutlineDelete className="text-red-500" />
