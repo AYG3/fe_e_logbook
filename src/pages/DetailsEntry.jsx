@@ -153,7 +153,7 @@ const DetailsEntry = () => {
                 <div className="space-x-4 flex ">
                   <button className="py-1 px-3 rounded-sm bg-yellow-100 hover:bg-yellow-200">
                     <AiOutlineEdit
-                    onClick={handleEditExtra}
+                    onClick={(e)=>handleEditExtra(e)}
                     className="text-yellow-500" />
                   </button>
                   <button className="py-1 px-3 rounded-sm bg-red-100 hover:bg-red-200">
