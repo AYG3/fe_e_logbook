@@ -73,9 +73,9 @@ const DetailsEntry = () => {
           },
         })
 
-        if (res.ok){
+        if (res.status !== 200){
             console.log('Error updating extra: ', res.data)
-        }else{
+        } else {
             console.log('Succesfully updated extra')
         }
 
