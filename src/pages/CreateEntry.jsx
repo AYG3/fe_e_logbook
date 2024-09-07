@@ -16,8 +16,9 @@ const CreateEntry = () => {
     const handleCreateEntry = () => {
         const token = localStorage.getItem('token')
         console.log("token: ", token)
-
+        
         const userId = localStorage.getItem('userId')
+        console.log("userId: ", userId)
 
         const data = {
             day,
