@@ -47,7 +47,7 @@ const EditEntry = () => {
         }
 
         const token = localStorage.getItem('token')
-        console.log('Put request token'. token);
+        console.log('Put request token', token);
 
         const res = await axios.put(`http://localhost:4444/logbook/editLogbook/${id}`, data, {
             headers: {

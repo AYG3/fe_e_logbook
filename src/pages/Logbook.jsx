@@ -67,7 +67,7 @@ const Logbook = () => {
       <div className=" flex flex-col  p-4">
         <h1 className="text-3xl"> E-logbook</h1>
         <div className="flex justify-end">
-          <Link to="logbook/create" className="text-3xl my-8 ">
+          <Link to="/create" className="text-3xl my-8 ">
             <MdOutlineAddBox className="text-4xl text-sky-800 " />
           </Link>
         </div>
@@ -84,14 +84,15 @@ const Logbook = () => {
             </tr>
           </thead>
           <tbody>
-            {entries?.map((entry) => {
+            {entries?.map((entry, index) => {
               return (
                 <tr key={entry._id}>
                   <td className="border border-slate-700 rounded-md text-center">
-                    {entry.id}
+                    {index + 1}
                   </td>
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {entry.day}
+                  <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
+                    <p>{entry.day}</p>
+                    <p>{entry.date}</p>
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     {entry.nature_of_activities}
