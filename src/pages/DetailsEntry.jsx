@@ -34,7 +34,15 @@ const DetailsEntry = () => {
     fetchEntry();
   }, [id]);
 
-    
+  const handleExtra = async () => {
+    try {
+        const res = await axios.post(`http://localhost:4444/`)
+    } catch (error) {
+        
+    }
+  }
+
+
 
   if (!entry) {
     return <div>Loading...</div>;
