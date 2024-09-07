@@ -36,7 +36,7 @@ const DetailsEntry = () => {
 
   const handleExtra = async () => {
     try {
-        const res = await axios.post(`http://localhost:4444/`)
+        const res = await axios.post(`http://localhost:4444/logbook/userLogbook/${id}`)
     } catch (error) {
         
     }
