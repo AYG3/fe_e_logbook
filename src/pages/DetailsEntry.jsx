@@ -9,7 +9,7 @@ const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
   const [extra, setExtra] = useState('');
   const [extraText, setExtraText] = useState('')
-  const { id } = useParams();
+  const { entryId } = useParams();
 
   const [day, setDay] = useState('');
   const [nature_of_activities, setNAtureOfActivities] = useState('');
@@ -25,7 +25,7 @@ const DetailsEntry = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:4444/logbook/userLogbook/${id}`,
+          `http://localhost:4444/logbook/userLogbook/${entryId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -35,6 +35,7 @@ const DetailsEntry = () => {
 
         console.log(res.data);
         setEntry(res.data);
+        setExtra(res.data.extra)
         setDate(res.data.date)
         setNAtureOfActivities(res.data.nature_of_activities)
         setDay(res.data.day)
@@ -45,7 +46,7 @@ const DetailsEntry = () => {
     };
 
     fetchEntry();
-  }, [id]);
+  }, [entryId]);
 
   const handleExtraText = (e) => {
     setExtra((prevExtra) => 
@@ -62,10 +63,10 @@ const DetailsEntry = () => {
         extra,
       };
       const token = localStorage.getItem("token");
-      console.log('id: ', id)
+      console.log('entryId: ', entryId)
 
       const res = await axios.put(
-        `http://localhost:4444/logbook/userLogbook/${id}`,
+        `http://localhost:4444/logbook/editLogbook/${entryId}`,
         data,
         {
           headers: {
