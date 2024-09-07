@@ -20,11 +20,11 @@ export const handleSubmitLogin = async (e, formData, navigate) => {
 
     } else {
       console.log("Login successful:");
-      alert("Login successful:");
-
+      
       console.log(res.data)
       localStorage.setItem('token', res.data.token)
-
+      
+      alert("Login successful:");
       navigate('/logbooks')
     }
   } catch (error) {

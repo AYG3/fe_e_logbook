@@ -10,16 +10,17 @@ const Logbook = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        
+
         console.log('token: ', token)
-        const res = await axios.get("http://localhost:4444/auth/user", {
+        
+        const res = await axios.get(`http://localhost:4444/auth/user/${user._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        console.log("User data: ", res.data);
+        
         setUser(res.data);    
+        console.log("User data: ", res.data);
 
       } catch (error) {
         console.log("Error fetching user details", error)
