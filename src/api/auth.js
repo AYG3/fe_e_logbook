@@ -23,6 +23,7 @@ export const handleSubmitLogin = async (e, formData, navigate) => {
       
       console.log(res.data)
       localStorage.setItem('token', res.data.token)
+      localStorage.setItem('userId', res.data._id)
       
       alert("Login successful:");
       navigate('/logbooks')
