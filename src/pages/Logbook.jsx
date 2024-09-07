@@ -33,7 +33,7 @@ const Logbook = () => {
       try {
         const token = window.localStorage.getItem("token");
         const res = await axios.get(
-          `http//:localhost:4444/userLogbooks/${user.id}`,
+          // `http//:localhost:4444/userLogbooks/${user.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -42,9 +42,12 @@ const Logbook = () => {
         );
 
         setEntries(res.data.data);
+
       } catch (error) {}
     };
-  });
+
+    fetchEntries()
+  }, []);
 
   return (
     <div className="overflow-x-auto">
@@ -60,7 +63,14 @@ const Logbook = () => {
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+        {entries.map((entry, index) => (
+          <tr key = {index}>
+            <td>{entry.id}</td>
+            <td>{entry.day}</td>
+            <td>{entry.nature_of_activities}</td>
+          </tr>
+
+        ))}
         </tbody>
       </table>
     </div>
