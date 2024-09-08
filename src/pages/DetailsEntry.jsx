@@ -7,9 +7,9 @@ import BackButton from "../components/BackButton";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
-  const [extra, setExtra] = useState('');
+  const [extra, setExtra] = useState(['']);
   const [extraText, setExtraText] = useState('')
-  const [textArea, setTextArea] = useState()
+  const [textArea, setTextArea] = useState('')
   const { entryId } = useParams();
 
   const [day, setDay] = useState('');
@@ -86,8 +86,8 @@ const DetailsEntry = () => {
     }
   };
 
-  const handleEditExtra = (e) => {
-    setTextArea(e.target.value)
+  const handleEditExtra = (index) => {
+    setTextArea(extra[index])
   }
 
   if (!entry) {
@@ -170,8 +170,8 @@ const DetailsEntry = () => {
         <textarea
           name="extra"
           rows="3"
-          ref={textArea}
-            onChange={(e) => setExtraText(e.target.value)}
+          value={textArea}
+          onChange={(e) => setExtraText(e.target.value)}
           className=" border-2 border-slate-300 w-full md:w-2/3 outline-none p-2 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
           placeholder="Enter extra info here"
         ></textarea>
@@ -182,6 +182,14 @@ const DetailsEntry = () => {
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
         >
           Update
+        </button>
+
+        <button
+          type="submit"
+          onClick={handleExtraText}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+        >
+          Update Former Entry
         </button>
 
         <button
