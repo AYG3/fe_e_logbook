@@ -237,10 +237,10 @@ return (
 
       <button
         type="submit"
-        onClick={handleExtraText}
+        onClick={editIndex ==null ?handleExtraText: handleExtra}
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
       >
-        Update
+        {editIndex !== null ? 'Update' : "Add"}
       </button>
 
       <button
