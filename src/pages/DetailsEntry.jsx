@@ -4,27 +4,28 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import Loading from "../components/Loading";
+
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
   const [extra, setExtra] = useState(['']);
   const [extraText, setExtraText] = useState('')
   const [textArea, setTextArea] = useState('')
+  const [del, setDel] = useState(null)
   const { entryId } = useParams();
+  const [editIndex, setEditIndex] = useState(null)
 
   const [day, setDay] = useState('');
   const [nature_of_activities, setNAtureOfActivities] = useState('');
   const [date, setDate] = useState('');
 
-
   
-
+  //Fetches initial entry
   useEffect(() => {
     const fetchEntry = async () => {
-      const token = localStorage.getItem("token");
-
-
       try {
+        const token = localStorage.getItem("token");
         const res = await axios.get(
           `http://localhost:4444/logbook/userLogbook/${entryId}`,
           {
@@ -49,14 +50,26 @@ const DetailsEntry = () => {
     fetchEntry();
   }, [entryId]);
 
+  //Updates extra on the client side
   const handleExtraText = (e) => {
-    setExtra((prevExtra) => 
-        [...prevExtra, extraText],
-    )     
+    setExtra((prevExtra) => [...prevExtra, textArea])     
 }
 
+//Handle creating extra and updating an extra
   const handleExtra = async () => {
     try {
+      if(editIndex !== null ){
+        setExtra((prevExtra) => {
+          const newExtra = [...prevExtra];
+          newExtra[editIndex] = textArea;
+          setExtra(newExtra)
+        })
+        setEditIndex(null);
+        setTextArea('');
+      }
+      
+
+
       const data = {
         day,
         nature_of_activities,
@@ -86,12 +99,51 @@ const DetailsEntry = () => {
     }
   };
 
+
+  //Handle edit extra
   const handleEditExtra = (index) => {
+    setEditIndex(index)
     setTextArea(extra[index])
   }
 
+  //Delete an extra text
+  const handleDeleteExtra = async (index) => {
+      setExtra((prevExtra) => {
+        const newExtra = [...prevExtra]
+        newExtra.splice(index, 1)
+        setExtra(newExtra)
+        console.log('After delete extra: ', newExtra)
+      })
+
+      try {
+
+        const data = {
+          day,
+          nature_of_activities,
+          date,
+          extra
+        }
+        const token = localStorage.getItem('token')
+        console.log("Token: ", token)
+        const res = await axios.put(`http://localhost:4444/logbook/editLogbook/${entryId}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        if (res.status !== 200){
+          console.log('Error deleting extra', res.data)
+        }
+        else{
+          console.log('Suceesfully deleted extra', res.data)
+        }
+      } catch (error) {
+        console.log('Error deleting extra catch: ', error) 
+      }
+  }
+
   if (!entry) {
-    return <div>Loading...</div>;
+    return <div><Loading /></div>;
   }
 
   return (
@@ -154,11 +206,12 @@ const DetailsEntry = () => {
                 <div className="space-x-4 flex ">
                   <button className="py-1 px-3 rounded-sm bg-yellow-100 hover:bg-yellow-200">
                     <AiOutlineEdit
-                    //why index
                     onClick={()=>handleEditExtra(index)}
                     className="text-yellow-500" />
                   </button>
-                  <button className="py-1 px-3 rounded-sm bg-red-100 hover:bg-red-200">
+                  <button
+                  onClick={()=>handleDeleteExtra(index)}
+                  className="py-1 px-3 rounded-sm bg-red-100 hover:bg-red-200">
                     <MdOutlineDelete className="text-red-500" />
                   </button>
                 </div>
@@ -171,7 +224,7 @@ const DetailsEntry = () => {
           name="extra"
           rows="3"
           value={textArea}
-          onChange={(e) => setExtraText(e.target.value)}
+          onChange={(e) => setTextArea(e.target.value)}
           className=" border-2 border-slate-300 w-full md:w-2/3 outline-none p-2 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
           placeholder="Enter extra info here"
         ></textarea>
@@ -182,14 +235,6 @@ const DetailsEntry = () => {
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
         >
           Update
-        </button>
-
-        <button
-          type="submit"
-          onClick={handleExtraText}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Update Former Entry
         </button>
 
         <button
