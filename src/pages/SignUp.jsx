@@ -1,32 +1,32 @@
-"use client"
-import React, { useState } from 'react';
-import { handleSubmitSignUp } from '../api/auth.js';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+"use client";
+import React, { useState } from "react";
+import { handleSubmitSignUp } from "../api/auth.js";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-
-  
   const [formData, setFormData] = useState({
-    fname: '',
-    lname: '',
-    email: '',
-    password: '',
-  })
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
 
-  const handleChange = (e) =>{
-    const {name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setFormData((prevData) => ({
-      ...prevData, [name]: value
-    }))
-  }
-  
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (e) => {
-    handleSubmitSignUp(e, formData, navigate)
-  }
+    e.preventDefault(); // Prevent default form submission behavior
+    handleSubmitSignUp(formData, navigate);
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -34,7 +34,10 @@ const SignUp = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="firstName"
+            >
               First Name
             </label>
             <input
@@ -47,7 +50,10 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="lastName"
+            >
               Last Name
             </label>
             <input
@@ -60,7 +66,10 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -73,7 +82,10 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -93,7 +105,14 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <div> Already have an account <Link to='/login' className='text-blue-600 hover:underline'  > Login</Link></div>
+            <div>
+              {" "}
+              Already have an account{" "}
+              <Link to="/login" className="text-blue-600 hover:underline">
+                {" "}
+                Login
+              </Link>
+            </div>
           </div>
         </form>
       </div>
