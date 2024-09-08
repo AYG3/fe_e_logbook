@@ -1,31 +1,29 @@
-"use client"
-import React, { useState } from 'react';
-import { handleSubmitLogin } from '../api/auth.js'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { handleSubmitLogin } from "../api/auth.js";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-const [formData, setFormData] = useState({
-  email: '',
-  password: '',
-})
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-  setFormData((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
-};
-
-const handleSubmit = (e) => {
-  handleSubmitLogin(e, formData, navigate);
-}
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    handleSubmitLogin(formData, navigate);
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -33,7 +31,10 @@ const handleSubmit = (e) => {
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -46,7 +47,10 @@ const handleSubmit = (e) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -64,9 +68,13 @@ const handleSubmit = (e) => {
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Login
-
             </button>
-              <div>Don't have an account <Link  to='/signup' className='text-blue-600 hover:underline'>Sign up</Link></div>
+            <div>
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-blue-600 hover:underline">
+                Sign up
+              </Link>
+            </div>
           </div>
         </form>
       </div>
