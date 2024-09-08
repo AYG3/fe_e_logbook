@@ -8,9 +8,12 @@ import CreateEntry from './pages/CreateEntry';
 import EditEntry from './pages/EditEntry';
 import DeleteEntry from './pages/DeleteEntry';
 import DetailsEntry from './pages/DetailsEntry';
+import { Toaster } from 'sonner';
 
 const App = () => {
   return (
+    <>
+      <Toaster />
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/login' element={<Login />}/>
@@ -21,6 +24,7 @@ const App = () => {
       <Route path='/edit/:id' element={<EditEntry/>}/>
       <Route path='/delete/:id' element={<DeleteEntry/>}/>
     </Routes>
+    </>
   )
 }
 
