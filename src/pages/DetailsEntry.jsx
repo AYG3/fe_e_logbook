@@ -165,7 +165,7 @@ return (
       <tbody>
         <tr key={entry.id}>
           <td className="border border-slate-700 rounded-md text-center">
-            {entry.id}
+            {entry.date}
           </td>
           <td className="border border-slate-700 rounded-md text-center">
             {entry.day}

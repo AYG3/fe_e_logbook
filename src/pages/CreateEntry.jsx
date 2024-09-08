@@ -1,14 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton.jsx';
 
 
 const CreateEntry = () => {
 
-    const [day, setDay] = useState();
+    const [day, setDay] = useState(new Date().toLocaleDateString('en-US', { weekday: 'long'}));
     const [nature_of_activities, setNAtureOfActivities] = useState();
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(new Date().toLocaleDateString());
 
     const navigate = useNavigate()
 

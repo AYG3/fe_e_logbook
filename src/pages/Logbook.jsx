@@ -63,7 +63,6 @@ const Logbook = () => {
 
   return (
     <div className="overflow-x-auto ">
-
       <div className=" flex flex-col  p-4">
         <h1 className="text-3xl"> E-logbook</h1>
         <div className="flex justify-end">
@@ -86,33 +85,46 @@ const Logbook = () => {
           <tbody>
             {entries?.map((entry, index) => {
               return (
-                <tr key={entry._id}>
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {index + 1}
-                  </td>
-                  <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
-                    <p>{entry.day}</p>
-                    <p>{entry.date}</p>
-                  </td>
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {entry.nature_of_activities}
-                  </td>
-
-                  <td className="border border-slate-700 rounded-md text-center">
-                    <div className="flex justify-center gap-4">
-                      <Link to={`/details/${entry._id}`} className="text-2x1 text-green-800">
-                        <BsInfoCircle />
-                      </Link>
-                      <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
-                        <AiOutlineEdit />
-                      </Link>
-                      <Link to={`/delete/${entry._id}`} className="text-2x1 text-red-600">
-                        <MdOutlineDelete />
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
+              <React.Fragment key={entry._id}>
+                {index> 0 && index % 5 == 0 && (<tr><td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td></tr>)}
+                  <tr >
+                    <td className="border border-slate-700 rounded-md text-center">
+                      {index % 5 + 1} 
+                    </td>
+                    <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
+                      <p>{entry.day}</p>
+                      <p>{entry.date}</p>
+                    </td>
+                    <td className="border border-slate-700 rounded-md text-center">
+                      {entry.nature_of_activities}
+                    </td>
+  
+                    <td className="border border-slate-700 rounded-md text-center">
+                      <div className="flex justify-center gap-4">
+                        <Link
+                          to={`/details/${entry._id}`}
+                          className="text-2x1 text-green-800"
+                        >
+                          <BsInfoCircle />
+                        </Link>
+                        <Link
+                          to={`/edit/${entry._id}`}
+                          className="text-2x1 text-yellow-600"
+                        >
+                          <AiOutlineEdit />
+                        </Link>
+                        <Link
+                          to={`/delete/${entry._id}`}
+                          className="text-2x1 text-red-600"
+                        >
+                          <MdOutlineDelete />
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+              </React.Fragment>
               );
+              
             })}
           </tbody>
         </table>
