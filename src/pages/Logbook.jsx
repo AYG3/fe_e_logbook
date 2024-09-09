@@ -89,6 +89,7 @@ const Logbook = () => {
                 {index> 0 && index % 5 == 0 && (<tr><td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td></tr>)}
                   <tr >
                     <td className="border border-slate-700 rounded-md text-center">
+                      Week 1
                       {index % 5 + 1} 
                     </td>
                     <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
