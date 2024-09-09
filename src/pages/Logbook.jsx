@@ -61,6 +61,8 @@ const Logbook = () => {
     fetchEntries();
   }, []);
 
+  let week_id = 1;
+
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">
@@ -84,12 +86,15 @@ const Logbook = () => {
           </thead>
           <tbody>
             {entries?.map((entry, index) => {
+              if (index > 0 && index % 5 == 0){
+                week_id++
+              }
               return (
               <React.Fragment key={entry._id}>
                 {index> 0 && index % 5 == 0 && (<tr><td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td></tr>)}
-                  <tr >
+                  <tr id={week_id}>
+                    {/* <tr>Week {week_id}</tr> */}
                     <td className="border border-slate-700 rounded-md text-center">
-                      Week 1
                       {index % 5 + 1} 
                     </td>
                     <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
