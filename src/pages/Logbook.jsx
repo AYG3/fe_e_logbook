@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const Logbook = () => {
-  const [entries, setEntries] = useState();
+  const [entries, setEntries] = useState(null);
   // const [user, setUser] = useState();
 
   useEffect(() => {
@@ -69,8 +69,8 @@ const Logbook = () => {
     localStorage.setItem(('weeks'), JSON.stringify(weeks));
   }, [weeks])
 
-  if(!entries){
-    <Loading  className='absolute'/>
+  if (!entries){
+    return <Loading  className='absolute'/>
   }
 
   return (

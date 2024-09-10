@@ -23,15 +23,15 @@ const Navbar = () => {
     // fetchUserData();
   }, []);
 
+  const [weeks, setWeeks] = useState();
+  
   // if(token){
     useEffect(() => {
       const logbookWeeks = JSON.parse(localStorage.getItem('weeks'))
-
-      // setWeeks(logbookWeeks)
-    })
+      // console.log('Logbook weeks: ',  logbookWeeks)
+      setWeeks(logbookWeeks)
+    }, [])
   // }
-  const [weeks, setWeeks] = useState();
-
 
   
   return (
