@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
   const [userData, setUserData] = useState({});
+  const location = useLocation();
+  const current_url = location.pathname;
+  const navigate = useNavigate();
 
   const logOut = () => {
     window.localStorage.clear();
@@ -38,6 +42,11 @@ const Navbar = () => {
   };
 
   const handleScroll = (id) => {
+    if(current_url != `/logbooks`){
+      console.log('Current URL: ', current_url);
+      navigate('/logbooks')
+    }
+
     const week = document.getElementById(id);
     if (week) {
       week.scrollIntoView({ behavior: "smooth" });
@@ -51,7 +60,7 @@ const Navbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex space-x-4 gap-4 ">
-          <Link to="/logbooks" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
+          <Link to="/" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
             Home
           </Link>
           <div className="flex flex-col items-center text-gray-300 relative">
