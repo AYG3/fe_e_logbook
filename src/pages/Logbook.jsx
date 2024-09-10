@@ -4,6 +4,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const Logbook = () => {
   const [entries, setEntries] = useState();
@@ -62,6 +63,15 @@ const Logbook = () => {
   }, []);
 
   let week_id = 1;
+  const weeks = [];
+
+  useEffect(() => {
+    localStorage.setItem(('weeks'), JSON.stringify(weeks));
+  }, [weeks])
+
+  if(!entries){
+    <Loading  className='absolute'/>
+  }
 
   return (
     <div className="overflow-x-auto ">
@@ -88,6 +98,9 @@ const Logbook = () => {
             {entries?.map((entry, index) => {
               if (index > 0 && index % 5 == 0){
                 week_id++
+              }
+              if(!weeks.includes(week_id)) {
+                weeks.push(week_id);
               }
               return (
               <React.Fragment key={entry._id}>

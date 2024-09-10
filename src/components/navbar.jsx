@@ -12,37 +12,26 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:4444/navbar", {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            token: window.localStorage.getItem("token"),
-          }),
-        });
+        const response = 1;
 
-        if (!response.ok) {
-          console.log("Navbar yes - Bad Network response");
-        } else {
-          const data = await response.json();
-          console.log(data, "userRegister");
-
-          setUserData(data.data);
-          if (data.data == 'Token verification failed'){
-            alert('Token expired, Re-Login')
-            logOut()
-          }
-        }
+        
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
     };
 
-    fetchUserData();
+    // fetchUserData();
   }, []);
+
+  // if(token){
+    useEffect(() => {
+      const logbookWeeks = JSON.parse(localStorage.getItem('weeks'))
+
+      // setWeeks(logbookWeeks)
+    })
+  // }
+  const [weeks, setWeeks] = useState();
+
 
   
   return (
@@ -52,13 +41,25 @@ const Navbar = () => {
           <Link to="/">HOME</Link>
         </div>
         <div className="flex space-x-4">
-          <Link to="/logbook/create" className="text-gray-300 hover:text-white">
-            Create Entry
+          <Link to="/logbooks" className="text-gray-300 hover:text-white">
+            Home
           </Link>
+          <div className="text-gray-300 hover:text-white relative">
+          <button className="text-gray-300 hover:text-white">
+            Weeks
+          </button>
+          <div className="absolute bg-gray-800 text-white mt-2 rounded shoadow-lg">
+            {weeks?.map((wk, index) => {
+              <button key={index} className="block px-4 py-2 text-left hover:bg-gray-700 w-full">
+                Week-{wk}
+              </button>
+            })}
+          </div>
+          </div>
         </div>
         <div className="text-white">
-          <h1>{userData.fname}</h1>
-          <h1>{userData.email}</h1>
+          {/* <h1>{userData.fname}</h1>
+          <h1>{userData.email}</h1> */}
         </div>
         <button onClick={logOut} className="bg-slate-500 p-4 rounded text-white">
           Logout
