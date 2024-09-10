@@ -15,7 +15,7 @@ const Logbook = () => {
       try {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId")
-        
+
         console.log("token: ", token);
         console.log("userId: ", userId);
 
@@ -77,7 +77,6 @@ const Logbook = () => {
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">
-        <h1 className="text-3xl"> E-logbook</h1>
         <div className="flex justify-end">
           <Link to="/create" className="text-3xl my-8 ">
             <MdOutlineAddBox className="text-4xl text-sky-800 " />

@@ -48,7 +48,7 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-lg font-bold">
-          <Link to="/">HOME</Link>
+          <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex space-x-4 gap-4 ">
           <Link to="/logbooks" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
