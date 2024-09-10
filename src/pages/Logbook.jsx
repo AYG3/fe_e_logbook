@@ -14,7 +14,8 @@ const Logbook = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem("userId")
+        
         console.log("token: ", token);
         console.log("userId: ", userId);
 

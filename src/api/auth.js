@@ -18,8 +18,10 @@ export const handleSubmitSignUp = async (formData, navigate) => {
 export const handleSubmitLogin = async (formData, navigate) => {
   try {
     const response = await axiosInstance.post("/auth/login", formData);
-    const { token } = response.data;
+    console.log("Login response data", response.data)
+    const { token,  _id } = response.data;
     localStorage.setItem("token", token); // Save token in local storage
+    localStorage.setItem('userId', _id);
     toast.success(response?.data?.message || "Login successful!");
     navigate("/logbooks"); // Redirect to logbooks after successful login
   } catch (error) {
