@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center text-gray-300 relative">
             <button
               className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-              onClick={toggleDropdown}
+              onClick={toggleDropdown} 
             >
               Weeks
             </button>
