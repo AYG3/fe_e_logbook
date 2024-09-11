@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {AuthContext} from "../context/authContext";
 
 
 const Navbar = () => {
@@ -8,10 +9,7 @@ const Navbar = () => {
   const current_url = location.pathname;
   const navigate = useNavigate();
 
-  const logOut = () => {
-    window.localStorage.clear();
-    window.location.href = "./login";
-  };
+  const { isLoggedIn, logout, login } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -92,12 +90,21 @@ const Navbar = () => {
           {/* <h1>{userData.fname}</h1>
           <h1>{userData.email}</h1> */}
         </div>
+        {isLoggedIn ? 
         <button
-          onClick={logOut}
+          onClick={logout}
           className="bg-slate-500 p-4 rounded text-white"
         >
           Logout
         </button>
+         :
+         <button
+         onClick={login}
+         className="bg-slate-500 p-4 rounded text-white"
+       >
+         Login
+       </button>
+         }
       </div>
     </nav>
   );

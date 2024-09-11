@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import axiosInstance from "../utils/axiosConfig";
 import { toast } from "sonner";
+import {AuthContext} from "../context/authContext.jsx";
 
 // Signup function
 export const handleSubmitSignUp = async (formData, navigate) => {
@@ -16,12 +18,16 @@ export const handleSubmitSignUp = async (formData, navigate) => {
 
 // Login function
 export const handleSubmitLogin = async (formData, navigate) => {
+
+  const { login } = useContext(AuthContext);
+
   try {
     const response = await axiosInstance.post("/auth/login", formData);
     console.log("Login response data", response.data)
     const { token,  _id } = response.data;
-    localStorage.setItem("token", token); // Save token in local storage
-    localStorage.setItem('userId', _id);
+    login(token);
+    // localStorage.setItem("token", token); // Save token in local storage
+    // localStorage.setItem('userId', _id);
     toast.success(response?.data?.message || "Login successful!");
     navigate("/logbooks"); // Redirect to logbooks after successful login
   } catch (error) {
@@ -32,7 +38,8 @@ export const handleSubmitLogin = async (formData, navigate) => {
 
 // Logout function
 export const logout = () => {
-  localStorage.removeItem("token"); // Clear token from local storage
+  const { logout } = useContext(AuthContext);
+  logout();
   toast.success("Logout successful");
   window.location.href = "/"; // Redirect to home or login page after logout
 };
