@@ -16,10 +16,21 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  const login = () => {
-    localStorage.setItem('token', token);
-    localStorage.setItem('userId', _id);
-    setIsLoggedIn(true);
+  const login = async () => {
+
+    try {
+      const response = await axiosInstance.post("/auth/login", formData);
+      console.log("Login response data", response.data)
+      const { token,  _id } = response.data;
+      login(token);
+      // localStorage.setItem("token", token); // Save token in local storage
+      // localStorage.setItem('userId', _id);
+      toast.success(response?.data?.message || "Login successful!");
+      navigate("/logbooks"); // Redirect to logbooks after successful login
+    } catch (error) {
+      console.error("Login failed:", error);
+      toast.error(error?.response?.data?.message || "Login failed. Try again.");
+    }
   };
 
   const logout = () => {
