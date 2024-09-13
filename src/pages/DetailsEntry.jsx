@@ -55,7 +55,7 @@ const handleExtraText = () => {
 
 //Handle creating extra and updating an extra
 const handleExtra = async () => {
-  try {
+try {
     if (editIndex !== null) {
       setExtra((prevExtra) => {
         const newExtra = [...prevExtra];
