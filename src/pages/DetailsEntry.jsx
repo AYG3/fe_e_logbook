@@ -49,34 +49,28 @@ useEffect(() => {
 }, [entryId]);
 
 //Updates extra on the client side
-// const handleExtraText = () => {
-//   setExtra((prevExtra) => [...prevExtra, textArea]);
-// };
+const handleExtraText = () => {
+  setExtra((prevExtra) => [...prevExtra, textArea]);
+};
 
 //Handle creating extra and updating an extra
 const handleExtra = async () => {
 
+  try {
     if (editIndex !== null) {
-    
       setExtra((prevExtra) => {
         const newExtra = [...prevExtra];
         newExtra[editIndex] = textArea;
         setExtra(newExtra);
-        return newExtra;
+        return newExtra
       });
-    
       setEditIndex(null);
       setTextArea("");
-    
     } else {
       setExtra((prevExtra) => [...prevExtra, textArea]);
       setTextArea('')
     }
-};
 
-useEffect(() => {
-
-  const updateBackend = async () =>{
     const data = {
       day,
       nature_of_activities,
@@ -85,7 +79,7 @@ useEffect(() => {
     };
     
     console.log("entryId: ", entryId);
-    
+
     const res = await axios.put(
       `http://localhost:4444/logbook/editLogbook/${entryId}`,
       data,
@@ -95,19 +89,16 @@ useEffect(() => {
         },
       }
     );
-    
+
     if (res.status !== 200) {
       console.log("Error updating extra: ", res.data);
     } else {
       console.log("Succesfully updated extra");
     }
-   
-    if (extra.length > 0){
-      updateBackend();
-    }
+  } catch (error) {
+    console.log("Error handling extra: ", error);
   }
-}, [extra]);
-
+};
 
 //Handle edit extra
 const handleEditExtra = (index) => {
