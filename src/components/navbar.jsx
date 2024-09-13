@@ -4,14 +4,15 @@ import {AuthContext} from "../context/authContext";
 
 
 const Navbar = () => {
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState('');
   const location = useLocation();
   const current_url = location.pathname;
   const navigate = useNavigate();
-
   const { isLoggedIn, logout, login } = useContext(AuthContext);
 
+  
   useEffect(() => {
+
     const fetchUserData = async () => {
       try {
         const response = 1;
@@ -26,14 +27,13 @@ const Navbar = () => {
   const [weeks, setWeeks] = useState();
   const [dropDown, setDropDown] = useState(false);
 
-  // if(token){
+  
   useEffect(() => {
     const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
-    console.log("Logbook weeks: ", logbookWeeks);
+    // console.log("Logbook weeks: ", logbookWeeks);
     setWeeks(logbookWeeks);
-    console.log("Weeks: ", weeks);
+    // console.log("Weeks: ", weeks);
   }, []);
-  // }
 
   const toggleDropdown = () => {
     setDropDown(!dropDown);
@@ -58,9 +58,10 @@ const Navbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex space-x-4 gap-4 ">
-          <Link to="/" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
+          {/* <Link to="/" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
             Home
-          </Link>
+          </Link> */}
+          {isLoggedIn ?  
           <div className="flex flex-col items-center text-gray-300 relative">
             <button
               className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
@@ -85,6 +86,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          : '' }
         </div>
         <div className="text-white">
           {/* <h1>{userData.fname}</h1>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import axiosInstance from "../utils/axiosConfig";
 import { toast } from "sonner";
-// import {AuthContext} from "../context/authContext.jsx";
+import {AuthContext} from "../context/authContext.jsx";
 
 // Signup function
 export const handleSubmitSignUp = async (formData, navigate) => {
@@ -16,13 +16,15 @@ export const handleSubmitSignUp = async (formData, navigate) => {
   }
 };
 
+
 // Login function
 export const handleSubmitLogin = async (formData, navigate) => {
-
   const { login } = useContext(AuthContext);
 
+  login(formData);
   
 };  
+
 
 // Logout function
 export const logout = () => {

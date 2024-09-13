@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import  e_logbook from '../components/images/e_logbook.jpeg'
+import AuthContext from '../context/authContext';
 // import 
 
 const Home = () => {
+
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100">
       <div className="md:w-1/2 p-8">
@@ -18,8 +22,9 @@ const Home = () => {
         <p className="text-xl mb-6">
           Keep track of your activities and manage your logbook entries with ease.
         </p>
-        <Link to="/logbooks" className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
-          Get Started
+        <Link to={isLoggedIn ? '/logbooks' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
+          {isLoggedIn ? 'Logbook' : 'Get Started'}
+          {/* Get Started */}
         </Link>
       </div>
     </div>

@@ -1,11 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
+import axiosInstance from "../utils/axiosConfig";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 
-const AuthContext = createContext('');
+export const AuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const navigate = useNavigate();  
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -16,15 +19,15 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  const login = async () => {
+  const login = async (formData) => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
       console.log("Login response data", response.data)
       const { token,  _id } = response.data;
       login(token);
-      // localStorage.setItem("token", token); // Save token in local storage
-      // localStorage.setItem('userId', _id);
+      localStorage.setItem("token", token); // Save token in local storage
+      localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
@@ -37,6 +40,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    toast.success("Logout successful");
+    navigate('/')
   }
 
   return (

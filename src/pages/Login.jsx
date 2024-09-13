@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { handleSubmitLogin } from "../api/auth.js";
+import React, { useContext, useState } from "react";
+// import { handleSubmitLogin } from "../api/auth.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext.jsx";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -22,7 +25,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    handleSubmitLogin(formData, navigate);
+    // handleSubmitLogin(formData, navigate);
+    login(formData);
   };
 
   return (
