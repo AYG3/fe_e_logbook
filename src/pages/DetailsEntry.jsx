@@ -55,7 +55,8 @@ const handleExtraText = () => {
 
 //Handle creating extra and updating an extra
 const handleExtra = async () => {
-try {
+
+  try {
     if (editIndex !== null) {
       setExtra((prevExtra) => {
         const newExtra = [...prevExtra];
@@ -64,6 +65,9 @@ try {
       });
       setEditIndex(null);
       setTextArea("");
+    } else {
+      setExtra((prevExtra) => [...prevExtra, textArea]);
+      setTextArea('')
     }
 
     const data = {
@@ -237,19 +241,20 @@ return (
 
       <button
         type="submit"
-        onClick={editIndex ==null ?handleExtraText: handleExtra}
+        // onClick={editIndex ==null ?handleExtraText: handleExtra}
+        onClick={handleExtra}
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
       >
         {editIndex !== null ? 'Update' : "Add"}
       </button>
 
-      <button
+      {/* <button
         type="submit"
         onClick={handleExtra}
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
       >
         Server Update
-      </button>
+      </button> */}
 
       {/* ACCEPT THE IMAGES */}
       <input
