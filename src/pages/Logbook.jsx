@@ -5,6 +5,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import axiosInstance from "../utils/axiosConfig";
 
 const Logbook = () => {
   const [entries, setEntries] = useState(null);

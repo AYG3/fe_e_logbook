@@ -5,8 +5,11 @@ import { MdOutlineDelete } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/Loading";
+import axiosInstance from "../utils/axiosConfig";
 
 const DetailsEntry = () => {
+
+
 const [entry, setEntry] = useState(null);
 const [extra, setExtra] = useState([""]);
 const [extraText, setExtraText] = useState("");
@@ -22,6 +25,7 @@ const [date, setDate] = useState("");
 
 //Fetches initial entry
 useEffect(() => {
+
   const fetchEntry = async () => {
     try {
       
@@ -34,16 +38,19 @@ useEffect(() => {
         }
       );
 
-      console.log(res.data);
+      console.log("Response data: ", res.data);
       setEntry(res.data);
       setExtra(res.data.extra);
+      setDay(res.data.day)
+      setNAtureOfActivities(res.data.nature_of_activities)
+      setDate(res.data.date)
     } catch (error) {
       console.log("Error Fetching entry: ", error);
     }
   };
 
   fetchEntry();
-}, [entryId]);
+}, [entryId, token]);
 
 //Updates extra on the client side
 const handleExtraText = () => {
@@ -54,59 +61,55 @@ const handleExtraText = () => {
 const handleExtra = async () => {
 
   try {
-    // if (editIndex !== null) {
-    //   setExtra((prevExtra) => {
-    //     const newExtra = [...prevExtra];
-    //     newExtra[editIndex] = textArea;
-    //     setExtra(newExtra);
-    //     return newExtra
-    //   });
-    //   setEditIndex(null);
-    //   setTextArea("");
-    // } else {
-    //   setExtra((prevExtra) => [...prevExtra, textArea]);
-    //   setTextArea('')
-    // }
-
     let updatedExtra;
+
     if (editIndex != null){
-      updatedExtra = extra.map((item, index) => {
-        index == editIndex ? textArea : item
-      })
-      setExtra(updatedExtra)
+      // updatedExtra = extra.map((item, index) => {
+      //   index == editIndex ? textArea : item
+      // })
+      extra[editIndex] = textArea
+      // updatedExtra = updatedExtra1;
+      // setExtra(updatedExtra)
+    
     }else{
       updatedExtra = [...extra, textArea]
       setExtra(updatedExtra);
     }
-    setEditIndex(null)
+    // setEditIndex(null)
     setTextArea('')
-
+    console.log("Extra after: ", extra);
+    console.log("updatedExtra after: ", updatedExtra);
 
     const data = {
-      day,
+      day: day,
       nature_of_activities,
-      date,
-      extra: updatedExtra,
+      date: date,
+      extra,
     };
     
     console.log("entryId: ", entryId);
 
-    // const res = await axios.put(
-    const res = await import.meta.env.put(
-      `/logbook/editLogbook/${entryId}`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    console.log('Data sent: ', data);
 
-    if (res.status !== 200) {
-      console.log("Error updating extra: ", res.data);
-    } else {
-      console.log("Succesfully updated extra");
+    // const res = await axios.put(
+    
+    if (editIndex != null){
+      const res = await axiosInstance.post(`/logbook/editLogbook/${entryId}`, data);
+      if (res.status !== 200) {
+        console.log("Post Error updating extra: ", res.data);
+      } else {
+        console.log("Post Succesfully updated extra");
+      }
+    }else{
+      const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data);
+      if (res.status !== 200) {
+        console.log("Put Error updating extra: ", res.data);
+      } else {
+        console.log("Put Succesfully updated extra");
+      }
+      setEditIndex(null)
     }
+
   } catch (error) {
     console.log("Error handling extra: ", error);
   }
