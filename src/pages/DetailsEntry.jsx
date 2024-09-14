@@ -35,11 +35,8 @@ useEffect(() => {
       );
 
       console.log(res.data);
-      setEntry(res.data);
+       setEntry(res.data);
       setExtra(res.data.extra);
-      setDate(res.data.date);
-      setNAtureOfActivities(res.data.nature_of_activities);
-      setDay(res.data.day);
     } catch (error) {
       console.log("Error Fetching entry: ", error);
     }
