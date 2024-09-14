@@ -115,7 +115,7 @@ const Logbook = () => {
                       <p>{entry.day}</p>
                       <p>{entry.date}</p>
                     </td>
-                    <td className="border border-slate-700 rounded-md text-left pl-12">
+                    <td className="border border-slate-700 rounded-md whitespace-pre-wrap pl-4">
                       {entry.nature_of_activities}
                     </td>
   

@@ -39,10 +39,18 @@ const EditEntry = () => {
   }, [id]);
 
   const handleEditEntry = async () => {
+
+    const activitiesArray = nature_of_activities.split('\n').map(line => {
+      const trimmedLine = line.trim();
+      return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`;
+    });
+
+    const activitiesString = activitiesArray.join('\n');
+
     try {
         const data = {
             day,
-            nature_of_activities,
+            nature_of_activities: activitiesString,
             date
         }
 

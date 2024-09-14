@@ -20,9 +20,15 @@ const CreateEntry = () => {
         const userId = localStorage.getItem('userId')
         console.log("userId: ", userId)
 
+        const activitiesArray = nature_of_activities.split('\n').map((line) => {
+          const trimmedLine = line.trim();
+          return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`
+        })
+
+        const activitiesString = activitiesArray.join('\n');
         const data = {
             day,
-            nature_of_activities,
+            nature_of_activities: activitiesString,
             date,
             user: userId
         }
