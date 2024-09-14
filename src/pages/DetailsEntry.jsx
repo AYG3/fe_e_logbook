@@ -35,7 +35,7 @@ useEffect(() => {
       );
 
       console.log(res.data);
-       setEntry(res.data);
+      setEntry(res.data);
       setExtra(res.data.extra);
     } catch (error) {
       console.log("Error Fetching entry: ", error);
@@ -54,31 +54,46 @@ const handleExtraText = () => {
 const handleExtra = async () => {
 
   try {
-    if (editIndex !== null) {
-      setExtra((prevExtra) => {
-        const newExtra = [...prevExtra];
-        newExtra[editIndex] = textArea;
-        setExtra(newExtra);
-        return newExtra
-      });
-      setEditIndex(null);
-      setTextArea("");
-    } else {
-      setExtra((prevExtra) => [...prevExtra, textArea]);
-      setTextArea('')
+    // if (editIndex !== null) {
+    //   setExtra((prevExtra) => {
+    //     const newExtra = [...prevExtra];
+    //     newExtra[editIndex] = textArea;
+    //     setExtra(newExtra);
+    //     return newExtra
+    //   });
+    //   setEditIndex(null);
+    //   setTextArea("");
+    // } else {
+    //   setExtra((prevExtra) => [...prevExtra, textArea]);
+    //   setTextArea('')
+    // }
+
+    let updatedExtra;
+    if (editIndex != null){
+      updatedExtra = extra.map((item, index) => {
+        index == editIndex ? textArea : item
+      })
+      setExtra(updatedExtra)
+    }else{
+      updatedExtra = [...extra, textArea]
+      setExtra(updatedExtra);
     }
+    setEditIndex(null)
+    setTextArea('')
+
 
     const data = {
       day,
       nature_of_activities,
       date,
-      extra,
+      extra: updatedExtra,
     };
     
     console.log("entryId: ", entryId);
 
-    const res = await axios.put(
-      `http://localhost:4444/logbook/editLogbook/${entryId}`,
+    // const res = await axios.put(
+    const res = await import.meta.env.put(
+      `/logbook/editLogbook/${entryId}`,
       data,
       {
         headers: {
@@ -96,6 +111,7 @@ const handleExtra = async () => {
     console.log("Error handling extra: ", error);
   }
 };
+
 
 //Handle edit extra
 const handleEditExtra = (index) => {
