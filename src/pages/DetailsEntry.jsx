@@ -64,13 +64,8 @@ const handleExtra = async () => {
     let updatedExtra;
 
     if (editIndex != null){
-      // updatedExtra = extra.map((item, index) => {
-      //   index == editIndex ? textArea : item
-      // })
       extra[editIndex] = textArea
-      // updatedExtra = updatedExtra1;
-      // setExtra(updatedExtra)
-    
+      setEditIndex(null)    
     }else{
       updatedExtra = [...extra, textArea]
       setExtra(updatedExtra);
@@ -89,26 +84,16 @@ const handleExtra = async () => {
     
     console.log("entryId: ", entryId);
 
-    console.log('Data sent: ', data);
+    console.log('Data sent: ', data);    
 
-    // const res = await axios.put(
-    
-    if (editIndex != null){
-      const res = await axiosInstance.post(`/logbook/editLogbook/${entryId}`, data);
-      if (res.status !== 200) {
-        console.log("Post Error updating extra: ", res.data);
-      } else {
-        console.log("Post Succesfully updated extra");
-      }
-    }else{
       const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data);
       if (res.status !== 200) {
         console.log("Put Error updating extra: ", res.data);
       } else {
         console.log("Put Succesfully updated extra");
       }
-      setEditIndex(null)
-    }
+      
+
 
   } catch (error) {
     console.log("Error handling extra: ", error);
