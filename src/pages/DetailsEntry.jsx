@@ -9,7 +9,7 @@ import axiosInstance from "../utils/axiosConfig";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
-  const [extra, setExtra] = useState([""]);
+  const [extra, setExtra] = useState(['']);
   const [extraText, setExtraText] = useState("");
   const [textArea, setTextArea] = useState("");
   const [del, setDel] = useState(null);
@@ -57,7 +57,8 @@ const DetailsEntry = () => {
         extra[editIndex] = textArea;
         setEditIndex(null);
       } else {
-        updatedExtra = [...extra, textArea];
+        // updatedExtra = [...extra, textArea];
+        extra.push(textArea)
         setExtra(updatedExtra);
       }
       setTextArea("");
@@ -83,11 +84,13 @@ const DetailsEntry = () => {
         console.log("Put Error updating extra: ", res.data);
       } else {
         console.log("Put Succesfully updated extra");
-      }
+        window.location.reload();
+      };
     } catch (error) {
       console.log("Error handling extra: ", error);
     }
   };
+  
 
   //Handle edit extra
   const handleEditExtra = (index) => {
@@ -102,9 +105,9 @@ const DetailsEntry = () => {
 
     try {
       const data = {
-        day,
+        day: day,
         nature_of_activities,
-        date,
+        date: date,
         extra,
       };
 
@@ -114,6 +117,7 @@ const DetailsEntry = () => {
         console.log("Error deleting extra", res.data);
       } else {
         console.log("Suceesfully deleted extra", res.data);
+        window.location.reload();
       }
     } catch (error) {
       console.log("Error deleting extra catch: ", error);
