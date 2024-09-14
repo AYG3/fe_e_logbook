@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/Loading";
 import axiosInstance from "../utils/axiosConfig";
+import UploadWidget from "../components/images/UploadWidget";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -244,6 +245,8 @@ const DetailsEntry = () => {
           multiple
           className="mt-4"
         />
+
+        <UploadWidget  className='bg-black'/>
       </div>
     </div>
   );

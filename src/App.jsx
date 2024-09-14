@@ -26,7 +26,7 @@ const App = () => {
         <Route path='/edit/:id' element={<EditEntry/>}/>
         <Route path='/delete/:id' element={<DeleteEntry/>}/>
       </Routes>
-      <UploadWidget />
+      {/* <UploadWidget /> */}
     </Layout>
     </>
   )
