@@ -60,7 +60,6 @@ const DetailsEntry = () => {
         updatedExtra = [...extra, textArea];
         setExtra(updatedExtra);
       }
-      // setEditIndex(null)
       setTextArea("");
       console.log("Extra after: ", extra);
       console.log("updatedExtra after: ", updatedExtra);
@@ -98,12 +97,8 @@ const DetailsEntry = () => {
 
   //Delete an extra text
   const handleDeleteExtra = async (index) => {
-    setExtra((prevExtra) => {
-      const newExtra = [...prevExtra];
-      newExtra.splice(index, 1);
-      setExtra(newExtra);
-      console.log("After delete extra: ", newExtra);
-    });
+    extra.splice(index, 1);
+    console.log("After delete extra: ", extra);
 
     try {
       const data = {
@@ -113,8 +108,7 @@ const DetailsEntry = () => {
         extra,
       };
 
-      console.log("Token: ", token);
-      const res = await axiosInstance(`/logbook/editLogbook/${entryId}`, data );
+      const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data );
 
       if (res.status !== 200) {
         console.log("Error deleting extra", res.data);
