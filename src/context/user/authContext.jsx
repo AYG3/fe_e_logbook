@@ -75,6 +75,18 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+
+  const Login = (formData) => {
+    try {
+      const res = axiosInstance.post(`/auth/adminSignup`, formData)
+      toast.success(response?.data?.message || "Addmin Sign up successful!");
+      navigate("/adminlogin"); 
+    } catch (error) {
+      console.log(error)
+      toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
+    }
+  }
+
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, signup }}>
         {children}
