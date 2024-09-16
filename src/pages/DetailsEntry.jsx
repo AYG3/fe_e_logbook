@@ -7,6 +7,7 @@ import BackButton from "../components/BackButton";
 import Loading from "../components/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
+import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -21,6 +22,7 @@ const DetailsEntry = () => {
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
+
 
   //Fetches initial entry
   useEffect(() => {
@@ -50,80 +52,80 @@ const DetailsEntry = () => {
   }, [entryId, token]);
 
   //Handle creating extra and updating an extra
-  const handleExtra = async () => {
-    try {
-      let updatedExtra;
+  // const handleExtra = async () => {
+  //   try {
+  //     let updatedExtra;
 
-      if (editIndex != null) {
-        extra[editIndex] = textArea;
-        setEditIndex(null);
-      } else {
-        // updatedExtra = [...extra, textArea];
-        extra.push(textArea)
-        setExtra(updatedExtra);
-      }
-      setTextArea("");
-      console.log("Extra after: ", extra);
-      console.log("updatedExtra after: ", updatedExtra);
+  //     if (editIndex != null) {
+  //       extra[editIndex] = textArea;
+  //       setEditIndex(null);
+  //     } else {
+  //       // updatedExtra = [...extra, textArea];
+  //       extra.push(textArea)
+  //       setExtra(updatedExtra);
+  //     }
+  //     setTextArea("");
+  //     console.log("Extra after: ", extra);
+  //     console.log("updatedExtra after: ", updatedExtra);
 
-      const data = {
-        day: day,
-        nature_of_activities,
-        date: date,
-        extra,
-      };
+  //     const data = {
+  //       day: day,
+  //       nature_of_activities,
+  //       date: date,
+  //       extra,
+  //     };
 
-      console.log("entryId: ", entryId);
+  //     console.log("entryId: ", entryId);
 
-      console.log("Data sent: ", data);
+  //     console.log("Data sent: ", data);
 
-      const res = await axiosInstance.put(
-        `/logbook/editLogbook/${entryId}`,
-        data
-      );
-      if (res.status !== 200) {
-        console.log("Put Error updating extra: ", res.data);
-      } else {
-        console.log("Put Succesfully updated extra");
-        window.location.reload();
-      };
-    } catch (error) {
-      console.log("Error handling extra: ", error);
-    }
-  };
+  //     const res = await axiosInstance.put(
+  //       `/logbook/editLogbook/${entryId}`,
+  //       data
+  //     );
+  //     if (res.status !== 200) {
+  //       console.log("Put Error updating extra: ", res.data);
+  //     } else {
+  //       console.log("Put Succesfully updated extra");
+  //       window.location.reload();
+  //     };
+  //   } catch (error) {
+  //     console.log("Error handling extra: ", error);
+  //   }
+  // };
   
 
   //Handle edit extra
-  const handleEditExtra = (index) => {
-    setEditIndex(index);
-    setTextArea(extra[index]);
-  };
+  // const handleEditExtra = (index) => {
+  //   setEditIndex(index);
+  //   setTextArea(extra[index]);
+  // };
 
   //Delete an extra text
-  const handleDeleteExtra = async (index) => {
-    extra.splice(index, 1);
-    console.log("After delete extra: ", extra);
+  // const handleDeleteExtra = async (index) => {
+  //   extra.splice(index, 1);
+  //   console.log("After delete extra: ", extra);
 
-    try {
-      const data = {
-        day: day,
-        nature_of_activities,
-        date: date,
-        extra,
-      };
+  //   try {
+  //     const data = {
+  //       day: day,
+  //       nature_of_activities,
+  //       date: date,
+  //       extra,
+  //     };
 
-      const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data );
+  //     const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data );
 
-      if (res.status !== 200) {
-        console.log("Error deleting extra", res.data);
-      } else {
-        console.log("Suceesfully deleted extra", res.data);
-        // window.location.reload();
-      }
-    } catch (error) {
-      console.log("Error deleting extra catch: ", error);
-    }
-  };
+  //     if (res.status !== 200) {
+  //       console.log("Error deleting extra", res.data);
+  //     } else {
+  //       console.log("Suceesfully deleted extra", res.data);
+  //       // window.location.reload();
+  //     }
+  //   } catch (error) {
+  //     console.log("Error deleting extra catch: ", error);
+  //   }
+  // };
 
   if (!entry) {
     return (
