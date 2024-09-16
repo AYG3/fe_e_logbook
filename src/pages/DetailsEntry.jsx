@@ -12,9 +12,7 @@ import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
   const [extra, setExtra] = useState(['']);
-  const [extraText, setExtraText] = useState("");
   const [textArea, setTextArea] = useState("");
-  const [del, setDel] = useState(null);
   const { entryId } = useParams();
   const [editIndex, setEditIndex] = useState(null);
   const token = localStorage.getItem("token");
@@ -142,7 +140,6 @@ const DetailsEntry = () => {
 
         <button
           type="submit"
-          // onClick={editIndex ==null ?handleExtraText: handleExtra}
           onClick={() => handleExtra(extra, textArea, setExtra, setTextArea, day, nature_of_activities, date, entryId, editIndex, setEditIndex)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
         >
