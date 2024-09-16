@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 const AdminLogin = () => {
 
 
-    const [data, formData] = useState();
+    const [data, formData] = useState({
+        name: '',
+
+    });
 
     const handleSubmit = () => {
         

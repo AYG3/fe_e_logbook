@@ -4,32 +4,32 @@ import { toast } from "sonner";
 import {AuthContext} from "../context/authContext.jsx";
 
 // Signup function
-export const handleSubmitSignUp = async (formData, navigate) => {
-  try {
-    const response = await axiosInstance.post("/auth/signup", formData);
+export const handleSubmitSignUp = async (formData) => {
+  const { signup } = useContext(AuthContext);;
 
-    toast.success(response?.data?.message || "Sign up successful!");
-    navigate("/login"); // Redirect to login after successful sign-up
-  } catch (error) {
-    console.error("Sign up failed:", error);
-    toast.error(error?.response?.data?.message || "Sign up failed. Try again.");
-  }
+  signup(formData)
 };
 
 
 // Login function
-export const handleSubmitLogin = async (formData, navigate) => {
-  const { login } = useContext(AuthContext);
+// export const handleSubmitLogin = async (formData, navigate) => {
+//   const { login } = useContext(AuthContext);
 
-  login(formData);
+//   login(formData);
   
-};  
+// };  
+
+// export const handleAdminLogin = async ((formData) => {
+//   const { adminLogin } = useContext(AuthContext);
+
+//   adminLogin(formData)
+// })
 
 
-// Logout function
-export const logout = () => {
-  const { logout } = useContext(AuthContext);
-  logout();
-  toast.success("Logout successful");
-  window.location.href = "/"; // Redirect to home or login page after logout
-};
+// // Logout function
+// export const logout = () => {
+//   const { logout } = useContext(AuthContext);
+//   logout();
+//   toast.success("Logout successful");
+//   window.location.href = "/"; // Redirect to home or login page after logout
+// };

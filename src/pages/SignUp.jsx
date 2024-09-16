@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { handleSubmitSignUp } from "../api/auth.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext.jsx";
+
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +14,7 @@ const SignUp = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
+  const { signup } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +27,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    handleSubmitSignUp(formData, navigate);
+    signup(formData);
   };
 
   return (

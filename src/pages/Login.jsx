@@ -10,7 +10,7 @@ const Login = () => {
     password: "",
   });
 
-  const { login } = useContext(AuthContext);
+  const { isLoggedIn, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 

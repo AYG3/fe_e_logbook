@@ -19,6 +19,18 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
+  const signup = async (formData) =>{ 
+    try {
+      const response = await axiosInstance.post("/auth/signup", formData);
+  
+      toast.success(response?.data?.message || "Sign up successful!");
+      navigate("/login"); // Redirect to login after successful sign-up
+    } catch (error) {
+      console.error("Sign up failed:", error);
+      toast.error(error?.response?.data?.message || "Sign up failed. Try again.");
+    }
+  }
+
   const login = async (formData) => {
 
     try {
@@ -29,6 +41,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
+      setIsLoggedIn(true);
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
       console.error("Login failed:", error);
