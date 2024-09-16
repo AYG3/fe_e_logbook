@@ -195,12 +195,12 @@ const DetailsEntry = () => {
                 <div className="space-x-4 flex ">
                   <button className="py-1 px-3 rounded-sm bg-yellow-100 hover:bg-yellow-200">
                     <AiOutlineEdit
-                      onClick={() => handleEditExtra(index)}
+                      onClick={() => handleEditExtra(index, extra, setEditIndex, setTextArea)}
                       className="text-yellow-500"
                     />
                   </button>
                   <button
-                    onClick={() => handleDeleteExtra(index)}
+                    onClick={() => handleDeleteExtra(index, extra, setExtra, day, nature_of_activities, date, entryId)}
                     className="py-1 px-3 rounded-sm bg-red-100 hover:bg-red-200"
                   >
                     <MdOutlineDelete className="text-red-500" />
@@ -224,7 +224,7 @@ const DetailsEntry = () => {
         <button
           type="submit"
           // onClick={editIndex ==null ?handleExtraText: handleExtra}
-          onClick={handleExtra}
+          onClick={() => handleExtra(extra, textArea, setExtra, setTextArea, day, nature_of_activities, date, entryId, editIndex, setEditIndex)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
         >
           {editIndex !== null ? "Update" : "Add"}

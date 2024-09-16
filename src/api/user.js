@@ -2,7 +2,7 @@ import React from "react";
 import axiosInstance from "../utils/axiosConfig";
 
 
-export const handleExtra = async (index, editIndex) => {
+export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, nature_of_activities, date, entryId, editIndex, setEditIndex) => {
     try {
       let updatedExtra;
 
@@ -45,14 +45,14 @@ export const handleExtra = async (index, editIndex) => {
   };
 
   //Sets editIndex
-  export const handleEditExtra = (index) => {
+  export const handleEditExtra = (index, extra, setEditIndex, setTextArea) => {
     setEditIndex(index);
     setTextArea(extra[index]);
   };
 
 
   //Handle delete for extra
-  export const handleDeleteExtra = async (index) => {
+  export const handleDeleteExtra = async (index, extra, setExtra, day, nature_of_activities, date, entryId) => {
     extra.splice(index, 1);
     console.log("After delete extra: ", extra);
 
