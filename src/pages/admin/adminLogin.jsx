@@ -12,7 +12,8 @@ const AdminLogin = () => {
         password: '',
     });
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         adminLogin(formData)
     }
 

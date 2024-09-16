@@ -84,7 +84,9 @@ export const AuthProvider = ({ children }) => {
       const { token, _id} = res.data;
       localStorage.setItem('token', token)
       localStorage.setItem('adminId', _id)
-      console.log(res);
+      console.log(res.data.message);
+      console.log("Succesfully logged in");
+      
       
       
       
