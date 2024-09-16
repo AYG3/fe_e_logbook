@@ -68,7 +68,7 @@ const AdminLogin = () => {
             </button>
             <div>
               Don't have an account?{" "}
-              <Link to="/signup" className="text-blue-600 hover:underline">
+              <Link to="/adminsignup" className="text-blue-600 hover:underline">
                 Sign up
               </Link>
             </div>

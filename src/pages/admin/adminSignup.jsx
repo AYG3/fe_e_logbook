@@ -12,7 +12,7 @@ const AdminSignUp = () => {
     password: "",
   });
 
-  const { adminSignup } = useContext(AuthContext);
+  const { adminSignUp } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const AdminSignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    adminSignup(formData);
+    adminSignUp(formData);
   };
 
   return (
