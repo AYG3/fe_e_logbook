@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import  e_logbook from '../components/images/e_logbook.jpeg'
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/user/authContext';
 // import 
 
 const Home = () => {

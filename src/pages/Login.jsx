@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 // import { handleSubmitLogin } from "../api/auth.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../context/authContext.jsx";
+import AuthContext from "../context/user/authContext.jsx";
 
 const Login = () => {
   const [formData, setFormData] = useState({

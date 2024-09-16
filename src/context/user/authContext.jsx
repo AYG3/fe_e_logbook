@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import axiosInstance from "../utils/axiosConfig";
+import axiosInstance from "../../utils/axiosConfig";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
