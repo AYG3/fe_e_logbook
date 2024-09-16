@@ -1,20 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/user/authContext';
 
 const AdminLogin = () => {
 
+    const { adminLogin } = useContext(AuthContext);
 
-    const [data, formData] = useState({
-        name: '',
+
+    const [formData, setFormData] = useState({
+        email: '',
         password: '',
     });
 
     const handleSubmit = () => {
-        
+        adminLogin(formData)
     }
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
+        setFormData((prevData) => ({...prevData, [name]: value}));
     }
     
   return (

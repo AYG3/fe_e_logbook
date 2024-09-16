@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axiosInstance.post("/auth/login", formData);
       console.log("Login response data", response.data)
       const { token,  _id } = response.data;
-      login(token);
+      // login(token);
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = axiosInstance.post(`/auth/adminSignup`, formData)
       toast.success(response?.data?.message || "Addmin Sign up successful!");
-      navigate("/adminlogin"); 
+      // navigate("/adminlogin"); 
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
@@ -76,11 +76,16 @@ export const AuthProvider = ({ children }) => {
   }
 
 
-  const Login = (formData) => {
+  const adminLogin = (formData) => {
     try {
-      const res = axiosInstance.post(`/auth/adminSignup`, formData)
-      toast.success(response?.data?.message || "Addmin Sign up successful!");
-      navigate("/adminlogin"); 
+      const res = axiosInstance.post(`/auth/adminLogin`, formData)
+      const { token, _id} = res.data;
+      localStorage.setItem('token', token)
+      localStorage.setItem('adminId', _id)
+      
+      
+      toast.success(response?.data?.message || "Admin Sign up successful!");
+      // navigate("/students"); 
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
