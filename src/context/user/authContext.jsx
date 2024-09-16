@@ -65,9 +65,9 @@ export const AuthProvider = ({ children }) => {
 
   //admin signup
   const adminSignUp = async (formData) => {
+    const res = await axiosInstance.post(`/auth/adminSignup`, formData)
     try {
-      const res = await axiosInstance.post(`/auth/adminSignup`, formData)
-      toast.success(response?.data?.message || "Addmin Sign up successful!");
+      toast.success(res?.data?.message || "Addmin Sign up successful!");
       // navigate("/adminlogin");
       console.log(res);
       
@@ -87,8 +87,8 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('adminId', _id)
       console.log("Succesfully logged in");
 
-      toast.success(response?.data?.message || "Admin Sign up successful!");
-      // navigate("/students"); 
+      toast.success(res?.data?.message || "Admin Sign up successful!");
+      navigate("/users"); 
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");

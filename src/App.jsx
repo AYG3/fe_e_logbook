@@ -12,6 +12,7 @@ import Layout from './components/Layout';
 import AdminLogin from './pages/admin/adminLogin';
 import { Toaster } from 'sonner';
 import AdminSignUp from './pages/admin/adminSignup';
+import UsersList from './pages/admin/UsersList';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/login' element={<Login />}/>
         <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/adminsignup' element={< AdminSignUp />}/>
+        <Route path='/users' element={< UsersList />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
         <Route path='/create' element={<CreateEntry/>}/>
