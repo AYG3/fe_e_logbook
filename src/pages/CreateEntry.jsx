@@ -10,42 +10,9 @@ const CreateEntry = () => {
     const [day, setDay] = useState(new Date().toLocaleDateString('en-US', { weekday: 'long'}));
     const [nature_of_activities, setNAtureOfActivities] = useState();
     const [date, setDate] = useState(new Date().toLocaleDateString());
-
     
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const handleCreateEntry = () => {
-    //     const token = localStorage.getItem('token')
-    //     console.log("token: ", token)
-        
-    //     const userId = localStorage.getItem('userId')
-    //     console.log("userId: ", userId)
-
-    //     const activitiesArray = nature_of_activities.split('\n').map((line) => {
-    //       const trimmedLine = line.trim();
-    //       return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`
-    //     })
-
-    //     const activitiesString = activitiesArray.join('\n');
-    //     const data = {
-    //         day,
-    //         nature_of_activities: activitiesString,
-    //         date,
-    //         user: userId
-    //     }
-
-    //     axios.post(`http://localhost:4444/logbook/logbookEntry`, data, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     }).then(() => {
-    //         console.log('Entry created successfully')
-    //         navigate('/logbooks')
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     })
-    // }
     
 
   return (
@@ -65,7 +32,6 @@ const CreateEntry = () => {
         <div className="my-4">
           <label className="text-xl mr-4 ">Nature of Activities</label>
           <textarea
-            // ref = {textareaR}
             value={nature_of_activities}
             onChange={(e) => setNAtureOfActivities(e.target.value)}
             required
