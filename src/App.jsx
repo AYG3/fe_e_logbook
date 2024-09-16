@@ -9,7 +9,7 @@ import EditEntry from './pages/EditEntry';
 import DeleteEntry from './pages/DeleteEntry';
 import DetailsEntry from './pages/DetailsEntry';
 import Layout from './components/Layout';
-import adminLogin from './pages/admin/adminLogin';
+import AdminLogin from './pages/admin/adminLogin';
 import { Toaster } from 'sonner';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/login' element={<Login />}/>
-        <Route path='/adminlogin' element={< adminLogin />}/>
+        <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
         <Route path='/create' element={<CreateEntry/>}/>

@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const adminLogin = () => {
+const AdminLogin = () => {
 
 
     const [data, formData] = useState();
+
+    const handleSubmit = () => {
+        
+    }
+
+    const handleChange = () => {
+
+    }
     
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -62,4 +71,4 @@ const adminLogin = () => {
   )
 }
 
-export default adminLogin
+export default AdminLogin
