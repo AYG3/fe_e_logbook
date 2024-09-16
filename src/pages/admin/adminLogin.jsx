@@ -6,7 +6,7 @@ const AdminLogin = () => {
 
     const [data, formData] = useState({
         name: '',
-
+        password: '',
     });
 
     const handleSubmit = () => {
