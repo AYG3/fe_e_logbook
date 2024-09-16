@@ -2,6 +2,40 @@ import React from "react";
 import axiosInstance from "../utils/axiosConfig";
 
 
+
+//Create entry
+
+export const handleCreateEntry = (day, nature_of_activities, date) => {
+    const token = localStorage.getItem('token')
+    console.log("token: ", token)
+    
+    const userId = localStorage.getItem('userId')
+    console.log("userId: ", userId)
+
+    const activitiesArray = nature_of_activities.split('\n').map((line) => {
+      const trimmedLine = line.trim();
+      return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`
+    })
+
+    try {
+        const activitiesString = activitiesArray.join('\n');
+        const data = {
+            day,
+            nature_of_activities: activitiesString,
+            date,
+            user: userId
+        }
+    
+        axiosInstance.post(`/logbook/logbookEntry`, data, )
+            console.log('Entry created successfully')
+            navigate('/logbooks')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+// Add or update extra
 export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, nature_of_activities, date, entryId, editIndex, setEditIndex) => {
     try {
       let updatedExtra;

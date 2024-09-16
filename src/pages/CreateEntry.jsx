@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton.jsx';
+import { handleCreateEntry } from '../api/user.js';
 
 
 const CreateEntry = () => {
@@ -13,38 +14,38 @@ const CreateEntry = () => {
     const navigate = useNavigate()
 
 
-    const handleCreateEntry = () => {
-        const token = localStorage.getItem('token')
-        console.log("token: ", token)
+    // const handleCreateEntry = () => {
+    //     const token = localStorage.getItem('token')
+    //     console.log("token: ", token)
         
-        const userId = localStorage.getItem('userId')
-        console.log("userId: ", userId)
+    //     const userId = localStorage.getItem('userId')
+    //     console.log("userId: ", userId)
 
-        const activitiesArray = nature_of_activities.split('\n').map((line) => {
-          const trimmedLine = line.trim();
-          return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`
-        })
+    //     const activitiesArray = nature_of_activities.split('\n').map((line) => {
+    //       const trimmedLine = line.trim();
+    //       return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`
+    //     })
 
-        const activitiesString = activitiesArray.join('\n');
-        const data = {
-            day,
-            nature_of_activities: activitiesString,
-            date,
-            user: userId
-        }
+    //     const activitiesString = activitiesArray.join('\n');
+    //     const data = {
+    //         day,
+    //         nature_of_activities: activitiesString,
+    //         date,
+    //         user: userId
+    //     }
 
-        axios.post(`http://localhost:4444/logbook/logbookEntry`, data, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(() => {
-            console.log('Entry created successfully')
-            navigate('/logbooks')
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
+    //     axios.post(`http://localhost:4444/logbook/logbookEntry`, data, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     }).then(() => {
+    //         console.log('Entry created successfully')
+    //         navigate('/logbooks')
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
     
 
   return (
@@ -84,7 +85,7 @@ const CreateEntry = () => {
         </div>
 
         <button
-          onClick={handleCreateEntry}
+          onClick={()=>handleCreateEntry(day, nature_of_activities, date)}
           className="p-2 bg-sky-700 m-8 text-white"
         >
           Create
