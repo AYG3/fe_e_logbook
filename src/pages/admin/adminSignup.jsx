@@ -1,10 +1,10 @@
 "use client";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/user/authContext.jsx";
+import AuthContext from "../../context/user/authContext";
 
 
-const SignUp = () => {
+const AdminSignUp = () => {
   const [formData, setFormData] = useState({
     fname: "",
     lname: "",
@@ -120,4 +120,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default AdminSignUp;
