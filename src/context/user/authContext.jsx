@@ -68,7 +68,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = axiosInstance.post(`/auth/adminSignup`, formData)
       toast.success(response?.data?.message || "Addmin Sign up successful!");
-      // navigate("/adminlogin"); 
+      // navigate("/adminlogin");
+      console.log(res);
+      
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
