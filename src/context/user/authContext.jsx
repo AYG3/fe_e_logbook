@@ -8,6 +8,9 @@ export const AuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+
   const navigate = useNavigate();  
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
+  //User signup
   const signup = async (formData) =>{ 
     try {
       const response = await axiosInstance.post("/auth/signup", formData);
@@ -31,6 +35,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  //User Login
   const login = async (formData) => {
 
     try {
@@ -49,12 +54,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //Logout
   const logout = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     toast.success("Logout successful");
     navigate('/')
+  }
+
+  //admin signup
+  const adminSignUp = (formData) => {
+    try {
+      const res = axiosInstance.post(`/auth/adminSignup`, formData)
+      toast.success(response?.data?.message || "Addmin Sign up successful!");
+      navigate("/adminlogin"); 
+    } catch (error) {
+      console.log(error)
+      toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
+    }
   }
 
   return (
