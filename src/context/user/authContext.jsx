@@ -86,10 +86,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('adminId', _id)
       console.log(res.data.message);
       console.log("Succesfully logged in");
-      
-      
-      
-      
+
       toast.success(response?.data?.message || "Admin Sign up successful!");
       // navigate("/students"); 
     } catch (error) {
