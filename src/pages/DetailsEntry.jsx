@@ -28,14 +28,7 @@ const DetailsEntry = () => {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:4444/logbook/userLogbook/${entryId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axiosInstance.get(`/logbook/userLogbook/${entryId}`);
 
         console.log("Response data: ", res.data);
         setEntry(res.data);
@@ -51,81 +44,7 @@ const DetailsEntry = () => {
     fetchEntry();
   }, [entryId, token]);
 
-  //Handle creating extra and updating an extra
-  // const handleExtra = async () => {
-  //   try {
-  //     let updatedExtra;
-
-  //     if (editIndex != null) {
-  //       extra[editIndex] = textArea;
-  //       setEditIndex(null);
-  //     } else {
-  //       // updatedExtra = [...extra, textArea];
-  //       extra.push(textArea)
-  //       setExtra(updatedExtra);
-  //     }
-  //     setTextArea("");
-  //     console.log("Extra after: ", extra);
-  //     console.log("updatedExtra after: ", updatedExtra);
-
-  //     const data = {
-  //       day: day,
-  //       nature_of_activities,
-  //       date: date,
-  //       extra,
-  //     };
-
-  //     console.log("entryId: ", entryId);
-
-  //     console.log("Data sent: ", data);
-
-  //     const res = await axiosInstance.put(
-  //       `/logbook/editLogbook/${entryId}`,
-  //       data
-  //     );
-  //     if (res.status !== 200) {
-  //       console.log("Put Error updating extra: ", res.data);
-  //     } else {
-  //       console.log("Put Succesfully updated extra");
-  //       window.location.reload();
-  //     };
-  //   } catch (error) {
-  //     console.log("Error handling extra: ", error);
-  //   }
-  // };
   
-
-  //Handle edit extra
-  // const handleEditExtra = (index) => {
-  //   setEditIndex(index);
-  //   setTextArea(extra[index]);
-  // };
-
-  //Delete an extra text
-  // const handleDeleteExtra = async (index) => {
-  //   extra.splice(index, 1);
-  //   console.log("After delete extra: ", extra);
-
-  //   try {
-  //     const data = {
-  //       day: day,
-  //       nature_of_activities,
-  //       date: date,
-  //       extra,
-  //     };
-
-  //     const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data );
-
-  //     if (res.status !== 200) {
-  //       console.log("Error deleting extra", res.data);
-  //     } else {
-  //       console.log("Suceesfully deleted extra", res.data);
-  //       // window.location.reload();
-  //     }
-  //   } catch (error) {
-  //     console.log("Error deleting extra catch: ", error);
-  //   }
-  // };
 
   if (!entry) {
     return (
@@ -229,14 +148,6 @@ const DetailsEntry = () => {
         >
           {editIndex !== null ? "Update" : "Add"}
         </button>
-
-        {/* <button
-        type="submit"
-        onClick={handleExtra}
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-      >
-        Server Update
-      </button> */}
 
         {/* ACCEPT THE IMAGES */}
         <input
