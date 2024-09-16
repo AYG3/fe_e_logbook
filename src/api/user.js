@@ -1,11 +1,13 @@
 import React from "react";
 import axiosInstance from "../utils/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 
 
 //Create entry
 
-export const handleCreateEntry = (day, nature_of_activities, date) => {
+export const handleCreateEntry = (day, nature_of_activities, date, navigate) => {
+
     const token = localStorage.getItem('token')
     console.log("token: ", token)
     

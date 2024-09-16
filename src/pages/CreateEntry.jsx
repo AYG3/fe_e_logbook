@@ -11,8 +11,8 @@ const CreateEntry = () => {
     const [nature_of_activities, setNAtureOfActivities] = useState();
     const [date, setDate] = useState(new Date().toLocaleDateString());
 
-    const navigate = useNavigate()
-
+    
+  const navigate = useNavigate();
 
     // const handleCreateEntry = () => {
     //     const token = localStorage.getItem('token')
@@ -85,7 +85,7 @@ const CreateEntry = () => {
         </div>
 
         <button
-          onClick={()=>handleCreateEntry(day, nature_of_activities, date)}
+          onClick={()=>handleCreateEntry(day, nature_of_activities, date, navigate)}
           className="p-2 bg-sky-700 m-8 text-white"
         >
           Create
