@@ -118,7 +118,7 @@ const DetailsEntry = () => {
         console.log("Error deleting extra", res.data);
       } else {
         console.log("Suceesfully deleted extra", res.data);
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.log("Error deleting extra catch: ", error);
