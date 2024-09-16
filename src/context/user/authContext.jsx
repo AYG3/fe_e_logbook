@@ -84,6 +84,8 @@ export const AuthProvider = ({ children }) => {
       const { token, _id} = res.data;
       localStorage.setItem('token', token)
       localStorage.setItem('adminId', _id)
+      console.log(res);
+      
       
       
       toast.success(response?.data?.message || "Admin Sign up successful!");
