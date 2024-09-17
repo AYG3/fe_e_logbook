@@ -9,7 +9,7 @@ const UsersList = () => {
     const getUsers = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/admin/users`);
-        console.log(res.data);
+        // console.log(res.data);
 
         setUsers(res.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const UsersList = () => {
               <td className="py-2 px-4 border-b">{student.lname}</td>
               <td className="py-2 px-4 border-b">{formatDate(student.createdAt)}</td>
               <td className='py-2 px-4 border-b'>
-                <Link to={`/logbooks/${student._id}`} > Check </Link>  
+                <Link to={`/userslogbook/${student._id}`} > Check </Link>  
               </td>
             </tr>
           ))}
