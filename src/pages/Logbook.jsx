@@ -38,14 +38,7 @@ const Logbook = () => {
         const token = window.localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
 
-        const res = await axios.get(
-          `http://localhost:4444/logbook/userLogbooks/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axiosInstance.get(`/logbook/userLogbooks/${userId}`);
 
         setEntries(res.data);
         console.log("setEntries: ", res.data);
