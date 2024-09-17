@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
-import AuthContext from '../../context/user/authContext';
+import AdminAuthContext from '../../context/admin/AdminAuthContext';
 
 const AdminLogin = () => {
 
-    const { adminLogin } = useContext(AuthContext);
+    const { adminLogin } = useContext(AdminAuthContext);
 
 
     const [formData, setFormData] = useState({

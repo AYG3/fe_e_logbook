@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/user/authContext.jsx";
+import AuthContext from "../context/user/UserAuthContext.jsx";
 
 
 const SignUp = () => {

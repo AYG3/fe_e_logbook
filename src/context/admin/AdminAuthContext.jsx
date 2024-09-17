@@ -1,14 +1,16 @@
 import React, {createContext, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosConfig';
+import { toast } from 'sonner';
 
 
-export const AdminAuthContext = createContext();
-
-
+export const AdminAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) =>{
     const [isAdmin, setIsAdmin] = useState(false);
+    const navigate = useNavigate();
 
-    //admin signup
+  //admin signup
   const adminSignUp = async (formData) => {
     const res = await axiosInstance.post(`/auth/adminSignup`, formData)
     try {
@@ -54,3 +56,5 @@ export const AuthProvider = ({ children }) =>{
         </AdminAuthContext.Provider>
     )
 }
+
+export default AdminAuthContext;

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {AuthContext} from "../../context/user/UserAuthContext";
+import {UserAuthContext} from "../../context/user/UserAuthContext";
 
 
 const Navbar = () => {
@@ -8,7 +8,7 @@ const Navbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
   const navigate = useNavigate();
-  const { isLoggedIn, logout, login } = useContext(AuthContext);
+  const { isLoggedIn, logout, login } = useContext(UserAuthContext);
 
   
   useEffect(() => {

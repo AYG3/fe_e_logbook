@@ -8,19 +8,7 @@ export const UserAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [isAdmin, setIsAdmin] = useState(false);
-
   const navigate = useNavigate();  
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(token){
-        setIsLoggedIn(true);
-    }else{
-      setIsLoggedIn(false)
-    }
-  }, [])
 
   //User signup
   const signup = async (formData) =>{ 
@@ -65,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   
   return (
-    <UserAuthContext.Provider value={{ isLoggedIn, login, logout, signup }}>
+    <UserAuthContext.Provider value={{ isLoggedIn, login, logout, signup}}>
         {children}
     </UserAuthContext.Provider >
   )
