@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react'
 
 
-export const adminAuthContext = createContext();
+export const AdminAuthContext = createContext();
 
 
 
@@ -49,8 +49,8 @@ export const AuthProvider = ({ children }) =>{
   }
 
     return (
-        <adminAuthContext.Provider value={{ isAdmin, adminSignUp, adminLogin, adminLogout }}>
+        <AdminAuthContext.Provider value={{ isAdmin, adminSignUp, adminLogin, adminLogout }}>
             {children}
-        </adminAuthContext.Provider>
+        </AdminAuthContext.Provider>
     )
 }
