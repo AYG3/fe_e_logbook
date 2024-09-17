@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
-import Loading from "../components/Loading";
+import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
+import AuthContext from "../context/user/authContext";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -20,7 +21,7 @@ const DetailsEntry = () => {
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
-
+  const { isAdminLoggedIn } = useContext(AuthContext);
 
   //Fetches initial entry
   useEffect(() => {
@@ -34,6 +35,7 @@ const DetailsEntry = () => {
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
+        console.log('isAdminLoggedIn: ', isAdminLoggedIn);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
@@ -74,7 +76,7 @@ const DetailsEntry = () => {
             <td className="border border-slate-700 rounded-md text-center">
               {entry.day}
             </td>
-            <td className="border border-slate-700 rounded-md text-center">
+            <td className="border border-slate-700 rounded-md whitespace-pre-wrap pl-4">
               {entry.nature_of_activities}
             </td>
 
@@ -157,6 +159,23 @@ const DetailsEntry = () => {
         />
 
         <UploadWidget  className='bg-black'/>
+
+        
+        if(isAdminLoggedIn){
+          <p>Admin Is Logged In </p>
+        } else{
+          <p>Admin Is Not Logged In </p>
+        }
+      {isAdminLoggedIn?
+
+      <form className=" flex border border-red-800">
+        <div className="border border-slate-800">
+          Checking comment section
+        </div>
+        <button type='submit'>Comment</button>
+      </form>
+      : null}
+
       </div>
     </div>
   );

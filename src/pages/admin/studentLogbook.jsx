@@ -3,10 +3,11 @@ import axiosInstance from '../../utils/axiosConfig'
 import { Link, useParams } from 'react-router-dom'
 import { BsInfoCircle } from 'react-icons/bs';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineDelete } from 'react-icons/md';
+import Loading from '../../components/shared/Loading';
 
 const StudentLogbook = () => {
-    const [logbook, setLogbook] = useState();
+    const [logbook, setLogbook] = useState(null);
     const { userId } = useParams();
 
     useEffect(() => {
@@ -20,6 +21,16 @@ const StudentLogbook = () => {
 
       fetchUserLogbook();
     }, [])
+
+
+    if(!logbook){
+      return(
+        <div>
+          <Loading />
+        </div>
+      )
+    }
+
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">

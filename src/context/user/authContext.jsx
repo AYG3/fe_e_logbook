@@ -99,9 +99,10 @@ export const AuthProvider = ({ children }) => {
     setIsAdminLoggedIn(false)
     localStorage.removeItem('token')
     navigate('/')
+    toast.success('Admin logout successful !')
   }
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin, adminLogout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin, adminLogout, isAdminLoggedIn }}>
         {children}
     </AuthContext.Provider >
   )
