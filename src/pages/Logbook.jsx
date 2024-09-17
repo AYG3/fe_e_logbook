@@ -20,14 +20,7 @@ const Logbook = () => {
         console.log("token: ", token);
         console.log("userId: ", userId);
 
-        const res = await axios.get(
-          `http://localhost:4444/auth/user/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axiosInstance.get(`/auth/user/${userId}`);
 
         // setUser(res.data);
         console.log("User data: ", res.data);
