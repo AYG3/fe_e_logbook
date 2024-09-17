@@ -9,7 +9,7 @@ export const AuthContext = createContext('');
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();  
 
@@ -63,46 +63,9 @@ export const AuthProvider = ({ children }) => {
     navigate('/')
   }
 
-  //admin signup
-  const adminSignUp = async (formData) => {
-    const res = await axiosInstance.post(`/auth/adminSignup`, formData)
-    try {
-      toast.success(res?.data?.message || "Addmin Sign up successful!");
-      navigate("/adminlogin");
-      console.log(res);
-      
-    } catch (error) {
-      console.log(error)
-      toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
-    }
-  }
-
-
-  const adminLogin = async (formData) => {
-    try {
-      const res = await axiosInstance.post(`/auth/adminLogin`, formData)
-      const { token, _id} = res.data;
-      localStorage.setItem('token', token)
-      localStorage.setItem('adminId', _id)
-      console.log("Succesfully logged in");
-      console.log(res.data);
-      setIsAdminLoggedIn(true);
-      toast.success(res?.data?.message || "Admin Sign up successful!");
-      navigate("/users"); 
-    } catch (error) {
-      console.log(error)
-      toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
-    }
-  }
-
-  const adminLogout = async () => {
-    setIsAdminLoggedIn(false)
-    localStorage.removeItem('token')
-    navigate('/')
-    toast.success('Admin logout successful !')
-  }
+  
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin, adminLogout, isAdminLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin, adminLogout, isAdmin }}>
         {children}
     </AuthContext.Provider >
   )

@@ -21,7 +21,7 @@ const DetailsEntry = () => {
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
-  const { isAdminLoggedIn } = useContext(AuthContext);
+  const { isAdmin } = useContext(AuthContext);
 
   //Fetches initial entry
   useEffect(() => {
@@ -35,7 +35,7 @@ const DetailsEntry = () => {
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
-        console.log('isAdminLoggedIn: ', isAdminLoggedIn);
+        console.log('isAdmin: ', isAdmin);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
@@ -161,12 +161,12 @@ const DetailsEntry = () => {
         <UploadWidget  className='bg-black'/>
 
         
-        if(isAdminLoggedIn){
+        if(isAdmin){
           <p>Admin Is Logged In </p>
         } else{
           <p>Admin Is Not Logged In </p>
         }
-      {isAdminLoggedIn?
+      {isAdmin?
 
       <form className=" flex border border-red-800">
         <div className="border border-slate-800">
