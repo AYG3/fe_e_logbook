@@ -1,18 +1,16 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {UserAuthContext} from "../../context/user/UserAuthContext";
-
+import { UserAuthContext } from "../../context/user/UserAuthContext";
+import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
 
 const Navbar = () => {
-  // const [userData, setUserData] = useState('');
   const location = useLocation();
   const current_url = location.pathname;
   const navigate = useNavigate();
   const { isLoggedIn, logout, login } = useContext(UserAuthContext);
+  const { isAdmin, adminLogout } = useContext(AdminAuthContext);
 
-  
   useEffect(() => {
-
     const fetchUserData = async () => {
       try {
         const response = 1;
@@ -27,7 +25,6 @@ const Navbar = () => {
   const [weeks, setWeeks] = useState();
   const [dropDown, setDropDown] = useState(false);
 
-  
   useEffect(() => {
     const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
     // console.log("Logbook weeks: ", logbookWeeks);
@@ -40,9 +37,9 @@ const Navbar = () => {
   };
 
   const handleScroll = (id) => {
-    if(current_url != `/logbooks`){
-      console.log('Current URL: ', current_url);
-      navigate('/logbooks')
+    if (current_url != `/logbooks`) {
+      console.log("Current URL: ", current_url);
+      navigate("/logbooks");
     }
 
     const week = document.getElementById(id);
@@ -61,52 +58,61 @@ const Navbar = () => {
           {/* <Link to="/" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
             Home
           </Link> */}
-          {isLoggedIn ?  
-          <div className="flex flex-col items-center text-gray-300 relative">
-            <button
-              className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-              onClick={toggleDropdown} 
-            >
-              Weeks
-            </button>
-            {dropDown && (
-              <div className="absolute bg-gray-800 text-white mt-12 rounded-xl shadow-lg w-48 z-10 duration-150">
-                {weeks?.map((wk, index) => (
-                  <button
-                    key={index}
-                    className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
-                    onClick={() => {
-                      handleScroll(wk);
-                      toggleDropdown();
-                    }}
-                  >
-                    Week {wk}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-          : '' }
+          {isLoggedIn ? (
+            <div className="flex flex-col items-center text-gray-300 relative">
+              <button
+                className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+                onClick={toggleDropdown}
+              >
+                Weeks
+              </button>
+              {dropDown && (
+                <div className="absolute bg-gray-800 text-white mt-12 rounded-xl shadow-lg w-48 z-10 duration-150">
+                  {weeks?.map((wk, index) => (
+                    <button
+                      key={index}
+                      className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
+                      onClick={() => {
+                        handleScroll(wk);
+                        toggleDropdown();
+                      }}
+                    >
+                      Week {wk}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="text-white">
           {/* <h1>{userData.fname}</h1>
           <h1>{userData.email}</h1> */}
         </div>
-        {isLoggedIn ? 
-        <button
-          onClick={logout}
-          className="bg-slate-500 p-4 rounded text-white"
-        >
-          Logout
-        </button>
-         :
-         <button
-         onClick={login}
-         className="bg-slate-500 p-4 rounded text-white"
-       >
-         Login
-       </button>
-         }
+        {isAdmin ? (
+          <button
+            onClick={adminLogout}
+            className="bg-slate-500 p-4 rounded text-white"
+          >
+            Admin Logout
+          </button>
+        ) : isLoggedIn ? (
+          <button
+            onClick={logout}
+            className="bg-slate-500 p-4 rounded text-white"
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            onClick={login}
+            className="bg-slate-500 p-4 rounded text-white"
+          >
+            Login
+          </button>
+        )}
       </div>
     </nav>
   );

@@ -8,7 +8,8 @@ import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
-import AuthContext from "../context/user/UserAuthContext";
+import UserAuthContext from "../context/user/UserAuthContext";
+import AdminAuthContext from "../context/admin/AdminAuthContext";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -21,7 +22,7 @@ const DetailsEntry = () => {
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
-  const { isAdmin } = useContext(AuthContext);
+  const { isAdmin } = useContext(AdminAuthContext);
 
   //Fetches initial entry
   useEffect(() => {
