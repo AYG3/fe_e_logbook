@@ -9,7 +9,9 @@ const UsersList = () => {
     const getUsers = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/admin/users`);
-        console.log(res);
+        console.log(res.data);
+
+        setUsers(res.data.data)
 
       } catch (error) {
         console.log(error);
@@ -18,9 +20,28 @@ const UsersList = () => {
 
     getUsers();
   }, [])
+
+  // const getUsers = async () => {
+  //   try {
+  //     const res = await axiosInstance.get(`/logbook/admin/users`);
+  //     console.log(res.data);
+
+  //     console.log("data", res.data.fname)
+  //     setUsers(res.data.data)
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   return (
     <div>
-      Users List
+      <div>
+        USERS
+      </div>
+      {users?.map((student) => {
+        <p key={student._id}>{student.fname}</p>
+      })}
+      {/* <button onClick={getUsers}>GET USERS</button> */}
     </div>
   )
 }
