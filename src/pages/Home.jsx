@@ -22,7 +22,7 @@ const Home = () => {
         <p className="text-xl mb-6">
           Keep track of your activities and manage your logbook entries with ease.
         </p>
-        <div>
+        <div className='flex gap-8'>
         <Link to={isLoggedIn ? '/logbooks' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
           {isLoggedIn ? 'Logbook' : 'Get Started'}
           {/* Get Started */}
