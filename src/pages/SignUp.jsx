@@ -24,7 +24,7 @@ const SignUp = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
     signup(formData);
   };
 
