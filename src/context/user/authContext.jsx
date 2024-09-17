@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   const adminLogin = async (formData) => {
     try {
       const res = await axiosInstance.post(`/auth/adminLogin`, formData)
-      console.log(res);
+      console.log(res.data);
       const { token, _id} = res.data;
       localStorage.setItem('token', token)
       localStorage.setItem('adminId', _id)

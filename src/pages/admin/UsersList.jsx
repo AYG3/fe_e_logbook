@@ -8,7 +8,7 @@ const UsersList = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axiosInstance.get(`auth/admin/users`);
+        const res = await axiosInstance.get(`/logbook/admin/users`);
         console.log(res);
 
       } catch (error) {
