@@ -30,17 +30,19 @@ const UsersList = () => {
             <th className="py-2 px-4 border-b">First Name</th>
             <th className="py-2 px-4 border-b">Last Name</th>
             <th className="py-2 px-4 border-b">Started</th>
+            <th className="py-2 px-4 border-b">Check</th>
           </tr>
         </thead>
         <tbody>
           {users?.map((student) => (
             <tr key={student._id}>
-              <Link to={`/logbooks/${student._id}`}>
               <td className="py-2 px-4 border-b">{student._id}</td>
               <td className="py-2 px-4 border-b">{student.fname}</td>
               <td className="py-2 px-4 border-b">{student.lname}</td>
               <td className="py-2 px-4 border-b">{formatDate(student.createdAt)}</td>
-              </Link>
+              <td className='py-2 px-4 border-b'>
+                <Link to={`/logbooks/${student._id}`} > Check </Link>  
+              </td>
             </tr>
           ))}
         </tbody>
