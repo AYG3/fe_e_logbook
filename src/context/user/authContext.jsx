@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('adminId', _id)
       console.log("Succesfully logged in");
       console.log(res.data);
-
+      setIsAdminLoggedIn(true);
       toast.success(res?.data?.message || "Admin Sign up successful!");
       navigate("/users"); 
     } catch (error) {
@@ -95,8 +95,13 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const adminLogout = async () => {
+    setIsAdminLoggedIn(false)
+    localStorage.removeItem('token')
+    navigate('/')
+  }
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, signup, adminSignUp, adminLogin, adminLogout }}>
         {children}
     </AuthContext.Provider >
   )
