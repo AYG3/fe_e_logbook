@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 
-export const AuthContext = createContext('');
+export const UserAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,4 +71,4 @@ export const AuthProvider = ({ children }) => {
   )
 };
 
-export default AuthContext;
+export default UserAuthContext;

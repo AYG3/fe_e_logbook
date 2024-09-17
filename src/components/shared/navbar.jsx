@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {AuthContext} from "../../context/user/authContext";
+import {AuthContext} from "../../context/user/UserAuthContext";
 
 
 const Navbar = () => {

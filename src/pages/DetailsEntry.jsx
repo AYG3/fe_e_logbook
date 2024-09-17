@@ -8,7 +8,7 @@ import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
-import AuthContext from "../context/user/authContext";
+import AuthContext from "../context/user/UserAuthContext";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
