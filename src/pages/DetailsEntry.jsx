@@ -8,7 +8,7 @@ import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
-import UserAuthContext from "../context/user/UserAuthContext";
+// import UserAuthContext from "../context/user/UserAuthContext";
 import AdminAuthContext from "../context/admin/AdminAuthContext";
 
 const DetailsEntry = () => {
