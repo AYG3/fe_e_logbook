@@ -1,13 +1,15 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosConfig";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { AdminAuthContext } from '../admin/AdminAuthContext'
 
 
 export const UserAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isAdmin } = useContext(AdminAuthContext);
   const navigate = useNavigate();  
 
   //User signup
