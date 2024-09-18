@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link, useAsyncValue, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
@@ -10,6 +10,7 @@ import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
 // import UserAuthContext from "../context/user/UserAuthContext";
 import AdminAuthContext from "../context/admin/AdminAuthContext";
+import { comment } from "postcss";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -18,25 +19,29 @@ const DetailsEntry = () => {
   const { entryId } = useParams();
   const [editIndex, setEditIndex] = useState(null);
   const token = localStorage.getItem("token");
-
+  
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
-  const { isAdmin } = useContext(AdminAuthContext);
 
+  const { isAdmin } = useContext(AdminAuthContext);
+  const [approval, setApproval] = useState('');
+  const [comment, setComment] = useState([''])
+  
   //Fetches initial entry
   useEffect(() => {
     const fetchEntry = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/userLogbook/${entryId}`);
 
-        console.log("Response data: ", res.data);
+        // console.log("Response data: ", res.data);
         setEntry(res.data);
         setExtra(res.data.extra);
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
         console.log('isAdmin: ', isAdmin);
+        console.log("EntryId: ", entryId);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
@@ -54,6 +59,36 @@ const DetailsEntry = () => {
       </div>
     );
   }
+
+  const handleAdminForm = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log("Handling Form (Try block)");
+      
+      const commentData = {
+        approval: approval,
+        comment: comment,
+      }
+      const res = axiosInstance.put(`/logbook/admin/addComment/${entryId}`, commentData);
+      
+      if(res==200){
+        console.log("Comment Succesful");
+        console.log("Response data: ", res);
+      }
+
+    } catch (error) {
+      console.log("handleAdminForm Error: ", error);
+    }
+  }
+
+  const handleApprovalChange = (e) =>{
+    setApproval(e.target.value);
+  } 
+
+  const handleCommentChange = (e) =>{
+    setComment(e.target.value);
+  } 
 
   return (
     <div>
@@ -135,7 +170,6 @@ const DetailsEntry = () => {
           name="extra"
           rows="3"
           value={textArea}
-          // onChange = {editIndex !== null? null : (e) => setTextArea(e.target.value)}
           onChange={(e) => setTextArea(e.target.value)}
           className=" border-2 border-slate-300 w-full md:w-2/3 outline-none p-2 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
           placeholder="Enter extra info here"
@@ -154,7 +188,6 @@ const DetailsEntry = () => {
           type="file"
           accept="image/"
           name="images"
-          //   onChange={convertToBase64}
           multiple
           className="mt-4"
         />
@@ -164,21 +197,22 @@ const DetailsEntry = () => {
         {/* ADMIN'S SECTION */}
 
         {isAdmin ? (
-          <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3">
+          <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={handleAdminForm}>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" id="approved" className="form-radio" />
+              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval=='approved'} onChange={(e)=>handleApprovalChange(e)}/>
               <label htmlFor="approved" className="text-gray-700">Approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" id="semi-approved" className="form-radio" />
+              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval=='semi-approved'} onChange={(e)=>handleApprovalChange(e)}/>
               <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" id="not-approved" className="form-radio" />
+              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval=='not-approved'} onChange={(e)=>handleApprovalChange(e)} />
               <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
             </div>
             <textarea
               className="border border-slate-800 p-2 rounded-md w-full bg-white"
+              onChange={(e)=>handleCommentChange(e)}
               placeholder="Supervisor's comment"
             ></textarea>
             <button

@@ -60,9 +60,6 @@ export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, n
         extra,
       };
 
-      console.log("entryId: ", entryId);
-
-      console.log("Data sent: ", data);
 
       const res = await axiosInstance.put(
         `/logbook/editLogbook/${entryId}`,
