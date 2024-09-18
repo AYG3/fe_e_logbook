@@ -27,7 +27,8 @@ const DetailsEntry = () => {
   const { isAdmin } = useContext(AdminAuthContext);
   const [approval, setApproval] = useState('');
   const [comment, setComment] = useState([''])
-  
+  const [editComment, setEditComment] = useState(false);
+
   //Fetches initial entry
   useEffect(() => {
     const fetchEntry = async () => {
@@ -40,8 +41,10 @@ const DetailsEntry = () => {
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
-        console.log('isAdmin: ', isAdmin);
-        console.log("EntryId: ", entryId);
+        setComment(res.data.comment)
+        setApproval(res.data.approval)
+        // console.log('isAdmin: ', isAdmin);
+        // console.log("EntryId: ", entryId);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
@@ -64,14 +67,14 @@ const DetailsEntry = () => {
     e.preventDefault();
 
     try {
-      console.log("Handling Form (Try block)");
       
       const commentData = {
         approval: approval,
         comment: comment,
       }
-      const res = axiosInstance.put(`/logbook/admin/addComment/${entryId}`, commentData);
+      const res = await axiosInstance.put(`/logbook/admin/addComment/${entryId}`, commentData);
       
+      console.log("Handling Form (Try block) Response: ", res);
       if(res==200){
         console.log("Comment Succesful");
         console.log("Response data: ", res);
@@ -89,6 +92,10 @@ const DetailsEntry = () => {
   const handleCommentChange = (e) =>{
     setComment(e.target.value);
   } 
+
+  const handleEditComment = () => {
+
+  }
 
   return (
     <div>
@@ -197,29 +204,41 @@ const DetailsEntry = () => {
         {/* ADMIN'S SECTION */}
 
         {isAdmin ? (
-          <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={handleAdminForm}>
+            <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={handleAdminForm}>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval=='approved'} onChange={(e)=>handleApprovalChange(e)}/>
+              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={handleApprovalChange} />
               <label htmlFor="approved" className="text-gray-700">Approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval=='semi-approved'} onChange={(e)=>handleApprovalChange(e)}/>
+              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={handleApprovalChange} />
               <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval=='not-approved'} onChange={(e)=>handleApprovalChange(e)} />
+              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={handleApprovalChange} />
               <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
             </div>
             <textarea
               className="border border-slate-800 p-2 rounded-md w-full bg-white"
-              onChange={(e)=>handleCommentChange(e)}
+              onChange={(e)=>{handleCommentChange(e); setEditComment(true)}}
+              value={comment}
               placeholder="Supervisor's comment"
             ></textarea>
+            <div className="flex space-x-4 justify-center mt-4">
+              <button type="button" className="flex items-center space-x-2 text-yellow-600 hover:text-yellow-700">
+                <AiOutlineEdit className="text-2xl" onClick={()=>setEditComment(true)} />
+                <span>Edit</span>
+              </button>
+              <button type="button" className="flex items-center space-x-2 text-red-600 hover:text-red-700">
+                <MdOutlineDelete className="text-2xl" />
+                <span>Delete</span>
+              </button>
+            </div>
             <button
               type="submit"
+              onClick={()=>setEditComment(false)}
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
-              Comment
+              {editComment ? 'Update': 'Comment'}
             </button>
           </form>
         ) : (
