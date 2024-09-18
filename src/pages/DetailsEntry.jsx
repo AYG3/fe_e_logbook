@@ -161,12 +161,6 @@ const DetailsEntry = () => {
 
         <UploadWidget  className='bg-black'/>
 
-        
-        if(isAdmin){
-          <p>Admin Is Logged In </p>
-        } else{
-          <p>Admin Is Not Logged In </p>
-        }
       {isAdmin?
 
       <form className=" flex border border-red-800">
@@ -175,7 +169,7 @@ const DetailsEntry = () => {
         </div>
         <button type='submit'>Comment</button>
       </form>
-      : null}
+      : "isAdmin is false"}
 
       </div>
     </div>
