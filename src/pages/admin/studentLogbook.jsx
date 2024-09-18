@@ -12,7 +12,7 @@ const StudentLogbook = () => {
 
     useEffect(() => {
       const fetchUserLogbook = async () => {
-        const res = await axiosInstance.get(`logbook/admin/user/logbooks/${userId}`);
+        const res = await axiosInstance.get(`/logbook/admin/user/logbooks/${userId}`);
         
         console.log(res.data);
 
@@ -23,12 +23,12 @@ const StudentLogbook = () => {
     }, [])
 
 
-    if(!logbook){
-      return(
-        <div>
+    if (!logbook) {
+      return (
+        <div className='absolute'>
           <Loading />
         </div>
-      )
+      );
     }
 
   return (

@@ -223,16 +223,6 @@ const DetailsEntry = () => {
               value={comment}
               placeholder="Supervisor's comment"
             ></textarea>
-            <div className="flex space-x-4 justify-center mt-4">
-              <button type="button" className="flex items-center space-x-2 text-yellow-600 hover:text-yellow-700">
-                <AiOutlineEdit className="text-2xl" onClick={()=>setEditComment(true)} />
-                <span>Edit</span>
-              </button>
-              <button type="button" className="flex items-center space-x-2 text-red-600 hover:text-red-700">
-                <MdOutlineDelete className="text-2xl" />
-                <span>Delete</span>
-              </button>
-            </div>
             <button
               type="submit"
               onClick={()=>setEditComment(false)}
