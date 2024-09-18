@@ -161,15 +161,21 @@ const DetailsEntry = () => {
 
         <UploadWidget  className='bg-black'/>
 
-      {isAdmin?
-
-      <form className=" flex border border-red-800">
-        <div className="border border-slate-800">
-          Checking comment section
-        </div>
-        <button type='submit'>Comment</button>
-      </form>
-      : "isAdmin is false"}
+        {isAdmin ? (
+          <form className="flex flex-col items-center space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3">
+            <textArea className="border border-slate-800 p-2 rounded-md w-full text-center bg-white placeholder:'Supervisors comment' ">
+              
+            </textArea>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Comment
+            </button>
+          </form>
+        ) : (
+          <div className="text-red-500 font-semibold">Admin access required to comment</div>
+        )}
 
       </div>
     </div>
