@@ -8,9 +8,9 @@ import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
+import { handleAdminForm, handleApprovalChange, handleCommentChange } from "../api/admin.js";
 // import UserAuthContext from "../context/user/UserAuthContext";
 import AdminAuthContext from "../context/admin/AdminAuthContext";
-import { comment } from "postcss";
 
 const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
@@ -63,39 +63,6 @@ const DetailsEntry = () => {
     );
   }
 
-  const handleAdminForm = async (e) => {
-    e.preventDefault();
-
-    try {
-      
-      const commentData = {
-        approval: approval,
-        comment: comment,
-      }
-      const res = await axiosInstance.put(`/logbook/admin/addComment/${entryId}`, commentData);
-      
-      console.log("Handling Form (Try block) Response: ", res);
-      if(res==200){
-        console.log("Comment Succesful");
-        console.log("Response data: ", res);
-      }
-
-    } catch (error) {
-      console.log("handleAdminForm Error: ", error);
-    }
-  }
-
-  const handleApprovalChange = (e) =>{
-    setApproval(e.target.value);
-  } 
-
-  const handleCommentChange = (e) =>{
-    setComment(e.target.value);
-  } 
-
-  const handleEditComment = () => {
-
-  }
 
   return (
     <div>
@@ -204,22 +171,22 @@ const DetailsEntry = () => {
         {/* ADMIN'S SECTION */}
 
         {isAdmin ? (
-            <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={handleAdminForm}>
+            <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={handleApprovalChange} />
+              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
               <label htmlFor="approved" className="text-gray-700">Approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={handleApprovalChange} />
+              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
               <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={handleApprovalChange} />
+              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
               <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
             </div>
             <textarea
               className="border border-slate-800 p-2 rounded-md w-full bg-white"
-              onChange={(e)=>{handleCommentChange(e); setEditComment(true)}}
+              onChange={(e)=>{handleCommentChange(e, setComment); setEditComment(true)}}
               value={comment}
               placeholder="Supervisor's comment"
             ></textarea>
