@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosConfig';
 import { toast } from 'sonner';
@@ -7,17 +7,25 @@ import { toast } from 'sonner';
 export const AdminAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) =>{
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(() => {
+      // Initialize state from localStorage
+      const savedIsAdmin = localStorage.getItem('isAdmin');
+      return savedIsAdmin === 'true';
+    });
     const navigate = useNavigate();
+
+    useEffect(() => {
+      // Save isAdmin state to localStorage whenever it changes
+      localStorage.setItem('isAdmin', isAdmin);
+    }, [isAdmin]);
 
   //admin signup
   const adminSignUp = async (formData) => {
     const res = await axiosInstance.post(`/auth/adminSignup`, formData)
     try {
-      toast.success(res?.data?.message || "Addmin Sign up successful!");
+      toast.success(res?.data?.message || "Admin Sign up successful!");
       navigate("/adminlogin");
       console.log(res);
-      
     } catch (error) {
       console.log(error)
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
@@ -34,7 +42,7 @@ export const AuthProvider = ({ children }) =>{
       console.log("Succesfully logged in");
       console.log(res.data);
       setIsAdmin(true);
-      toast.success(res?.data?.message || "Admin Sign up successful!");
+      toast.success(res?.data?.message || "Admin Login up successful!");
       navigate("/users"); 
     } catch (error) {
       console.log(error)
@@ -46,6 +54,7 @@ export const AuthProvider = ({ children }) =>{
   const adminLogout = async () => {
     setIsAdmin(false)
     localStorage.removeItem('token')
+    localStorage.removeItem('adminId')
     navigate('/')
     toast.success('Admin logout successful !')
   }
