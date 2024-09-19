@@ -1,12 +1,21 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, UNSAFE_LocationContext } from 'react-router-dom';
 import  e_logbook from '../components/images/e_logbook.jpeg'
-import AuthContext from '../context/user/UserAuthContext';
-// import 
+import UserAuthContext from '../context/user/UserAuthContext';
+import AdminAuthContext from '../context/admin/AdminAuthContext';
 
 const Home = () => {
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(UserAuthContext);
+  const { isAdmin } = useContext(AdminAuthContext);
+  
+  useEffect(()=>{
+    const CheckAdmin = () => {
+      console.log("IsAdmin: ", isAdmin);
+      console.log("IsLoggedIn: ", isLoggedIn);
+    }
+    CheckAdmin();
+  }, [])
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100">
@@ -23,13 +32,12 @@ const Home = () => {
           Keep track of your activities and manage your logbook entries with ease.
         </p>
         <div className='flex gap-8'>
-        <Link to={isLoggedIn ? '/logbooks' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
-          {isLoggedIn ? 'Logbook' : 'Get Started'}
-          {/* Get Started */}
-        </Link>
-        <Link to={isLoggedIn ? '/users' : '/adminlogin'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
-          {isLoggedIn ? 'Users' : 'Get Started as admin'}
-        </Link>
+        <Link to={isLoggedIn ? '/logbooks' : isAdmin ? '/adminlogin' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
+            {isLoggedIn ? 'Logbook' : isAdmin ? 'Check Students Logbook' : 'Get Started'}
+          </Link>
+          <Link to={isLoggedIn ? '/users' : '/adminlogin'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
+            {isLoggedIn ? 'Users' : 'Get Started as Admin'}
+          </Link>
         </div>
       </div>
     </div>
