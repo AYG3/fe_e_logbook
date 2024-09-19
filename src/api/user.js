@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 
 //Create entry
-
 export const handleCreateEntry = (day, nature_of_activities, date, navigate) => {
 
     const token = localStorage.getItem('token')

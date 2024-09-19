@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
       const response = await axiosInstance.post("/auth/login", formData);
       console.log("Login response data", response.data)
       const { token,  _id } = response.data;
-      // login(token);
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
