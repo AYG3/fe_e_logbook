@@ -113,7 +113,11 @@ const Navbar = () => {
             Login
           </button>
         )}
+        <button onClick={logout}>
+          Logout
+        </button>
       </div>
+
     </nav>
   );
 };

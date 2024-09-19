@@ -2,14 +2,14 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosConfig";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { AdminAuthContext } from '../admin/AdminAuthContext'
+// import { AdminAuthContext } from '../admin/AdminAuthContext'
 
 
 export const UserAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isAdmin } = useContext(AdminAuthContext);
+  // const { isAdmin } = useContext(AdminAuthContext);
   const navigate = useNavigate();  
 
   //User signup
@@ -29,6 +29,9 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
 
     try {
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
+      navigate('/');
       const response = await axiosInstance.post("/auth/login", formData);
       console.log("Login response data", response.data)
       const { token,  _id } = response.data;
