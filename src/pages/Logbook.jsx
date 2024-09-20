@@ -9,6 +9,7 @@ import axiosInstance from "../utils/axiosConfig";
 
 const Logbook = () => {
   const [entries, setEntries] = useState(null);
+  const [weeks, setWeeks] = useState([]);
   // const [user, setUser] = useState();
 
   useEffect(() => {
@@ -17,13 +18,13 @@ const Logbook = () => {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId")
 
-        console.log("token: ", token);
-        console.log("userId: ", userId);
+        // console.log("token: ", token);
+        // console.log("userId: ", userId);
 
         const res = await axiosInstance.get(`/auth/user/${userId}`);
 
         // setUser(res.data);
-        console.log("User data: ", res.data);
+        // console.log("User data: ", res.data);
       } catch (error) {
         console.log("Error fetching user details", error);
       }
@@ -41,7 +42,7 @@ const Logbook = () => {
         const res = await axiosInstance.get(`/logbook/userLogbooks/${userId}`);
 
         setEntries(res.data);
-        console.log("setEntries: ", res.data);
+        // console.log("setEntries: ", res.data);
       } catch (error) {
         console.log("Error getting entries: ", error);
       }
@@ -51,11 +52,31 @@ const Logbook = () => {
   }, []);
 
   let week_id = 1;
-  const weeks = [];
+  // const weeks = [];
+
+  // useEffect(() => {
+  //   localStorage.setItem(('weeks'), JSON.stringify(weeks));
+  // }, [weeks])
 
   useEffect(() => {
-    localStorage.setItem(('weeks'), JSON.stringify(weeks));
-  }, [weeks])
+     week_id = 1;
+     const weeksArray = [];
+
+    if (entries) {
+      entries.forEach((entry, index) => {
+        if (index > 0 && index % 5 === 0) {
+          week_id++;
+        }
+        if (!weeksArray.includes(week_id)) {
+          weeksArray.push(week_id);
+        }
+      });
+
+      setWeeks(weeksArray);
+      localStorage.setItem("weeks", JSON.stringify(weeksArray));
+    }
+  }, [entries]);
+
 
   if (!entries){
     return <Loading  className='absolute'/>

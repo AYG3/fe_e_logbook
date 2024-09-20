@@ -26,12 +26,9 @@ const Navbar = () => {
   const [dropDown, setDropDown] = useState(false);
 
   useEffect(() => {
-    const w = async () => {
-      const logbookWeeks = await JSON.parse(localStorage.getItem("weeks"))
-        setWeeks(logbookWeeks  ||[])
-    }
-    console.log('weeks: ', weeks);
-    w();
+      const logbookWeeks = JSON.parse(localStorage.getItem("weeks"))
+        setWeeks(logbookWeeks || [])
+        console.log('Logbook weeks',logbookWeeks);
   }, []);
 
   const toggleDropdown = () => {
