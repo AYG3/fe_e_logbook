@@ -27,7 +27,7 @@ const Home = () => {
         />
       </div>
       <div className="md:w-1/2 p-8 text-center md:text-left">
-        <h1 className="text-5xl font-bold mb-4">Welcome to E-Logbook</h1>
+        <h1 className="text-5xl font-bold mb-4">Welcome to<br/> E-Logbook</h1>
         <p className="text-xl mb-6">
           Keep track of your activities and manage your logbook entries with ease.
         </p>
