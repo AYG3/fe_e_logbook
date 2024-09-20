@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
   const navigate = useNavigate();
-  const { isLoggedIn, logout, login } = useContext(UserAuthContext);
+  const { isLoggedIn,  userLogout } = useContext(UserAuthContext);
   const { isAdmin, adminLogout } = useContext(AdminAuthContext);
 
   useEffect(() => {
@@ -18,7 +18,6 @@ const Navbar = () => {
         console.log(`Fetch error: ${error}`);
       }
     };
-
     // fetchUserData();
   }, []);
 
@@ -27,9 +26,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
-    // console.log("Logbook weeks: ", logbookWeeks);
     setWeeks(logbookWeeks);
-    // console.log("Weeks: ", weeks);
   }, []);
 
   const toggleDropdown = () => {
@@ -102,7 +99,7 @@ const Navbar = () => {
           </button>
         ) : isLoggedIn ? (
           <button
-            onClick={logout}
+            onClick={userLogout}
             className="bg-slate-500 p-4 rounded text-white"
           >
             Logout
@@ -117,7 +114,7 @@ const Navbar = () => {
           </button>
           )
         )}
-        <button onClick={logout}>
+        <button onClick={adminLogout}>
           Logout
         </button>
       </div>

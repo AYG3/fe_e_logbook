@@ -11,7 +11,6 @@ const Login = () => {
   });
 
   const { isLoggedIn, login } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,9 +23,9 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    // handleSubmitLogin(formData, navigate);
+    e.preventDefault(); 
     login(formData);
+    navigate(`/logbooks`);
   };
 
   return (
