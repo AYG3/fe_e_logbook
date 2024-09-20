@@ -22,9 +22,9 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); 
-    login(formData);
+    await login(formData);
     navigate(`/logbooks`);
   };
 

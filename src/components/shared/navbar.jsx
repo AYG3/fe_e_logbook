@@ -14,11 +14,12 @@ const Navbar = () => {
     const fetchUserData = async () => {
       try {
         const response = 1;
+        console.log('isLoggedIn', isLoggedIn);
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
     };
-    // fetchUserData();
+    fetchUserData();
   }, []);
 
   const [weeks, setWeeks] = useState();
@@ -116,7 +117,7 @@ const Navbar = () => {
         )}
         <button onClick={adminLogout}>
           Logout
-        </button>
+        </button> 
       </div>
 
     </nav>

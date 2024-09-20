@@ -8,9 +8,15 @@ import { useNavigate } from "react-router-dom";
 export const UserAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const { isAdmin } = useContext(AdminAuthContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const savedIsLoggedIn = localStorage.getItem('isLoggedIn');
+    return savedIsLoggedIn === 'true';
+  });
   const navigate = useNavigate();  
+
+  useEffect(() => {
+    localStorage.setItem('isLoggedIn', isLoggedIn)
+  }, [isLoggedIn])
 
   //User signup
   const signup = async (formData) =>{ 
@@ -29,9 +35,6 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
 
     try {
-      localStorage.removeItem('userId');
-      localStorage.removeItem('token');
-      navigate('/');
       const response = await axiosInstance.post("/auth/login", formData);
       console.log("Login response data", response.data)
       const { token,  _id } = response.data;
@@ -52,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     toast.success("Logout successful");
-    navigate('/')
+    navigate('/');
   }
 
   

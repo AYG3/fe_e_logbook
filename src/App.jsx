@@ -14,6 +14,7 @@ import { Toaster } from 'sonner';
 import AdminSignUp from './pages/admin/adminSignup';
 import UsersList from './pages/admin/UsersList';
 import StudentLogbook from './pages/admin/studentLogbook';
+import Navbar from './components/shared/navbar';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
     <Layout>
       <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/navbar' element={<Navbar/>} />
         <Route path='/login' element={<Login />}/>
         <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/adminsignup' element={< AdminSignUp />}/>
@@ -33,6 +35,7 @@ const App = () => {
         <Route path='/details/:entryId' element={<DetailsEntry/>}/>
         <Route path='/edit/:id' element={<EditEntry/>}/>
         <Route path='/delete/:id' element={<DeleteEntry/>}/>
+
       </Routes>
       {/* <UploadWidget /> */}
     </Layout>

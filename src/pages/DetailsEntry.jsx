@@ -81,10 +81,10 @@ const DetailsEntry = () => {
         <tbody>
           <tr key={entry.id}>
             <td className="border border-slate-700 rounded-md text-center">
-              {entry.date}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
-              {entry.day}
+              {entry.day}<br />
+              {entry.date}
             </td>
             <td className="border border-slate-700 rounded-md whitespace-pre-wrap pl-4">
               {entry.nature_of_activities}
