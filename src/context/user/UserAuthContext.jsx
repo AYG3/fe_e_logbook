@@ -20,8 +20,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('isLoggedIn', isLoggedIn)
   }, [isLoggedIn])
 
-  //User signup
-  const signup = async (formData) =>{ 
+  //User userSignup
+  const userSignup = async (formData) =>{ 
     try {
       const response = await axiosInstance.post("/auth/signup", formData);
   
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   //User Login
-  const login = async (formData) => {
+  const userLogin = async (formData) => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Logout
-  const logout = () => {
+  const userLogout = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     setIsLoggedIn(false);
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   
   return (
-    <UserAuthContext.Provider value={{ isLoggedIn, login, logout, signup, name}}>
+    <UserAuthContext.Provider value={{ isLoggedIn, userLogin, userLogout, userSignup, name}}>
         {children}
     </UserAuthContext.Provider >
   )

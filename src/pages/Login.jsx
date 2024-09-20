@@ -9,7 +9,7 @@ const Login = () => {
     password: "",
   });
 
-  const { isLoggedIn, login } = useContext(AuthContext);
+  const { isLoggedIn, userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    await login(formData);
+    await userLogin(formData);
     navigate(`/logbooks`);
   };
 
