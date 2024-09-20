@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserAuthContext } from "../../context/user/UserAuthContext";
 import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
+import axiosInstance from "../../utils/axiosConfig";
 
 const Navbar = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = 1;
+        const response = await  axiosInstance()
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
@@ -116,9 +117,9 @@ const Navbar = () => {
           </button>
           )
         )}
-        <button onClick={adminLogout}>
+        {/* <button onClick={adminLogout}>
           Logout
-        </button> 
+        </button>  */}
       </div>
 
     </nav>
