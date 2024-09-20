@@ -37,43 +37,36 @@ export const handleCreateEntry = (day, nature_of_activities, date, navigate) => 
 
 // Add or update extra
 export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, nature_of_activities, date, entryId, editIndex, setEditIndex) => {
-    try {
-      let updatedExtra;
+  try {
+    let updatedExtra = [...extra];
 
-      if (editIndex != null) {
-        extra[editIndex] = textArea;
-        setEditIndex(null);
-      } else {
-        // updatedExtra = [...extra, textArea];
-        extra.push(textArea)
-        setExtra(updatedExtra);
-      }
-      setTextArea("");
-      console.log("Extra after: ", extra);
-      console.log("updatedExtra after: ", updatedExtra);
-
-      const data = {
-        day: day,
-        nature_of_activities,
-        date: date,
-        extra,
-      };
-
-
-      const res = await axiosInstance.put(
-        `/logbook/editLogbook/${entryId}`,
-        data
-      );
-      if (res.status !== 200) {
-        console.log("Put Error updating extra: ", res.data);
-      } else {
-        console.log("Put Succesfully updated extra");
-        window.location.reload();
-      };
-    } catch (error) {
-      console.log("Error handling extra: ", error);
+    if (editIndex != null) {
+      updatedExtra[editIndex] = textArea;
+      setEditIndex(null);
+    } else {
+      updatedExtra.push(textArea);
     }
-  };
+
+    setExtra(updatedExtra);
+    setTextArea("");
+
+    const data = {
+      day: day,
+      nature_of_activities,
+      date: date,
+      extra: updatedExtra,
+    };
+
+    const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data);
+    if (res.status !== 200) {
+      console.log("Put Error updating extra: ", res.data);
+    } else {
+      console.log("Put Successfully updated extra");
+    }
+  } catch (error) {
+    console.log("Error handling extra: ", error);
+  }
+};
 
   //Sets editIndex
   export const handleEditExtra = (index, extra, setEditIndex, setTextArea) => {
@@ -84,24 +77,22 @@ export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, n
 
   //Handle delete for extra
   export const handleDeleteExtra = async (index, extra, setExtra, day, nature_of_activities, date, entryId) => {
-    extra.splice(index, 1);
-    console.log("After delete extra: ", extra);
-
     try {
+      const updatedExtra = extra.filter((_, i) => i !== index);
+      setExtra(updatedExtra);
+  
       const data = {
         day: day,
         nature_of_activities,
         date: date,
-        extra,
+        extra: updatedExtra,
       };
-
-      const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data );
-
+  
+      const res = await axiosInstance.put(`/logbook/editLogbook/${entryId}`, data);
       if (res.status !== 200) {
         console.log("Error deleting extra", res.data);
       } else {
-        console.log("Suceesfully deleted extra", res.data);
-        // window.location.reload();
+        console.log("Successfully deleted extra", res.data);
       }
     } catch (error) {
       console.log("Error deleting extra catch: ", error);

@@ -2,14 +2,13 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
-import { Link, useAsyncValue, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
 import { handleAdminForm, handleApprovalChange, handleCommentChange } from "../api/admin.js";
-// import UserAuthContext from "../context/user/UserAuthContext";
 import AdminAuthContext from "../context/admin/AdminAuthContext";
 
 const DetailsEntry = () => {
@@ -154,30 +153,22 @@ const DetailsEntry = () => {
         </button>
 
         {/* ACCEPT THE IMAGES */}
-        <input
-          type="file"
-          accept="image/"
-          name="images"
-          multiple
-          className="mt-4"
-        />
+       <UploadWidget className='bg-black' />
 
-        <UploadWidget className='bg-black' />
+       {/* ADMIN'S SECTION */}
 
-        {/* ADMIN'S SECTION */}
-
-        {isAdmin ? (
+       {isAdmin ? (
             <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
+              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
               <label htmlFor="approved" className="text-gray-700">Approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
+              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
               <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval)} />
+              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
               <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
             </div>
             <textarea
@@ -197,7 +188,6 @@ const DetailsEntry = () => {
         ) : (
           <div className="text-red-500 font-semibold">Admin access required to comment</div>
         )}
-
       </div>
     </div>
   );

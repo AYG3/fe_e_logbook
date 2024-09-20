@@ -22,8 +22,25 @@ export const handleAdminForm = async (e,approval, comment, entryId ) => {
     }
   }
 
-  export const handleApprovalChange = (e, setApproval) =>{
-    setApproval(e.target.value);
+  export const handleApprovalChange = async (e, setApproval, entryId ,comment) =>{
+    const newApproval = e.target.value;
+    setApproval(newApproval);
+
+    try {
+    const data = {
+      approval: newApproval,
+      comment: comment,
+    }
+
+    const res = await axiosInstance.put(`/logbook/admin/addComment/${entryId}`, data);
+    if (res.status === 200){
+      console.log("Approval status updated successfully");
+    } else {
+      console.log("Error updating approval status", res.data);
+    }
+  } catch (error) {
+    console.log("Error updating approval status: ", error);
+  }
   } 
 
   export const handleCommentChange = (e, setComment) =>{
