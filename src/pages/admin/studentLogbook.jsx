@@ -63,7 +63,7 @@ const StudentLogbook = () => {
                     <td className="border border-slate-700 rounded-md text-center">
                       {index % 5 + 1} 
                     </td>
-                    <td className="flex items-center flex-col border border-slate-700 rounded-md text-center">
+                    <td className="flex-col border border-slate-700 rounded-md text-center">
                       <p>{entry.day}</p>
                       <p>{entry.date}</p>
                     </td>

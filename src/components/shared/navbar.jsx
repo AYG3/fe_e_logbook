@@ -119,9 +119,9 @@ const Navbar = () => {
           )
         )}
         <div className="text-2xl text-white"> {name} </div>
-        <button onClick={adminLogout}>
+        {/* <button onClick={adminLogout}>
           Logout
-        </button> 
+        </button>  */}
       </div>
 
     </nav>
