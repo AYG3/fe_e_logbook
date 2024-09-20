@@ -14,6 +14,8 @@ export const AuthProvider = ({ children }) => {
   });
   const navigate = useNavigate();  
 
+  const [name, setName] = useState('');
+
   useEffect(() => {
     localStorage.setItem('isLoggedIn', isLoggedIn)
   }, [isLoggedIn])
@@ -36,11 +38,12 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
-      console.log("Login response data", response.data)
+      // console.log("Login response data", response.data)
       const { token,  _id } = response.data;
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
+      setName(response.data.fname);
       setIsLoggedIn(true);
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
@@ -60,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   
   return (
-    <UserAuthContext.Provider value={{ isLoggedIn, login, logout, signup}}>
+    <UserAuthContext.Provider value={{ isLoggedIn, login, logout, signup, name}}>
         {children}
     </UserAuthContext.Provider >
   )
