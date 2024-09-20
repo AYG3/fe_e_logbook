@@ -10,7 +10,6 @@ import axiosInstance from "../utils/axiosConfig";
 const Logbook = () => {
   const [entries, setEntries] = useState(null);
   const [weeks, setWeeks] = useState([]);
-  // const [user, setUser] = useState();
 
   useEffect(() => {
     const fetchUserData = async () => {
