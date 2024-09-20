@@ -45,6 +45,9 @@ const UsersList = () => {
               <td className='py-2 px-4 border-b'>
                 <Link to={`/userslogbook/${student._id}`} > Check </Link>  
               </td>
+              <td className='py-2 px-4 border-b'>
+                <Link to={`/confirmUserDelete`} > Check </Link>  
+              </td>
             </tr>
           ))}
         </tbody>

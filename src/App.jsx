@@ -15,6 +15,7 @@ import AdminSignUp from './pages/admin/adminSignup';
 import UsersList from './pages/admin/UsersList';
 import StudentLogbook from './pages/admin/studentLogbook';
 import Navbar from './components/shared/navbar';
+import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/adminsignup' element={< AdminSignUp />}/>
         <Route path='/users' element={< UsersList />}/>
+        <Route path='/confirmUserDelete' element={<ConfirmUserDelete />}/>
         <Route path='/userslogbook/:userId' element={< StudentLogbook />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
