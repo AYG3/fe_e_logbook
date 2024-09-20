@@ -6,6 +6,7 @@ import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
 const Navbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
+
   const navigate = useNavigate();
   const { isLoggedIn,  userLogout } = useContext(UserAuthContext);
   const { isAdmin, adminLogout } = useContext(AdminAuthContext);
@@ -14,20 +15,23 @@ const Navbar = () => {
     const fetchUserData = async () => {
       try {
         const response = 1;
-        console.log('isLoggedIn', isLoggedIn);
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
     };
-    fetchUserData();
+    // fetchUserData();
   }, []);
 
-  const [weeks, setWeeks] = useState();
+  const [weeks, setWeeks] = useState([]);
   const [dropDown, setDropDown] = useState(false);
 
   useEffect(() => {
-    const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
-    setWeeks(logbookWeeks);
+    const w = async () => {
+      const logbookWeeks = await JSON.parse(localStorage.getItem("weeks"))
+        setWeeks(logbookWeeks  ||[])
+    }
+    console.log('weeks: ', weeks);
+    w();
   }, []);
 
   const toggleDropdown = () => {

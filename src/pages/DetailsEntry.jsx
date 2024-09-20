@@ -34,8 +34,6 @@ const DetailsEntry = () => {
     const fetchEntry = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/userLogbook/${entryId}`);
-
-        // console.log("Response data: ", res.data);
         setEntry(res.data);
         setExtra(res.data.extra);
         setDay(res.data.day);
@@ -43,8 +41,6 @@ const DetailsEntry = () => {
         setDate(res.data.date);
         setComment(res.data.comment)
         setApproval(res.data.approval)
-        // console.log('isAdmin: ', isAdmin);
-        // console.log("EntryId: ", entryId);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
