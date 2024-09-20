@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, UNSAFE_LocationContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import  e_logbook from '../components/images/e_logbook.jpeg'
 import UserAuthContext from '../context/user/UserAuthContext';
 import AdminAuthContext from '../context/admin/AdminAuthContext';
@@ -15,7 +15,7 @@ const Home = () => {
       console.log("IsLoggedIn: ", isLoggedIn);
     }
     CheckAdmin();
-  }, [])
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100">

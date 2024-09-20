@@ -48,6 +48,11 @@ const Navbar = () => {
     }
   };
 
+  const handleLoginRedirect = () => {
+    if (current_url !== '/login') {
+      navigate('/login');
+    }
+  };
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -55,9 +60,6 @@ const Navbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex space-x-4 gap-4 ">
-          {/* <Link to="/" className="text-gray-300 px-4 py-2 hover:text-white rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
-            Home
-          </Link> */}
           {isLoggedIn ? (
             <div className="flex flex-col items-center text-gray-300 relative">
               <button
@@ -106,12 +108,14 @@ const Navbar = () => {
             Logout
           </button>
         ) : (
+          current_url != `/login` && (
           <button
-            onClick={login}
+            onClick={handleLoginRedirect}
             className="bg-slate-500 p-4 rounded text-white"
           >
             Login
           </button>
+          )
         )}
         <button onClick={logout}>
           Logout
