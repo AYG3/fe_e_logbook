@@ -15,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await  axiosInstance()
+        const response = await  axiosInstance.post();
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
