@@ -9,13 +9,13 @@ const Navbar = () => {
   const current_url = location.pathname;
 
   const navigate = useNavigate();
-  const { isLoggedIn,  userLogout } = useContext(UserAuthContext);
+  const { isLoggedIn,  userLogout, name } = useContext(UserAuthContext);
   const { isAdmin, adminLogout } = useContext(AdminAuthContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axiosInstance.post(``);
+        // const response = await axiosInstance.post(``);
       } catch (error) {
         console.log(`Fetch error: ${error}`);
       }
@@ -30,6 +30,7 @@ const Navbar = () => {
       const logbookWeeks = JSON.parse(localStorage.getItem("weeks"))
         setWeeks(logbookWeeks || [])
         console.log('Logbook weeks',logbookWeeks);
+        console.log('Name: ', name);
   }, []);
 
   const toggleDropdown = () => {
@@ -117,6 +118,7 @@ const Navbar = () => {
           </button>
           )
         )}
+        <div className="text-2xl text-white"> {name} </div>
         {/* <button onClick={adminLogout}>
           Logout
         </button>  */}
