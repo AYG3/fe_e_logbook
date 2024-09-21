@@ -152,10 +152,10 @@ const DetailsEntry = () => {
         </button>
 
         {/* ACCEPT THE IMAGES */}
-        <div className="bg-black">
+        {/* <div className="bg-black"> */}
         <UploadWidget className='bg-white ' />
 
-        </div>
+        {/* </div> */}
 
        {/* ADMIN'S SECTION */}
 
