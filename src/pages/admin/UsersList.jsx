@@ -39,43 +39,45 @@ const UsersList = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Users</h2>
-      <table className="min-w-full bg-white">
+    <div className="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+      <h2 className="text-3xl font-bold mb-6 text-center">Users</h2>
+      <table className="min-w-full bg-white rounded-lg shadow-md">
         <thead>
-          <tr>
-            <th className="py-2 px-4 border-b">ID</th>
-            <th className="py-2 px-4 border-b">First Name</th>
-            <th className="py-2 px-4 border-b">Last Name</th>
-            <th className="py-2 px-4 border-b">Email</th>
-            <th className="py-2 px-4 border-b">Started</th>
-            <th className="py-2 px-4 border-b">Check</th>
-            <th className="py-2 px-4 border-b">Operations</th>
+          <tr className="bg-gray-200 text-gray-700">
+            <th className="py-3 px-4 border-b font-semibold">ID</th>
+            <th className="py-3 px-4 border-b font-semibold">First Name</th>
+            <th className="py-3 px-4 border-b font-semibold">Last Name</th>
+            <th className="py-3 px-4 border-b font-semibold">Email</th>
+            <th className="py-3 px-4 border-b font-semibold">Started</th>
+            <th className="py-3 px-4 border-b font-semibold">Check</th>
+            <th className="py-3 px-4 border-b font-semibold">Operations</th>
           </tr>
         </thead>
         <tbody>
           {users?.map((student, index) => (
-            <tr key={student._id}>
-              <td className="py-2 px-4 border-b">{index + 1}</td>
-              <td className="py-2 px-4 border-b">{student.fname}</td>
-              <td className="py-2 px-4 border-b">{student.lname}</td>
-              <td className="py-2 px-4 border-b">{student.email}</td>
-              <td className="py-2 px-4 border-b">{formatDate(student.createdAt)}</td>
-              <td className='py-2 px-4 border-b'>
-                <Link to={`/userslogbook/${student._id}/${student.fname + " " + student.lname}`} > Check </Link>  
+            <tr key={student._id} className="hover:bg-gray-100">
+              <td className="py-3 px-4 border-b text-center">{index + 1}</td>
+              <td className="py-3 px-4 border-b text-center">{student.fname}</td>
+              <td className="py-3 px-4 border-b text-center">{student.lname}</td>
+              <td className="py-3 px-4 border-b text-center">{student.email}</td>
+              <td className="py-3 px-4 border-b text-center">{formatDate(student.createdAt)}</td>
+              <td className="py-3 px-4 border-b text-center">
+                <Link to={`/userslogbook/${student._id}/${student.fname + " " + student.lname}`} className="text-blue-600 hover:underline">
+                  Check
+                </Link>
               </td>
-              <td className='py-2 px-4 items-center border-b'>
-                <button onClick={() => openModal(student._id)} className='inline-block p-2 rounded-full hover:bg-red-100' > 
-                  <MdOutlineDelete className='text-red-600 text-xl' /> 
-                </button>  
+              <td className="py-3 px-4 border-b text-center">
+                <button onClick={() => openModal(student._id)} className="inline-block p-2 rounded-full hover:bg-red-100">
+                  <MdOutlineDelete className="text-red-600 text-xl" />
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <Modal isOpen={isModalOpen} onclose={closeModal}>
-          <ConfirmUserDelete userId={selectedUserId} onClose={closeModal} />
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ConfirmUserDelete userId={selectedUserId} onClose={closeModal} />
       </Modal>
     </div>
   );

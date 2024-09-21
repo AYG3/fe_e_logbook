@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) =>{
 
     useEffect(() => {
       localStorage.setItem('isAdmin', isAdmin);
-      localStorage.setItem('adminName, adminName');
+      localStorage.setItem('adminName', adminName);
     }, [isAdmin, adminName]);
 
   //admin signup
