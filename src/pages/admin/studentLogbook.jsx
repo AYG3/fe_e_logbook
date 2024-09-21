@@ -31,7 +31,9 @@ const StudentLogbook = () => {
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">
-        <h1>User: {userName}</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+          User: {userName}
+        </h1>
         <table className="w-full border border-separate border-spacing-2 table-auto ">
           <thead>
             <tr>

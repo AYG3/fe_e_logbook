@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserAuthContext } from "../../context/user/UserAuthContext";
 import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
-import axiosInstance from "../../utils/axiosConfig";
 
 const Navbar = () => {
   const location = useLocation();

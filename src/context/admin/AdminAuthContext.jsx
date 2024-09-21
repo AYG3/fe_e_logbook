@@ -8,6 +8,7 @@ export const AdminAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) =>{
     const [adminName, setAdminName] = useState('');
+    
     const [isAdmin, setIsAdmin] = useState(() => {
       // Initialize state from localStorage
       const savedIsAdmin = localStorage.getItem('isAdmin');
