@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   });
   const navigate = useNavigate();  
 
-  const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', isLoggedIn)
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   
   return (
-    <UserAuthContext.Provider value={{ isLoggedIn, userLogin, userLogout, userSignup, name}}>
+    <UserAuthContext.Provider value={{ isLoggedIn, userLogin, userLogout, userSignup, userName}}>
         {children}
     </UserAuthContext.Provider >
   )

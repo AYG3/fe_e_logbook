@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 export const AdminAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) =>{
+    const [adminName, setAdminName] = useState('');
     const [isAdmin, setIsAdmin] = useState(() => {
       // Initialize state from localStorage
       const savedIsAdmin = localStorage.getItem('isAdmin');
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }) =>{
       console.log("Succesfully logged in");
       console.log(res.data);
       setIsAdmin(true);
+      setAdminName(res.data.fname + res.data.lname)
       toast.success(res?.data?.message || "Admin Login up successful!");
       navigate("/users"); 
     } catch (error) {
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }) =>{
   //Admin Logout
   const adminLogout = async () => {
     setIsAdmin(false)
+    setAdminName(null)
     localStorage.removeItem('token')
     localStorage.removeItem('adminId')
     navigate('/')
@@ -60,7 +63,7 @@ export const AuthProvider = ({ children }) =>{
   }
 
     return (
-        <AdminAuthContext.Provider value={{ isAdmin, adminSignUp, adminLogin, adminLogout }}>
+        <AdminAuthContext.Provider value={{ isAdmin, adminSignUp, adminLogin, adminLogout, adminName }}>
             {children}
         </AdminAuthContext.Provider>
     )

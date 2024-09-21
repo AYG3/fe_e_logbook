@@ -10,8 +10,8 @@ const Navbar = () => {
   // const [name, setName] = useState("")
 
   const navigate = useNavigate();
-  const { isLoggedIn,  userLogout, name } = useContext(UserAuthContext);
-  const { isAdmin, adminLogout } = useContext(AdminAuthContext);
+  const { isLoggedIn,  userLogout, userName } = useContext(UserAuthContext);
+  const { isAdmin, adminLogout, adminName } = useContext(AdminAuthContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -114,7 +114,7 @@ const Navbar = () => {
             </button>
           )
         )}
-        <div className="text-2xl text-white">{name}</div>
+        <div className="text-2xl text-white">{isAdmin ? adminName: userName}</div>
       </div>
 
       {/* List of students */}
