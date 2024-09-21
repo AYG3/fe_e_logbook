@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axiosInstance from '../../utils/axiosConfig';
 
-const ConfirmUserDelete = (userId, onClose) => {
-  const [ student, setStudent ] = useState("");
+const ConfirmUserDelete = ({userId, onClose}) => {
+  const [ user, setUser ] = useState("");
 
   useEffect(() => {
-    const fetchStudent = async () =>{
+    const fetchUser = async () =>{
       const res = await axiosInstance.get(`/admin/getUser/${userId}`);
-      setStudent(res.data)
+      setUser(res.data)
+      console.log("user: ", user);
     }
-    fetchStudent();
-    console.log(student);
+    fetchUser();
 
   }, [userId]);
 
   const handleDelete = async () => {
     try {
-      const res = axiosInstance.delete(`/admin/userDelete/${userId}`)
+      await axiosInstance.delete(`/admin/userDelete/${userId}`)
       onClose();
       //Add snackbar success message
     } catch (error) {
@@ -28,7 +28,7 @@ const ConfirmUserDelete = (userId, onClose) => {
     <div>
       <h2 className="text-xl font-bold mb-4">Confirm User Delete</h2>
       <p className="mb-4">
-        Are you sure you want to delete the user <strong>{student.fname} {student.lname}</strong>?
+        Are you sure you want to delete the user <strong>{user.fname} {user.lname}</strong>?
       </p>
       <div className="flex justify-end space-x-4">
         <button onClick={onClose} className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400">

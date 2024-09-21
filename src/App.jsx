@@ -15,6 +15,7 @@ import UsersList from './pages/admin/UsersList';
 import StudentLogbook from './pages/admin/studentLogbook';
 import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
+import AdminHome from './pages/admin/AdminHome';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/edit/:id' element={<EditEntry/>}/>
         <Route path='/delete/:id' element={<DeleteEntry/>}/>
         {/* ADMIN ROUTES */}
+        <Route path='/adminHome' element={< AdminHome />}/>
         <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/adminsignup' element={< AdminSignUp />}/>
         <Route path='/users' element={< UsersList />}/>

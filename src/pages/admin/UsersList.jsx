@@ -26,7 +26,7 @@ const UsersList = () => {
     };
 
     getUsers();
-  }, []);
+  }, [users]);
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -75,7 +75,7 @@ const UsersList = () => {
       </table>
 
       <Modal isOpen={isModalOpen} onclose={closeModal}>
-          <ConfirmUserDelete userId={selectedUserId} onclose={closeModal} />
+          <ConfirmUserDelete userId={selectedUserId} onClose={closeModal} />
       </Modal>
     </div>
   );

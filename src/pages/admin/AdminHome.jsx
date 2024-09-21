@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import  e_logbook from '../components/images/e_logbook.jpeg'
-import UserAuthContext from '../context/user/UserAuthContext';
-import AdminAuthContext from '../context/admin/AdminAuthContext';
+import  e_logbook from '../../components/images/e_logbook.jpeg'
+import UserAuthContext from '../../context/user/UserAuthContext';
+import AdminAuthContext from '../../context/admin/AdminAuthContext';
 
 const AdminHome = () => {
 
@@ -32,9 +32,9 @@ const AdminHome = () => {
           Keep track of your students activities and manage their logbook entries with ease.
         </p>
         <div className='flex gap-8'>            
-        <Link to={isAdmin ? '/adminlogin' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
+        {/* <Link to={isAdmin ? '/userslogbook/:userId' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
             Check Student's Logbook
-        </Link>
+        </Link> */}
         <Link to={`/users`} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
             UsersList
         </Link>
