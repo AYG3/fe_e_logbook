@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       toast.success(response?.data?.message || "Login successful!");
-      setName(response.data.fname);
+      setUserName(response.data.fname + " " + response.data.lname);
       setIsLoggedIn(true);
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-    setName(null)
+    setUserName(null)
     toast.success("Logout successful");
     navigate('/');
   }

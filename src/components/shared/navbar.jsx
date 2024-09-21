@@ -7,29 +7,17 @@ import axiosInstance from "../../utils/axiosConfig";
 const Navbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
-  // const [name, setName] = useState("")
 
   const navigate = useNavigate();
-  const { isLoggedIn,  userLogout, userName } = useContext(UserAuthContext);
+  const { isLoggedIn, userLogout, userName } = useContext(UserAuthContext);
   const { isAdmin, adminLogout, adminName } = useContext(AdminAuthContext);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        // const response = await axiosInstance.post(``);
-      } catch (error) {
-        console.log(`Fetch error: ${error}`);
-      }
-    };
-    // fetchUserData();
-  }, [name]);
 
   const [weeks, setWeeks] = useState([]);
   const [dropDown, setDropDown] = useState(false);
 
   useEffect(() => {
-      const logbookWeeks = JSON.parse(localStorage.getItem("weeks"))
-        setWeeks(logbookWeeks || [])
+    const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
+    setWeeks(logbookWeeks || []);
   }, []);
 
   const toggleDropdown = () => {
@@ -37,8 +25,7 @@ const Navbar = () => {
   };
 
   const handleScroll = (id) => {
-    if (current_url != `/logbooks`) {
-      console.log("Current URL: ", current_url);
+    if (current_url !== `/logbooks`) {
       navigate("/logbooks");
     }
 
@@ -53,79 +40,80 @@ const Navbar = () => {
       navigate('/login');
     }
   };
+
   return (
-    <nav className="bg-gray-800 p-4">
-    <div className="container mx-auto flex justify-between items-center">
-      <div className="text-white text-lg font-bold">
-        <Link to={isAdmin? '/adminHome': '/'}>E-Logbook</Link>
-      </div>
-      <div className="flex space-x-4 gap-4">
-        {isLoggedIn ? (
-          <div className="flex flex-col items-center text-gray-300 relative">
+    <nav className="bg-gray-800 p-4 shadow-md">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-white text-lg font-bold">
+          <Link to={isAdmin ? '/adminHome' : '/'}>E-Logbook</Link>
+        </div>
+        <div className="flex space-x-4">
+          {isLoggedIn && (
+            <div className="relative">
+              <button
+                className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+                onClick={toggleDropdown}
+              >
+                Weeks
+              </button>
+              {dropDown && (
+                <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
+                  {weeks?.map((wk, index) => (
+                    <button
+                      key={index}
+                      className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
+                      onClick={() => {
+                        handleScroll(wk);
+                        toggleDropdown();
+                      }}
+                    >
+                      Week {wk}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center space-x-4">
+          {isAdmin ? (
             <button
-              className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-              onClick={toggleDropdown}
+              onClick={adminLogout}
+              className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
             >
-              Weeks
+              Admin Logout
             </button>
-            {dropDown && (
-              <div className="absolute bg-gray-800 text-white mt-12 rounded-xl shadow-lg w-48 z-10 duration-150">
-                {weeks?.map((wk, index) => (
-                  <button
-                    key={index}
-                    className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
-                    onClick={() => {
-                      handleScroll(wk);
-                      toggleDropdown();
-                    }}
-                  >
-                    Week {wk}
-                  </button>
-                ))}
-              </div>
-            )}
+          ) : isLoggedIn ? (
+            <button
+              onClick={userLogout}
+              className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
+            >
+              Logout
+            </button>
+          ) : (
+            current_url !== `/login` && (
+              <button
+                onClick={handleLoginRedirect}
+                className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
+              >
+                Login
+              </button>
+            )
+          )}
+          <div className="text-white text-lg font-semibold">
+            {isAdmin ? adminName : userName}
           </div>
-        ) : (
-          ""
+        </div>
+        {isAdmin && (
+          <Link
+            to="/users"
+            className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+          >
+            All Students
+          </Link>
         )}
       </div>
-      <div className="text-white flex items-center space-x-4">
-        {isAdmin ? (
-          <button
-            onClick={adminLogout}
-            className="bg-slate-500 px-4 py-2 rounded text-white"
-          >
-            Admin Logout
-          </button>
-        ) : isLoggedIn ? (
-          <button
-            onClick={userLogout}
-            className="bg-slate-500 px-4 py-2 rounded text-white"
-          >
-            Logout
-          </button>
-        ) : (
-          current_url !== `/login` && (
-            <button
-              onClick={handleLoginRedirect}
-              className="bg-slate-500 px-4 py-2 rounded text-white"
-            >
-              Login
-            </button>
-          )
-        )}
-        <div className="text-2xl text-white">{isAdmin ? adminName: userName}</div>
-      </div>
-
-      {/* List of students */}
-
-      {isAdmin && (
-        <Link to="/users" className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
-          All Students
-        </Link>)
-      }
-    </div>
-  </nav>
+    </nav>
   );
 };
 

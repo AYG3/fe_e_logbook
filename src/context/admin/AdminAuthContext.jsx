@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) =>{
       console.log("Succesfully logged in");
       console.log(res.data);
       setIsAdmin(true);
-      setAdminName(res.data.fname + res.data.lname)
+      setAdminName(res.data.fname + " " + res.data.lname)
       toast.success(res?.data?.message || "Admin Login up successful!");
       navigate("/users"); 
     } catch (error) {
