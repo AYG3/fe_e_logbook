@@ -8,8 +8,8 @@ const Navbar = () => {
   const current_url = location.pathname;
 
   const navigate = useNavigate();
-  const { isLoggedIn, userLogout, userName } = useContext(UserAuthContext);
-  const { isAdmin, adminLogout, adminName } = useContext(AdminAuthContext);
+  const { isLoggedIn, userLogout, userName, userId } = useContext(UserAuthContext);
+  const { isAdmin, adminLogout, adminName, adminId } = useContext(AdminAuthContext);
 
   const [weeks, setWeeks] = useState([]);
   const [dropDown, setDropDown] = useState(false);
@@ -99,7 +99,7 @@ const Navbar = () => {
               </button>
             )
           )}
-          <Link to='/profile/:id' className="text-white text-lg font-semibold">
+          <Link to={isAdmin ? `profile/${adminId}` : `profile/${userId}` } className="text-white text-lg font-semibold">
             {isAdmin ? adminName : userName}
           </Link>
         </div>

@@ -1,7 +1,26 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import AdminAuthContext from "../context/admin/AdminAuthContext";
+import axiosInstance from "../utils/axiosConfig";
+import { useParams } from 'react-router-dom';
+
 
 const Profile = () => {
+    const {isAdmin } = useContext(AdminAuthContext)
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axiosInstance.get(`{isAdmin ? /admin : /logbook}/` + '/getUser')
+                console.log(res.data)
+                console.log("Id")
+            } catch (error) {
+                console.error("Error fetching user  in profile: ", error)            
+            }
+            
+        }
+
+    }, [])
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
