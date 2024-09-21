@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
     const {isAdmin } = useContext(AdminAuthContext)
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchUser = async () => {
