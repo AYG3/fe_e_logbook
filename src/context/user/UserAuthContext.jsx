@@ -12,13 +12,19 @@ export const AuthProvider = ({ children }) => {
     const savedIsLoggedIn = localStorage.getItem('isLoggedIn');
     return savedIsLoggedIn === 'true';
   });
-  const navigate = useNavigate();  
 
-  const [userName, setUserName] = useState('');
+  const navigate = useNavigate();  
+  const [userId, setUserId] = useState("")
+
+  const [userName, setUserName] = useState(() => {
+    const savedUserName = localStorage.getItem('userName');
+    return savedUserName || ""
+  });
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', isLoggedIn)
-  }, [isLoggedIn])
+    localStorage.setItem('userName', userName);
+  }, [isLoggedIn, userName])
 
   //User userSignup
   const userSignup = async (formData) =>{ 
@@ -42,6 +48,7 @@ export const AuthProvider = ({ children }) => {
       const { token,  _id } = response.data;
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
+      setUserId(_id);
       toast.success(response?.data?.message || "Login successful!");
       setUserName(response.data.fname + " " + response.data.lname);
       setIsLoggedIn(true);
@@ -58,13 +65,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     setUserName(null)
+    setUserId(null)
     toast.success("Logout successful");
     navigate('/');
   }
 
   
   return (
-    <UserAuthContext.Provider value={{ isLoggedIn, userLogin, userLogout, userSignup, userName}}>
+    <UserAuthContext.Provider value={{ isLoggedIn, userLogin, userLogout, userSignup, userName, userId}}>
         {children}
     </UserAuthContext.Provider >
   )
