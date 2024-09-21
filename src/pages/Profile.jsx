@@ -17,10 +17,8 @@ const Profile = () => {
                 console.log("Id")
             } catch (error) {
                 console.error("Error fetching user  in profile: ", error)            
-            }
-            
+            }   
         }
-
     }, [])
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
