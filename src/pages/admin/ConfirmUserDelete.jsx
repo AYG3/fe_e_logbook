@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosConfig';
 
-const ConfirmUserDelete = () => {
-  const { userId } = useParams();
+const ConfirmUserDelete = (userId, onClose) => {
   const [ student, setStudent ] = useState("");
 
   useEffect(() => {
@@ -14,17 +12,32 @@ const ConfirmUserDelete = () => {
     fetchStudent();
     console.log(student);
 
-  }, []);
+  }, [userId]);
+
+  const handleDelete = async () => {
+    try {
+      const res = axiosInstance.delete(`/admin/userDelete/${userId}`)
+      onClose();
+      //Add snackbar success message
+    } catch (error) {
+      console.error('Error deleting user: ', error);
+    }
+  }
 
   return (
     <div>
-      <p>
-        {student.fname}
-        {student.lname}
+      <h2 className="text-xl font-bold mb-4">Confirm User Delete</h2>
+      <p className="mb-4">
+        Are you sure you want to delete the user <strong>{student.fname} {student.lname}</strong>?
       </p>
-
-      CONFIRM USER DELETE
-
+      <div className="flex justify-end space-x-4">
+        <button onClick={onClose} className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400">
+          Cancel
+        </button>
+        <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+          Delete
+        </button>
+      </div>
     </div>
   )
 }

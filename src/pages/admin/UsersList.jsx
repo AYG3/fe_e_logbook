@@ -3,10 +3,15 @@ import axiosInstance from '../../utils/axiosConfig';
 import { formatDate } from '../../utils/dateTimeUtils';
 import { Link } from 'react-router-dom';
 import { MdOutlineDelete } from "react-icons/md";
+import Modal from '../../components/Modal';
+import ConfirmUserDelete from './ConfirmUserDelete';
 
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
 
   useEffect(() => {
     const getUsers = async () => {
@@ -22,6 +27,16 @@ const UsersList = () => {
 
     getUsers();
   }, []);
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedUserId(null)
+  }
+
+  const openModal = (userId) => {
+    setIsModalOpen(true)
+    setSelectedUserId(userId)
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -50,12 +65,18 @@ const UsersList = () => {
                 <Link to={`/userslogbook/${student._id}`} > Check </Link>  
               </td>
               <td className='py-2 px-4 items-center border-b'>
-                <Link to={`/confirmUserDelete/${student._id}`} > <MdOutlineDelete className='text-red-600' /> </Link>  
+                <button onClick={() => openModal(student._id)} className='inline-block p-2 rounded-full hover:bg-red-100' > 
+                  <MdOutlineDelete className='text-red-600 text-xl' /> 
+                </button>  
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <Modal isOpen={isModalOpen} onclose={closeModal}>
+          <ConfirmUserDelete userId={selectedUserId} onclose={closeModal} />
+      </Modal>
     </div>
   );
 };
