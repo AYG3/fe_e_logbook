@@ -194,15 +194,15 @@ const DetailsEntry = () => {
 {isAdmin ? (
   <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
+      <input type="radio" name="approval" value='approved' className="form-radio text-blue-600" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
       <label htmlFor="approved" className="text-gray-700">Approved</label>
     </div>
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
+      <input type="radio" name="approval" value="semi-approved" className="form-radio text-yellow-600" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
       <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
     </div>
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
+      <input type="radio" name="approval" value="not-approved" className="form-radio text-red-600" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
       <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
     </div>
     <textarea
@@ -222,15 +222,15 @@ const DetailsEntry = () => {
 ) : (
   <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3">
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} disabled />
+      <input type="radio" name="approval" value='approved' className="form-radio text-blue-600" checked={approval === 'approved'} disabled />
       <label htmlFor="approved" className="text-gray-700">Approved</label>
     </div>
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} disabled />
+      <input type="radio" name="approval" value="semi-approved" className="form-radio text-yellow-600" checked={approval === 'semi-approved'} disabled />
       <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
     </div>
     <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} disabled />
+      <input type="radio" name="approval" value="not-approved" className="form-radio text-red-600" checked={approval === 'not-approved'} disabled />
       <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
     </div>
     <textarea

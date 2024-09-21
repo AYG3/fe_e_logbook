@@ -16,6 +16,7 @@ import StudentLogbook from './pages/admin/studentLogbook';
 import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
+        <Route path='/profile' element={<Profile />}/>
         <Route path='/create' element={<CreateEntry/>}/>
         <Route path='/details/:entryId' element={<DetailsEntry/>}/>
         <Route path='/edit/:id' element={<EditEntry/>}/>
