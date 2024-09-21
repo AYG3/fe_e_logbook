@@ -99,9 +99,9 @@ const Navbar = () => {
               </button>
             )
           )}
-          <div className="text-white text-lg font-semibold">
+          <Link to='/profile/:id' className="text-white text-lg font-semibold">
             {isAdmin ? adminName : userName}
-          </div>
+          </Link>
         </div>
         {isAdmin && (
           <Link
