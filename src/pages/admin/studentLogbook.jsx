@@ -16,14 +16,13 @@ const StudentLogbook = () => {
         console.log(res.data);
         setLogbook(res.data)
       }
-
       fetchUserLogbook();
     }, [])
 
 
     if (!logbook) {
       return (
-        <div className='absolute'>
+        <div className=''>
           <Loading />
         </div>
       );

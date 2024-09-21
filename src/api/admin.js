@@ -9,7 +9,7 @@ export const handleAdminForm = async (e,approval, comment, entryId ) => {
         approval: approval,
         comment: comment,
       }
-      const res = await axiosInstance.put(`/logbook/admin/addComment/${entryId}`, commentData);
+      const res = await axiosInstance.put(`admin/addComment/${entryId}`, commentData);
       
       console.log("Handling Form (Try block) Response: ", res);
       if(res==200){
@@ -32,7 +32,7 @@ export const handleAdminForm = async (e,approval, comment, entryId ) => {
       comment: comment,
     }
 
-    const res = await axiosInstance.put(`/logbook/admin/addComment/${entryId}`, data);
+    const res = await axiosInstance.put(`admin/addComment/${entryId}`, data);
     if (res.status === 200){
       console.log("Approval status updated successfully");
     } else {
@@ -48,4 +48,3 @@ export const handleAdminForm = async (e,approval, comment, entryId ) => {
   }
 
 
-  
