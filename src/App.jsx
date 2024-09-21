@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import UploadWidget from './components/images/UploadWidget';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
