@@ -7,6 +7,7 @@ import axiosInstance from "../../utils/axiosConfig";
 const Navbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
+  // const [name, setName] = useState("")
 
   const navigate = useNavigate();
   const { isLoggedIn,  userLogout, name } = useContext(UserAuthContext);
@@ -21,7 +22,7 @@ const Navbar = () => {
       }
     };
     // fetchUserData();
-  }, []);
+  }, [name]);
 
   const [weeks, setWeeks] = useState([]);
   const [dropDown, setDropDown] = useState(false);
