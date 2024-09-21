@@ -29,8 +29,6 @@ const Navbar = () => {
   useEffect(() => {
       const logbookWeeks = JSON.parse(localStorage.getItem("weeks"))
         setWeeks(logbookWeeks || [])
-        console.log('Logbook weeks',logbookWeeks);
-        console.log('Name: ', name);
   }, []);
 
   const toggleDropdown = () => {
@@ -185,6 +183,14 @@ const Navbar = () => {
         )}
         <div className="text-2xl text-white">{name}</div>
       </div>
+
+      {/* List of students */}
+
+      {isAdmin && (
+        <Link to="/users" className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600">
+          All Students
+        </Link>)
+      }
     </div>
   </nav>
   );

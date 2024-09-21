@@ -46,3 +46,6 @@ export const handleAdminForm = async (e,approval, comment, entryId ) => {
   export const handleCommentChange = (e, setComment) =>{
     setComment(e.target.value);
   }
+
+
+  

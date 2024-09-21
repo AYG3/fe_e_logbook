@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosConfig';
 import { formatDate } from '../../utils/dateTimeUtils';
 import { Link } from 'react-router-dom';
+import { MdOutlineDelete } from "react-icons/md";
+
+
 const UsersList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axiosInstance.get(`/logbook/admin/users`);
+        const res = await axiosInstance.get(`/admin/users`);
         // console.log(res.data);
 
         setUsers(res.data);
@@ -32,6 +35,7 @@ const UsersList = () => {
             <th className="py-2 px-4 border-b">Email</th>
             <th className="py-2 px-4 border-b">Started</th>
             <th className="py-2 px-4 border-b">Check</th>
+            <th className="py-2 px-4 border-b">Operations</th>
           </tr>
         </thead>
         <tbody>
@@ -45,8 +49,8 @@ const UsersList = () => {
               <td className='py-2 px-4 border-b'>
                 <Link to={`/userslogbook/${student._id}`} > Check </Link>  
               </td>
-              <td className='py-2 px-4 border-b'>
-                <Link to={`/confirmUserDelete`} > Check </Link>  
+              <td className='py-2 px-4 items-center border-b'>
+                <Link to={`/confirmUserDelete/${student._id}`} > <MdOutlineDelete className='text-red-600' /> </Link>  
               </td>
             </tr>
           ))}

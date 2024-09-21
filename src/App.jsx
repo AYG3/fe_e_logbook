@@ -25,17 +25,18 @@ const App = () => {
         <Route path='/' element={<Home/>} />
         <Route path='/navbar' element={<Navbar/>} />
         <Route path='/login' element={<Login />}/>
-        <Route path='/adminlogin' element={< AdminLogin />}/>
-        <Route path='/adminsignup' element={< AdminSignUp />}/>
-        <Route path='/users' element={< UsersList />}/>
-        <Route path='/confirmUserDelete' element={<ConfirmUserDelete />}/>
-        <Route path='/userslogbook/:userId' element={< StudentLogbook />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
         <Route path='/create' element={<CreateEntry/>}/>
         <Route path='/details/:entryId' element={<DetailsEntry/>}/>
         <Route path='/edit/:id' element={<EditEntry/>}/>
         <Route path='/delete/:id' element={<DeleteEntry/>}/>
+        {/* ADMIN ROUTES */}
+        <Route path='/adminlogin' element={< AdminLogin />}/>
+        <Route path='/adminsignup' element={< AdminSignUp />}/>
+        <Route path='/users' element={< UsersList />}/>
+        <Route path='/confirmUserDelete/:userId' element={<ConfirmUserDelete />}/>
+        <Route path='/userslogbook/:userId' element={< StudentLogbook />}/>
 
       </Routes>
       {/* <UploadWidget /> */}

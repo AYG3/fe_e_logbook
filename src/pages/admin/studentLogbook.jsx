@@ -12,7 +12,7 @@ const StudentLogbook = () => {
 
     useEffect(() => {
       const fetchUserLogbook = async () => {
-        const res = await axiosInstance.get(`/logbook/admin/user/logbooks/${userId}`);
+        const res = await axiosInstance.get(`admin/user/logbooks/${userId}`);
         console.log(res.data);
         setLogbook(res.data)
       }
