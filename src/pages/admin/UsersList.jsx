@@ -62,7 +62,7 @@ const UsersList = () => {
               <td className="py-2 px-4 border-b">{student.email}</td>
               <td className="py-2 px-4 border-b">{formatDate(student.createdAt)}</td>
               <td className='py-2 px-4 border-b'>
-                <Link to={`/userslogbook/${student._id}`} > Check </Link>  
+                <Link to={`/userslogbook/${student._id}/${student.fname + " " + student.lname}`} > Check </Link>  
               </td>
               <td className='py-2 px-4 items-center border-b'>
                 <button onClick={() => openModal(student._id)} className='inline-block p-2 rounded-full hover:bg-red-100' > 

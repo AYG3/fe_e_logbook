@@ -8,15 +8,13 @@ import Loading from '../../components/shared/Loading';
 
 const StudentLogbook = () => {
     const [logbook, setLogbook] = useState(null);
-    const { userId } = useParams();
-    const [userName, setUserName ] = useState("")
+    const { userId, userName } = useParams();
 
     useEffect(() => {
       const fetchUserLogbook = async () => {
         const res = await axiosInstance.get(`admin/user/logbooks/${userId}`);
-        console.log(res.data);
+        console.log("Res data: ", res.data);
         setLogbook(res.data)
-        setUserName(res.data.fname)
       }
       fetchUserLogbook();
     }, [])
@@ -33,7 +31,7 @@ const StudentLogbook = () => {
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">
-
+        <h1>User: {userName}</h1>
         <table className="w-full border border-separate border-spacing-2 table-auto ">
           <thead>
             <tr>
