@@ -7,7 +7,10 @@ import { toast } from 'sonner';
 export const AdminAuthContext = createContext('');
 
 export const AuthProvider = ({ children }) =>{
-    const [adminName, setAdminName] = useState('');
+    const [adminName, setAdminName] = useState(()=>{
+      const savedAdminName = localStorage.getItem('adminName');
+      return savedAdminName || ""
+    });
     
     const [isAdmin, setIsAdmin] = useState(() => {
       // Initialize state from localStorage
@@ -17,9 +20,9 @@ export const AuthProvider = ({ children }) =>{
     const navigate = useNavigate();
 
     useEffect(() => {
-      // Save isAdmin state to localStorage whenever it changes
       localStorage.setItem('isAdmin', isAdmin);
-    }, [isAdmin]);
+      localStorage.setItem('adminName, adminName');
+    }, [isAdmin, adminName]);
 
   //admin signup
   const adminSignUp = async (formData) => {
@@ -59,6 +62,7 @@ export const AuthProvider = ({ children }) =>{
     setAdminName(null)
     localStorage.removeItem('token')
     localStorage.removeItem('adminId')
+    localStorage.removeItem('adminName')
     navigate('/')
     toast.success('Admin logout successful !')
   }
