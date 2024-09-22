@@ -17,6 +17,8 @@ const Navbar = () => {
   useEffect(() => {
     const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
     setWeeks(logbookWeeks || []);
+    console.log("Admin Id: ", adminId)
+    console.log("User Id: ", userId)
   }, []);
 
   const toggleDropdown = () => {
