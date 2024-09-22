@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import AdminAuthContext from "../context/admin/AdminAuthContext";
 import axiosInstance from "../utils/axiosConfig";
@@ -6,21 +6,29 @@ import { useParams } from 'react-router-dom';
 
 
 const Profile = () => {
-    const {isAdmin } = useContext(AdminAuthContext)
+    const {isAdmin } = useContext(AdminAuthContext);
     const { id } = useParams();
+
+    const [user, setUser] = useState("");
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                // const res = await axiosInstance.get(`{isAdmin ? /admin : /logbook}/` + '/getUser')
-                // console.log(res.data)
-                console.log(id)
+              console.log("Id: ", id);
+              const res = await axiosInstance.get(isAdmin ? `/admin/adminDetails/${id}` : `/logbook/userDetails/${id}`);  
+              console.log("Res data: ", res.data)
+              setUser(res.data)
+              
+              console.log(id);
             } catch (error) {
-                console.error("Error fetching user  in profile: ", error)            
+              console.error("Error fetching user  in profile: ", error);           
             }   
         }
+
         fetchUser();
     }, []);
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -30,7 +38,7 @@ const Profile = () => {
             src="https://via.placeholder.com/150"
             alt="Profile"
           />
-          <h2 className="mt-4 text-3xl font-semibold text-gray-800">John Doe</h2>
+          <h2 className="mt-4 text-3xl font-semibold text-gray-800">{user} checkers</h2>
           <p className="mt-2 text-gray-600 text-center">
             A passionate developer with a love for creating amazing web applications.
           </p>
