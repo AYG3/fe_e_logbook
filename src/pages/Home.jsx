@@ -34,10 +34,7 @@ const Home = () => {
         <div className='flex gap-8'>
         <Link to={isLoggedIn ? '/logbooks' : isAdmin ? '/adminlogin' : '/login'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
             {isLoggedIn ? 'Logbook' : isAdmin ? 'Check Students Logbook' : 'Get Started'}
-          </Link>
-          <Link to={isLoggedIn ? '/users' : '/adminlogin'} className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
-            {isLoggedIn ? 'Users' : 'Get Started as Admin'}
-          </Link>
+        </Link>
         </div>
       </div>
     </div>
