@@ -99,7 +99,7 @@ const Navbar = () => {
               </button>
             )
           )}
-          <Link to={isAdmin ? `profile/${adminId}` : `profile/${userId}` } className="text-white text-lg font-semibold">
+          <Link to={isAdmin ? `/profile/${adminId}` : `/profile/${userId}` } className="text-white text-lg font-semibold">
             {isAdmin ? adminName : userName}
           </Link>
         </div>
