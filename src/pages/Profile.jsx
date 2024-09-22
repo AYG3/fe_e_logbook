@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 
 const Profile = () => {
-    const {isAdmin } = useContext(AdminAuthContext);
+    // const {isAdmin } = useContext(AdminAuthContext);
     const { id } = useParams();
 
     const [user, setUser] = useState("");
@@ -14,8 +14,8 @@ const Profile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
+              const res = await axiosInstance.get(`/logbook/userDetails/${id}`);  
               console.log("Id: ", id);
-              const res = await axiosInstance.get(isAdmin ? `/admin/adminDetails/${id}` : `/logbook/userDetails/${id}`);  
               console.log("Res data: ", res.data)
               setUser(res.data)
               
