@@ -12,7 +12,7 @@ const SignUp = () => {
     password: "",
   });
 
-  const { signup } = useContext(AuthContext);
+  const { userSignup } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    signup(formData);
+    userSignup(formData);
   };
 
   return (
