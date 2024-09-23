@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import AdminAuthContext from "../context/admin/AdminAuthContext";
 import axiosInstance from "../utils/axiosConfig";
@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
     // const {isAdmin } = useContext(AdminAuthContext);
+
     const { id } = useParams();
 
     const [user, setUser] = useState("");
