@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import BackButton from "../components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -8,7 +8,8 @@ const EditEntry = () => {
   const [nature_of_activities, setNAtureOfActivities] = useState();
   const [date, setDate] = useState();
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     const fetchEntry = async () => {
@@ -23,13 +24,12 @@ const EditEntry = () => {
               Authorization: `Bearer ${token}`,
             },
           }
-        )
+        );
 
         console.log("Response data: ", response.data);
         setDay(response.data.day);
         setNAtureOfActivities(response.data.nature_of_activities);
         setDate(response.data.date);
-
       } catch (error) {
         console.log(`Error fetching entry: ${error}`);
       }
@@ -38,36 +38,45 @@ const EditEntry = () => {
     fetchEntry();
   }, [id]);
 
-  const handleEditEntry = async () => {
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [nature_of_activities]);
 
-    const activitiesArray = nature_of_activities.split('\n').map(line => {
+  const handleEditEntry = async () => {
+    const activitiesArray = nature_of_activities.split("\n").map((line) => {
       const trimmedLine = line.trim();
-      return trimmedLine.startsWith('•') ? trimmedLine : `• ${trimmedLine}`;
+      return trimmedLine.startsWith("•") ? trimmedLine : `• ${trimmedLine}`;
     });
 
-    const activitiesString = activitiesArray.join('\n');
+    const activitiesString = activitiesArray.join("\n");
 
     try {
-        const data = {
-            day,
-            nature_of_activities: activitiesString,
-            date
+      const data = {
+        day,
+        nature_of_activities: activitiesString,
+        date,
+      };
+
+      const token = localStorage.getItem("token");
+      console.log("Put request token", token);
+
+      const res = await axios.put(
+        `http://localhost:4444/logbook/editLogbook/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
+      );
+      console.log(res.data);
 
-        const token = localStorage.getItem('token')
-        console.log('Put request token', token);
-
-        const res = await axios.put(`http://localhost:4444/logbook/editLogbook/${id}`, data, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        console.log(res.data)
-
-        navigate('/logbooks')
-
+      navigate("/logbooks");
     } catch (error) {
-        console.log('Error updating entry', error)
+      console.log("Error updating entry", error);
     }
   };
 
@@ -88,7 +97,7 @@ const EditEntry = () => {
         <div className="my-4">
           <label className="text-xl mr-4 ">Nature of Activities</label>
           <textarea
-            // ref = {textareaR}
+            ref={textareaRef}
             value={nature_of_activities}
             onChange={(e) => setNAtureOfActivities(e.target.value)}
             required
