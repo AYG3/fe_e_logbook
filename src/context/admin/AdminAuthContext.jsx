@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) =>{
 
     const [adminName, setAdminName] = useState(()=>{
       const savedAdminName = localStorage.getItem('adminName');
-      return savedAdminName || ""
+      return savedAdminName || " "
     });
     
     const [isAdmin, setIsAdmin] = useState(() => {
