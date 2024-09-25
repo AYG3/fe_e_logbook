@@ -14,7 +14,7 @@ const DetailsEntry = () => {
   const [entry, setEntry] = useState(null);
   const [extra, setExtra] = useState(['']);
   const [textArea, setTextArea] = useState("");
-  const { entryId } = useParams();
+  const { entryId, rIndex } = useParams();
   const [editIndex, setEditIndex] = useState(null);
   const token = localStorage.getItem("token");
   
@@ -75,6 +75,7 @@ const DetailsEntry = () => {
         <tbody>
           <tr key={entry.id}>
             <td className="border border-slate-700 rounded-md text-center">
+              {rIndex}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
               {entry.day}<br />

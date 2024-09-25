@@ -31,7 +31,7 @@ const App = () => {
         <Route path='/logbooks' element={<Logbook />}/>
         <Route path='/profile/:id' element={<Profile />}/>
         <Route path='/create' element={<CreateEntry/>}/>
-        <Route path='/details/:entryId' element={<DetailsEntry/>}/>
+        <Route path='/details/:entryId/:rIndex' element={<DetailsEntry/>}/>
         <Route path='/edit/:id' element={<EditEntry/>}/>
         <Route path='/delete/:id' element={<DeleteEntry/>}/>
         {/* ADMIN ROUTES */}
