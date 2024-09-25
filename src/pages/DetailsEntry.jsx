@@ -153,7 +153,7 @@ const DetailsEntry = () => {
 
         {/* ACCEPT THE IMAGES */}
         {/* <div className="bg-black"> */}
-        <UploadWidget className='bg-white ' />
+        {/* <UploadWidget className='bg-white ' /> */}
 
         {/* </div> */}
 
