@@ -9,13 +9,13 @@ const Home = () => {
   const { isLoggedIn } = useContext(UserAuthContext);
   const { isAdmin } = useContext(AdminAuthContext);
   
-  useEffect(()=>{
-    const CheckAdmin = () => {
-      console.log("IsAdmin: ", isAdmin);
-      console.log("IsLoggedIn: ", isLoggedIn);
-    }
-    CheckAdmin();
-  }, []);
+  // useEffect(()=>{
+  //   const CheckAdmin = () => {
+  //     console.log("IsAdmin: ", isAdmin);
+  //     console.log("IsLoggedIn: ", isLoggedIn);
+  //   }
+  //   CheckAdmin();
+  // }, []);
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100">
