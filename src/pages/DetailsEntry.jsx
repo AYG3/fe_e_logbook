@@ -104,17 +104,17 @@ const DetailsEntry = () => {
         </tbody>
       </table>
 
-      <div className="border border-black my-6 flex flex-col items-center space-y-8 p-6 rounded-lg shadow-lg bg-white">
-        <label className="text-3xl font-semibold text-slate-700">Extra</label>
+      <div className="border border-black my-6 flex flex-col items-center space-y-8 p-6 rounded-lg shadow-lg bg-white  text-black">
+        <label className="text-3xl font-semibold text-black">Details</label>
 
         {extra && extra.length > 0 && (
-          <div className="border border-slate-300 w-full md:w-2/3 outline-none space-y-4 p-4 rounded-xl bg-gray-50">
+          <div className="border border-slate-800 w-full md:w-2/3 outline-none space-y-4 p-4 rounded-xl bg-slate-300">
             {extra?.map((line, index) => (
               <div
                 key={index}
                 className="whitespace-pre-wrap flex justify-between items-center p-2 bg-white rounded-md shadow-sm"
               >
-                <p className="my-4 text-slate-600">{line}</p>
+                <p className="my-4 text-black">{line}</p>
                 <div className="space-x-4 flex ">
                   <button className="py-1 px-3 rounded-sm bg-yellow-100 hover:bg-yellow-200">
                     <AiOutlineEdit

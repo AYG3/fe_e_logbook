@@ -131,7 +131,7 @@ const Logbook = () => {
                     </td>
                     <td className="border border-slate-700 rounded-md text-center">
                       <div className="flex justify-center gap-4">
-                        <Link to={`/details/${entry._id}`} className="text-2x1 text-green-800">
+                        <Link to={`/details/${entry._id}/${index}`} className="text-2x1 text-green-800">
                           <BsInfoCircle />
                         </Link>
                         <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
