@@ -17,8 +17,8 @@ const Navbar = () => {
   useEffect(() => {
     const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
     setWeeks(logbookWeeks || []);
-    console.log("Admin Id: ", adminId)
-    console.log("User Id: ", userId)
+    console.log("Admin Id: ", adminId);
+    console.log("User Id: ", userId);
   }, []);
 
   const toggleDropdown = () => {
@@ -101,9 +101,15 @@ const Navbar = () => {
               </button>
             )
           )}
-          <Link to={isAdmin ? `/profile/${adminId}` : `/profile/${userId}` } className="text-white text-lg font-semibold">
-            {isAdmin ? adminName : userName}
-          </Link>
+          {isAdmin && adminName ? (
+            <Link to={`/profile/${adminId}`} className="text-white text-lg font-semibold">
+              {adminName}
+            </Link>
+          ) : isLoggedIn && userName ? (
+            <Link to={`/profile/${userId}`} className="text-white text-lg font-semibold">
+              {userName}
+            </Link>
+          ) : null}
         </div>
         {isAdmin && (
           <Link
@@ -118,4 +124,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;  
