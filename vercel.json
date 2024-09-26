@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/main.jsx",
+        "use": "@vercel/node"
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://api.example.com/:path*"
+      },
+      {
+        "source": "/old-path/:path*",
+        "destination": "/new-path/:path*"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/Home.html"
+      }
+    ],
+    "env": {
+      "VITE_API_URL": "@env.VITE_API_URL"
+    }
+  }
