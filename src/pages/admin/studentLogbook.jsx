@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import axiosInstance from '../../utils/axiosConfig'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosConfig';
+import { Link, useParams } from 'react-router-dom';
 import { BsInfoCircle } from 'react-icons/bs';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { MdOutlineDelete } from 'react-icons/md';
 import Loading from '../../components/shared/Loading';
 
 const StudentLogbook = () => {
-    const [logbook, setLogbook] = useState(null);
-    const { userId, userName } = useParams();
+  const [logbook, setLogbook] = useState(null);
+  const { userId, userName } = useParams();
 
-    useEffect(() => {
-      const fetchUserLogbook = async () => {
-        const res = await axiosInstance.get(`admin/user/logbooks/${userId}`);
-        console.log("Res data: ", res.data);
-        setLogbook(res.data)
-      }
-      fetchUserLogbook();
-    }, [])
+  useEffect(() => {
+    const fetchUserLogbook = async () => {
+      const res = await axiosInstance.get(`admin/user/logbooks/${userId}`);
+      console.log("Res data: ", res.data);
+      setLogbook(res.data);
+    };
+    fetchUserLogbook();
+  }, [userId]);
 
-
-    if (!logbook) {
-      return (
-        <div className=''>
-          <Loading />
-        </div>
-      );
-    }
+  if (!logbook) {
+    return (
+      <div className=''>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-x-auto ">
       <div className=" flex flex-col  p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+        <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
           User: {userName}
         </h1>
         <table className="w-full border border-separate border-spacing-2 table-auto ">
@@ -47,20 +46,16 @@ const StudentLogbook = () => {
           </thead>
           <tbody>
             {logbook?.map((entry, index) => {
-              // if (index > 0 && index % 5 == 0){
-              //   week_id++
-              // }
-              // if(!weeks.includes(week_id)) {
-              //   weeks.push(week_id);
-              // }
               return (
-              <React.Fragment key={entry._id}>
-                {index> 0 && index % 5 == 0 && (<tr><td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td></tr>)}
-                  {/* <tr id={week_id}> */}
-                  <tr >
-                    {/* <tr>Week {week_id}</tr> */}
+                <React.Fragment key={entry._id}>
+                  {index > 0 && index % 5 === 0 && (
+                    <tr>
+                      <td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td>
+                    </tr>
+                  )}
+                  <tr>
                     <td className="border border-slate-700 rounded-md text-center">
-                      {index % 5 + 1} 
+                      {index % 5 + 1}
                     </td>
                     <td className="flex-col border border-slate-700 rounded-md text-center">
                       <p>{entry.day}</p>
@@ -69,7 +64,6 @@ const StudentLogbook = () => {
                     <td className="border border-slate-700 rounded-md whitespace-pre-wrap pl-4">
                       {entry.nature_of_activities}
                     </td>
-  
                     <td className="border border-slate-700 rounded-md text-center">
                       <div className="flex justify-center gap-4">
                         <Link
@@ -93,15 +87,14 @@ const StudentLogbook = () => {
                       </div>
                     </td>
                   </tr>
-              </React.Fragment>
+                </React.Fragment>
               );
-              
             })}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentLogbook
+export default StudentLogbook;
