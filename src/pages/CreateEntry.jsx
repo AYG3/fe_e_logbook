@@ -17,19 +17,33 @@ const CreateEntry = () => {
     }
   }, [nature_of_activities]);
 
+  const daysOfWeek = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
   return (
     <div>
       <BackButton />
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4">Day</label>
-          <input
-            type="text"
+          <select
             value={day}
             onChange={(e) => setDay(e.target.value)}
             required
             className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+          >
+            {daysOfWeek.map((day) => (
+              <option key={day} value={day}>
+                {day}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="my-4">
           <label className="text-xl mr-4">Nature of Activities</label>

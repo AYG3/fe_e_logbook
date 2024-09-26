@@ -9,14 +9,9 @@ const DeleteEntry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDeleteEntry = async () => {
-    const token = localStorage.getItem("token");
 
     try {
-      await axiosInstance.delete(`/logbook/deleteLogbook/${id}`, {
-        headers: {
-          Authorization: `Bearer: ${token}`,
-        },
-      });
+      await axiosInstance.delete(`/logbook/deleteLogbook/${id}`);
       navigate("/logbooks");
     } catch (error) {
       console.log("Error deleting entry: ", error);

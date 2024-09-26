@@ -3,6 +3,15 @@ import React, { useEffect, useState, useRef } from "react";
 import BackButton from "../components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
 
+const daysOfWeek = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 const EditEntry = () => {
   const [day, setDay] = useState();
   const [nature_of_activities, setNAtureOfActivities] = useState();
@@ -15,7 +24,7 @@ const EditEntry = () => {
     const fetchEntry = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("token:", token);
+        console.log("token: ", token);
 
         const response = await axios.get(
           `http://localhost:4444/logbook/userLogbook/${id}`,
@@ -85,17 +94,22 @@ const EditEntry = () => {
       <BackButton />
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
-          <label className="text-xl mr-4 ">Day</label>
-          <input
-            type="text"
+          <label className="text-xl mr-4">Day</label>
+          <select
             value={day}
             onChange={(e) => setDay(e.target.value)}
             required
             className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+          >
+            {daysOfWeek.map((day) => (
+              <option key={day} value={day}>
+                {day}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="my-4">
-          <label className="text-xl mr-4 ">Nature of Activities</label>
+          <label className="text-xl mr-4">Nature of Activities</label>
           <textarea
             ref={textareaRef}
             value={nature_of_activities}
@@ -107,7 +121,7 @@ const EditEntry = () => {
         </div>
 
         <div className="my-4">
-          <label className="text-xl mr-4 ">Date</label>
+          <label className="text-xl mr-4">Date</label>
           <input
             type="text"
             value={date}
