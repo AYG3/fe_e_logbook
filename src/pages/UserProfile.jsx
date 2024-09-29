@@ -5,7 +5,7 @@ import axiosInstance from "../utils/axiosConfig";
 import { useParams } from 'react-router-dom';
 
 
-const Profile = () => {
+const UserProfile = () => {
     // const {isAdmin } = useContext(AdminAuthContext);
 
     const { id } = useParams();
@@ -91,4 +91,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;
