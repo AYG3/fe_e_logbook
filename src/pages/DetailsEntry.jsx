@@ -26,7 +26,7 @@ const DetailsEntry = () => {
   const [approval, setApproval] = useState('');
   const [comment, setComment] = useState([''])
   const [editComment, setEditComment] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   //Fetches initial entry
   useEffect(() => {
@@ -95,7 +95,7 @@ const DetailsEntry = () => {
                   <AiOutlineEdit />
                 </Link>
                 <Link
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setIsDeleteModalOpen(true)}
                   className="text-2x1 text-red-600"
                 >
                   <MdOutlineDelete />
@@ -254,7 +254,7 @@ const DetailsEntry = () => {
 )}
       </div>
 
-      {isModalOpen && (
+      {isDeleteModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
             <h2 className="text-2xl mb-4">Confirm Deletion</h2>
@@ -262,7 +262,7 @@ const DetailsEntry = () => {
             <div className="flex justify-end gap-4">
               <button
                 className="p-2 bg-gray-300 rounded"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setIsDeleteModalOpen(false)}
               >
                 Cancel
               </button>
