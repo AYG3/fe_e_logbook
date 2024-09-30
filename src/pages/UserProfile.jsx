@@ -39,7 +39,7 @@ const UserProfile = () => {
             src="https://via.placeholder.com/150"
             alt="Profile"
           />
-          <h2 className="mt-4 text-3xl font-semibold text-gray-800">{user.email}</h2>
+          <h2 className="mt-4 text-3xl font-semibold text-gray-800">{user.fname} {user.lname}</h2>
           <p className="mt-2 text-gray-600 text-center">
             A passionate developer with a love for creating amazing web applications.
           </p>
@@ -48,7 +48,7 @@ const UserProfile = () => {
           <h3 className="text-xl font-semibold text-gray-800">Contact Information</h3>
           <div className="mt-4">
             <p className="text-gray-600"><strong>Email:</strong> {user.email}</p>
-            <p className="text-gray-600"><strong>Phone:</strong> (123) 456-7890</p>
+            <p className="text-gray-600"><strong>Phone:</strong> {user.email}</p>
           </div>
         </div>
         <div className="mt-6 w-full">
