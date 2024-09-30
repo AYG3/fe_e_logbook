@@ -95,7 +95,7 @@ const DetailsEntry = () => {
                   <AiOutlineEdit />
                 </Link>
                 <Link
-                  to={`/delete/${entry._id}`}
+                  onClick={() => setIsModalOpen(true)}
                   className="text-2x1 text-red-600"
                 >
                   <MdOutlineDelete />
