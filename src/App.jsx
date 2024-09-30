@@ -16,7 +16,7 @@ import StudentLogbook from './pages/admin/studentLogbook';
 import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
-import Profile from './pages/UserProfile';
+import UserProfile from './pages/UserProfile';
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
-        <Route path='/profile/:id' element={<Profile />}/>
+        <Route path='/userprofile/:id' element={<UserProfile />}/>
         <Route path='/create' element={<CreateEntry/>}/>
         <Route path='/details/:entryId/:rIndex' element={<DetailsEntry/>}/>
         <Route path='/edit/:id' element={<EditEntry/>}/>
@@ -38,6 +38,7 @@ const App = () => {
         <Route path='/adminHome' element={< AdminHome />}/>
         <Route path='/adminlogin' element={< AdminLogin />}/>
         <Route path='/adminsignup' element={< AdminSignUp />}/>
+        <Route path='/adminprofile/:id' element={<UserProfile />}/>
         <Route path='/users' element={< UsersList />}/>
         <Route path='/confirmUserDelete/:userId' element={<ConfirmUserDelete />}/>
         <Route path='/userslogbook/:userId/:userName' element={< StudentLogbook />}/>

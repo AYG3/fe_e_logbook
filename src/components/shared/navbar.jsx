@@ -106,7 +106,7 @@ const Navbar = () => {
               {adminName}
             </Link>
           ) : isLoggedIn && userName ? (
-            <Link to={`/profile/${userId}`} className="text-white text-lg font-semibold">
+            <Link to={`/userprofile/${userId}`} className="text-white text-lg font-semibold">
               {userName}
             </Link>
           ) : null}
