@@ -47,7 +47,7 @@ const UserProfile = () => {
         <div className="mt-6 w-full">
           <h3 className="text-xl font-semibold text-gray-800">Contact Information</h3>
           <div className="mt-4">
-            <p className="text-gray-600"><strong>Email:</strong> john.doe@example.com</p>
+            <p className="text-gray-600"><strong>Email:</strong> {user.email}</p>
             <p className="text-gray-600"><strong>Phone:</strong> (123) 456-7890</p>
           </div>
         </div>
