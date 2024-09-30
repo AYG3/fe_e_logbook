@@ -98,3 +98,13 @@ export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, n
       console.log("Error deleting extra catch: ", error);
     }
   };
+
+  const handleDeleteEntry = async () => {
+
+    try {
+      await axiosInstance.delete(`/logbook/deleteLogbook/${id}`);
+      navigate("/logbooks");
+    } catch (error) {
+      console.log("Error deleting entry: ", error);
+    }
+  };

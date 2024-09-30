@@ -26,6 +26,7 @@ const DetailsEntry = () => {
   const [approval, setApproval] = useState('');
   const [comment, setComment] = useState([''])
   const [editComment, setEditComment] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //Fetches initial entry
   useEffect(() => {
