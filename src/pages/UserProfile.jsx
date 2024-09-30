@@ -10,14 +10,14 @@ const UserProfile = () => {
 
     const { id } = useParams();
 
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
               const res = await axiosInstance.get(`/logbook/userDetails/${id}`);  
               console.log("Id: ", id);
-              console.log("Res data: ", res.data)
+              console.log("Res data email: ", res.data)
               setUser(res.data)
               
               console.log(id);
@@ -39,7 +39,7 @@ const UserProfile = () => {
             src="https://via.placeholder.com/150"
             alt="Profile"
           />
-          <h2 className="mt-4 text-3xl font-semibold text-gray-800">{user} checkers</h2>
+          <h2 className="mt-4 text-3xl font-semibold text-gray-800">{user.email}</h2>
           <p className="mt-2 text-gray-600 text-center">
             A passionate developer with a love for creating amazing web applications.
           </p>
