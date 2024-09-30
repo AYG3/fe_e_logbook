@@ -16,7 +16,7 @@ import StudentLogbook from './pages/admin/studentLogbook';
 import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
-import Profile from './pages/Profile';
+import Profile from './pages/UserProfile';
 
 const App = () => {
   return (
