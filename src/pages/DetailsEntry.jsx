@@ -254,7 +254,7 @@ const DetailsEntry = () => {
 )}
       </div>
 
-      isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
             <h2 className="text-2xl mb-4">Confirm Deletion</h2>
@@ -275,7 +275,7 @@ const DetailsEntry = () => {
             </div>
           </div>
         </div>
-      )
+      )}
     </div>
   );
 };
