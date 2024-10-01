@@ -27,3 +27,5 @@ const DeleteModal = () => {
     </div>
   )
 }
+
+export default DeleteModal;
