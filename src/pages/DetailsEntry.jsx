@@ -255,7 +255,7 @@ const DetailsEntry = () => {
 )}
       </div>
 
-      {isDeleteModalOpen && ( <DeleteModal /> )}
+      {isDeleteModalOpen && ( <DeleteModal/> )}
     </div>
   );
 };
