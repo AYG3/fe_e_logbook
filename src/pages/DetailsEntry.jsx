@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
@@ -18,6 +18,7 @@ const DetailsEntry = () => {
   const { entryId, rIndex } = useParams();
   const [editIndex, setEditIndex] = useState(null);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   
   const [day, setDay] = useState("");
   const [nature_of_activities, setNAtureOfActivities] = useState("");
@@ -165,38 +166,6 @@ const DetailsEntry = () => {
 
        {/* ADMIN'S SECTION */}
 
-       {/* {isAdmin ? (
-            <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
-            <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value='approved' className="form-radio" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-              <label htmlFor="approved" className="text-gray-700">Approved</label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="semi-approved" className="form-radio" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-              <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <input type="radio" name="approval" value="not-approved" className="form-radio" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-              <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
-            </div>
-            <textarea
-              className="border border-slate-800 p-2 rounded-md w-full bg-white"
-              onChange={(e)=>{handleCommentChange(e, setComment); setEditComment(true)}}
-              value={comment}
-              placeholder="Supervisor's comment"
-            ></textarea>
-            <button
-              type="submit"
-              onClick={()=>setEditComment(false)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-            >
-              {editComment ? 'Update': 'Comment'}
-            </button>
-          </form>
-        ) : (
-          <div className="text-red-500 font-semibold">Admin access required to comment</div>
-        )} */}
-
 {isAdmin ? (
   <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
     <div className="flex items-center space-x-2">
@@ -255,7 +224,7 @@ const DetailsEntry = () => {
   </form>
 )}
       </div>
-      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={handleDeleteEntry}/> )}
+      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(id, navigate)}/> )}
     </div>
   );
 };
