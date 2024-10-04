@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosConfig';
 
 const DeleteModal = () => {
+  
   const { id } = useParams();
   const navigate = useNavigate();
 
