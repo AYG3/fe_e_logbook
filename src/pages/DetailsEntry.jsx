@@ -6,7 +6,7 @@ import BackButton from "../components/BackButton";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import UploadWidget from "../components/images/UploadWidget";
-import { handleExtra, handleEditExtra, handleDeleteExtra } from "../api/user";
+import { handleExtra, handleEditExtra, handleDeleteExtra, handleDeleteEntry } from "../api/user";
 import { handleAdminForm, handleApprovalChange, handleCommentChange } from "../api/admin.js";
 import AdminAuthContext from "../context/admin/AdminAuthContext";
 import DeleteModal from "../components/Modals/DeleteModal.jsx";
@@ -255,7 +255,7 @@ const DetailsEntry = () => {
   </form>
 )}
       </div>
-      {isDeleteModalOpen && ( <DeleteModal/> )}
+      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={handleDeleteEntry}/> )}
     </div>
   );
 };

@@ -99,7 +99,7 @@ export const handleExtra = async (extra, textArea, setExtra, setTextArea, day, n
     }
   };
 
-  const handleDeleteEntry = async () => {
+  export const handleDeleteEntry = async () => {
 
     try {
       await axiosInstance.delete(`/logbook/deleteLogbook/${id}`);
