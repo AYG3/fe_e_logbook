@@ -10,7 +10,7 @@ import axiosInstance from "../utils/axiosConfig";
 const Logbook = () => {
   const [entries, setEntries] = useState(null);
   const [weeks, setWeeks] = useState([]);
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
