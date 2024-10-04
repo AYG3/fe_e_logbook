@@ -157,10 +157,11 @@ const Logbook = () => {
                         <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
                           <AiOutlineEdit />
                         </Link>
-                        <button onClick={()=> openDeleteModal(entry._id)} className="text-2x1 text-red-600">
+                        <Link onClick={()=> openDeleteModal(entry._id)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
-                          <DeleteModal isOpen={isDeleteModalOpen} isClose={closeDeleteModal} onDelete={handleDelete}  />
-                        </button>
+                        </Link>
+
+                        <DeleteModal isOpen={isDeleteModalOpen} isClose={closeDeleteModal} onDelete={handleDelete}  />
                       </div>
                     </td>
                   </tr>
