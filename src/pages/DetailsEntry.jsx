@@ -41,13 +41,14 @@ const DetailsEntry = () => {
         setDate(res.data.date);
         setComment(res.data.comment)
         setApproval(res.data.approval)
+        console.log("isDeleteModalOpen: ", isDeleteModalOpen);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
       }
     };
 
     fetchEntry();
-  }, [entryId, token]);
+  }, [entryId, token, isDeleteModalOpen]);
 
 
 
