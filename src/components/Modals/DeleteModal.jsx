@@ -1,9 +1,21 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosConfig';
 
 const DeleteModal = () => {
   const { id } = useParams();
-  
+  const navigate = useNavigate();
+
+  const handleDeleteEntry = async () => {
+
+    try {
+      await axiosInstance.delete(`/logbook/deleteLogbook/${id}`);
+      navigate("/logbooks");
+    } catch (error) {
+      console.log("Error deleting entry: ", error);
+    }
+  };
+
   return (
     <div>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
