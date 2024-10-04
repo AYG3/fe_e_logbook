@@ -13,7 +13,23 @@ const Logbook = () => {
   const [entries, setEntries] = useState(null);
   const [weeks, setWeeks] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedEntryId, setSelectedEntryId] = useState(null);
   const navigate = useNavigate()
+
+  const openDeleteModal = (entryId) => {
+    setSelectedEntryId(entryId)
+    setIsDeleteModalOpen(false)
+  }
+
+  const closeDeleteModal = () => {
+    setSelectedEntryId(null)
+    setIsDeleteModalOpen(false)
+  }
+
+  const handleDelete = async () => {
+    await handleDeleteEntry(selectedEntryId, navigate);
+    closeDeleteModal();
+  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -141,10 +157,10 @@ const Logbook = () => {
                         <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
                           <AiOutlineEdit />
                         </Link>
-                        <Link to={`/delete/${entry._id}`} onClick={()=>isDeleteModalOpen(true)} className="text-2x1 text-red-600">
+                        <button onClick={()=> openDeleteModal(entry._id)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
-                          <DeleteModal isOpen={()=>setIsDeleteModalOpen(true)} isClose={()=>setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entry._id, navigate)}  />
-                        </Link>
+                          <DeleteModal isOpen={isDeleteModalOpen} isClose={closeDeleteModal} onDelete={handleDelete}  />
+                        </button>
                       </div>
                     </td>
                   </tr>
