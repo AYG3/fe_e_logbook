@@ -1,6 +1,9 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
 
 const DeleteModal = () => {
+  const { id } = useParams();
+  
   return (
     <div>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
