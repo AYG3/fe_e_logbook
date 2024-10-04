@@ -224,7 +224,7 @@ const DetailsEntry = () => {
   </form>
 )}
       </div>
-      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(id, navigate)}/> )}
+      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entryId, navigate)}/> )}
     </div>
   );
 };
