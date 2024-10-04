@@ -3,14 +3,17 @@ import axios from "axios";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
+import DeleteModal from "../components/Modals/DeleteModal";
 
 const Logbook = () => {
   const [entries, setEntries] = useState(null);
   const [weeks, setWeeks] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const navigate = useNavigate()
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -137,7 +140,7 @@ const Logbook = () => {
                         <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
                           <AiOutlineEdit />
                         </Link>
-                        <Link to={`/delete/${entry._id}`} className="text-2x1 text-red-600">
+                        <Link to={`/delete/${entry._id}`} onClick={()=>isDeleteModalOpen(true)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
                         </Link>
                       </div>
@@ -146,6 +149,7 @@ const Logbook = () => {
                 </React.Fragment>
               );
             })}
+            <DeleteModal isOpen={()=>setIsDeleteModalOpen(true)} isClose={()=>setIsDeleteModalOpen(false)}  />
           </tbody>
         </table>
       </div>
