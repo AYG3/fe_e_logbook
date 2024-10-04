@@ -10,10 +10,7 @@ const DeleteModal = ({ isOpen, onClose, onDelete }) => {
         <button className="p-2 bg-gray-300 rounded" onClick={onClose}>
           Cancel
         </button>
-        <button
-          className="p-2 bg-red-600 text-white rounded"
-          onClick={onDelete}
-        >
+        <button className="p-2 bg-red-600 text-white rounded" onClick={onDelete}>
           Delete
         </button>
       </div>
