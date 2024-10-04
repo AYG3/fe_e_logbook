@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
 import DeleteModal from "../components/Modals/DeleteModal";
+import { handleDeleteEntry } from "../api/user";
 
 const Logbook = () => {
   const [entries, setEntries] = useState(null);
@@ -142,6 +143,7 @@ const Logbook = () => {
                         </Link>
                         <Link to={`/delete/${entry._id}`} onClick={()=>isDeleteModalOpen(true)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
+                          <DeleteModal isOpen={()=>setIsDeleteModalOpen(true)} isClose={()=>setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entry._id, navigate)}  />
                         </Link>
                       </div>
                     </td>
@@ -149,7 +151,6 @@ const Logbook = () => {
                 </React.Fragment>
               );
             })}
-            <DeleteModal isOpen={()=>setIsDeleteModalOpen(true)} isClose={()=>setIsDeleteModalOpen(false)}  />
           </tbody>
         </table>
       </div>
