@@ -1,40 +1,11 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { UserAuthContext } from "../../context/user/UserAuthContext";
-import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
 
-const Navbar = () => {
+const GuestNavbar = () => {
   const location = useLocation();
   const current_url = location.pathname;
 
   const navigate = useNavigate();
-  const { isLoggedIn, userLogout, userName, userId } = useContext(UserAuthContext);
-  const { isAdmin, adminLogout, adminName, adminId } = useContext(AdminAuthContext);
-
-  const [weeks, setWeeks] = useState([]);
-  const [dropDown, setDropDown] = useState(false);
-
-  useEffect(() => {
-    const logbookWeeks = JSON.parse(localStorage.getItem("weeks"));
-    setWeeks(logbookWeeks || []);
-    console.log("Admin Id: ", adminId);
-    console.log("User Id: ", userId);
-  }, []);
-
-  const toggleDropdown = () => {
-    setDropDown(!dropDown);
-  };
-
-  const handleScroll = (id) => {
-    if (current_url !== `/logbooks`) {
-      navigate("/logbooks");
-    }
-
-    const week = document.getElementById(id);
-    if (week) {
-      week.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   const handleLoginRedirect = () => {
     if (current_url !== '/login') {
@@ -42,86 +13,39 @@ const Navbar = () => {
     }
   };
 
+  const handleSignupRedirect = () => {
+    if (current_url !== '/signup') {
+      navigate('/signup');
+    }
+  };
+
   return (
     <nav className="bg-gray-800 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-lg font-bold">
-          <Link to={isAdmin ? '/adminHome' : '/'}>E-Logbook</Link>
-        </div>
-        <div className="flex space-x-4">
-          {isLoggedIn && (
-            <div className="relative">
-              <button
-                className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-                onClick={toggleDropdown}
-              >
-                Weeks
-              </button>
-              {dropDown && (
-                <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
-                  {weeks?.map((wk, index) => (
-                    <button
-                      key={index}
-                      className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
-                      onClick={() => {
-                        handleScroll(wk);
-                        toggleDropdown();
-                      }}
-                    >
-                      Week {wk}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+          <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex items-center space-x-4">
-          {isAdmin ? (
+          {current_url !== `/login` && (
             <button
-              onClick={adminLogout}
+              onClick={handleLoginRedirect}
               className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
             >
-              Admin Logout
+              Login
             </button>
-          ) : isLoggedIn ? (
-            <button
-              onClick={userLogout}
-              className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
-            >
-              Logout
-            </button>
-          ) : (
-            current_url !== `/login` && (
-              <button
-                onClick={handleLoginRedirect}
-                className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
-              >
-                Login
-              </button>
-            )
           )}
-          {isAdmin && adminName ? (
-            <Link to={`/profile/${adminId}`} className="text-white text-lg font-semibold">
-              {adminName}
-            </Link>
-          ) : isLoggedIn && userName ? (
-            <Link to={`/userprofile/${userId}`} className="text-white text-lg font-semibold">
-              {userName}
-            </Link>
-          ) : null}
+          {current_url !== `/signup` && (
+            <button
+              onClick={handleSignupRedirect}
+              className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
+            >
+              Sign Up
+            </button>
+          )}
         </div>
-        {isAdmin && (
-          <Link
-            to="/users"
-            className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-          >
-            All Students
-          </Link>
-        )}
       </div>
     </nav>
   );
 };
 
-export default Navbar;  
+export default GuestNavbar;

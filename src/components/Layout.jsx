@@ -4,6 +4,7 @@ import UserNavbar from './shared/UserNavbar'
 import AdminNavbar from './shared/AdminNavbar'
 import UserAuthContext from '../context/user/UserAuthContext'
 import AdminAuthContext from '../context/admin/AdminAuthContext'
+import GuestNavbar from './shared/GuestNavbar'
 
 const Layout = ( {children}) => {
   const { isAdmin } = useContext(AdminAuthContext)
@@ -11,7 +12,7 @@ const Layout = ( {children}) => {
 
   return (
     <div className='flex flex-col min-h-screen'>
-        {isAdmin ? <AdminNavbar /> : isLoggedIn ? <UserNavbar /> : null}
+        {isAdmin ? <AdminNavbar /> : isLoggedIn ? <UserNavbar /> : <GuestNavbar />}
         <div className='flex-grow'>
             {children}
         </div>
