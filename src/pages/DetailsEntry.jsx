@@ -243,6 +243,7 @@ const DetailsEntry = () => {
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
         onDelete={handleDelete}
+        day={entry.day + entry.date}
       />
     </div>
   );

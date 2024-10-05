@@ -17,19 +17,20 @@ const Logbook = () => {
   const navigate = useNavigate()
 
   const openDeleteModal = (entryId) => {
-    setSelectedEntryId(entryId)
-    setIsDeleteModalOpen(false)
-  }
-
+    setSelectedEntryId(entryId);
+    setIsDeleteModalOpen(true);
+  };
+  
   const closeDeleteModal = () => {
-    setSelectedEntryId(null)
-    setIsDeleteModalOpen(false)
-  }
-
+    setSelectedEntryId(null);
+    setIsDeleteModalOpen(false);
+  };
+  
   const handleDelete = async () => {
     await handleDeleteEntry(selectedEntryId, navigate);
     closeDeleteModal();
-  }
+  };
+  
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -157,14 +158,20 @@ const Logbook = () => {
                         <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
                           <AiOutlineEdit />
                         </Link>
-                        <Link onClick={()=> openDeleteModal(entry._id)} className="text-2x1 text-red-600">
+                        <Link onClick={() => openDeleteModal(entry._id, entry.day)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
                         </Link>
 
                       </div>
                     </td>
                   </tr>
-                  {isDeleteModalOpen && (<DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} onDelete={handleDelete}  />)}
+                  {/* {isDeleteModalOpen && (<DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} onDelete={handleDelete}  />)} */}
+                  <DeleteModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={closeDeleteModal}
+                    onDelete={handleDelete}
+                    day={entry.day + " " + entry.date}
+                  />
                 </React.Fragment>
               );
             })}
