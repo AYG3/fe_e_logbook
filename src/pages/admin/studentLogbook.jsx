@@ -72,12 +72,6 @@ const StudentLogbook = () => {
                         >
                           <BsInfoCircle />
                         </Link>
-                        <Link
-                          to={`/delete/${entry._id}`}
-                          className="text-2x1 text-red-600"
-                        >
-                          <MdOutlineDelete />
-                        </Link>
                       </div>
                     </td>
                   </tr>
