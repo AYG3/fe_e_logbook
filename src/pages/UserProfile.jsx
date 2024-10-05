@@ -11,7 +11,7 @@ const UserProfile = () => {
     const fetchUser = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/userDetails/${id}`);
-        console.log("API Response:", res.data);
+        // console.log("API Response:", res.data);
         setUser(res.data);
       } catch (error) {
         console.error("Error fetching user in profile: ", error);
