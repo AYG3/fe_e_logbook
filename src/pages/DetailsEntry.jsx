@@ -21,6 +21,8 @@ const DetailsEntry = () => {
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
 
+  const [approval, setApproval] = useState('');
+  const [comment, setComment] = useState('')
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const openDeleteModal = () => {
@@ -46,6 +48,8 @@ const DetailsEntry = () => {
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
+        setComment(res.data.comment)
+        setApproval(res.data.approval)
         console.log("isDeleteModalOpen: ", isDeleteModalOpen);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
@@ -156,10 +160,30 @@ const DetailsEntry = () => {
         >
           {editIndex !== null ? "Update" : "Add"}
         </button>
-      </div>
-      
-      
 
+        {/* Display Admin's Comment and Approval */}
+        <div className="border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3">
+          <h3 className="text-xl font-semibold mb-4">Admin's Feedback</h3>
+          <div className="flex items-center space-x-2 mb-4">
+            <input type="radio" name="approval" value='approved' className="form-radio text-blue-600" checked={approval === 'approved'} disabled />
+            <label htmlFor="approved" className="text-gray-700">Approved</label>
+          </div>
+          <div className="flex items-center space-x-2 mb-4">
+            <input type="radio" name="approval" value="semi-approved" className="form-radio text-yellow-600" checked={approval === 'semi-approved'} disabled />
+            <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
+          </div>
+          <div className="flex items-center space-x-2 mb-4">
+            <input type="radio" name="approval" value="not-approved" className="form-radio text-red-600" checked={approval === 'not-approved'} disabled />
+            <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
+          </div>
+          <textarea
+            className="border border-slate-800 p-2 rounded-md w-full bg-white"
+            value={comment}
+            placeholder="Supervisor's comment"
+            disabled
+          ></textarea>
+        </div>
+      </div>
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
