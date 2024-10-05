@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }) =>{
       navigate("/users"); 
     } catch (error) {
       console.log(error)
+      navigate('/adminlogin')
       toast.error(error?.response?.data?.message || "Admin Login failed. Try again.");
     }
   }

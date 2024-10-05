@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }) => {
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
       console.error("Login failed:", error);
+      navigate('/login')
       toast.error(error?.response?.data?.message || "Login failed. Try again.");
     }
   };
