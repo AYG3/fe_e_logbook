@@ -32,7 +32,7 @@ const App = () => {
       {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null}
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/navbar' element={<Navbar/>} />
+        {/* <Route path='/navbar' element={<Navbar/>} /> */}
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/logbooks' element={<Logbook />}/>
