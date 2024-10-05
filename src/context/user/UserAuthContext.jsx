@@ -23,8 +23,15 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    Cookies.set('isLoggedIn', isLoggedIn)
-    localStorage.setItem('userName', userName);
+
+    // Check if the user is already logged in by checking the cookie
+    const loggedIn = Cookies.get('isLoggedIn') === 'true';
+    const name = Cookies.get('userName');
+    const id = Cookies.get('userId');
+
+    // localStorage.setItem('isLoggedIn', isLoggedIn)
+    // localStorage.setItem('userName', userName);
+
   }, [isLoggedIn, userName])
 
   //User userSignup
@@ -46,7 +53,17 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axiosInstance.post("/auth/login", formData);
       // console.log("Login response data", response.data)
-      const { token,  _id } = response.data;
+      const { token,  id } = response.data;
+      
+      setIsLoggedIn(true);
+      setUserName(response.data.fname + " " + response.data.lname);
+      setUserId(id);
+      // Set cookies
+      Cookies.set('isLoggedIn', true, { expires: 7 }); // Expires in 7 days
+      Cookies.set('userName', name, { expires: 7 });
+      Cookies.set('userId', id, { expires: 7 });
+
+
       localStorage.setItem("token", token); // Save token in local storage
       localStorage.setItem('userId', _id);
       setUserId(_id);
