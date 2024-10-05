@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
@@ -14,7 +13,8 @@ const Logbook = () => {
   const [weeks, setWeeks] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedEntryId, setSelectedEntryId] = useState(null);
-  const navigate = useNavigate()
+  const [dropDown, setDropDown] = useState(false);
+  const navigate = useNavigate();
 
   const openDeleteModal = (entryId) => {
     setSelectedEntryId(entryId);
@@ -30,21 +30,12 @@ const Logbook = () => {
     await handleDeleteEntry(selectedEntryId, navigate);
     closeDeleteModal();
   };
-  
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("userId")
-
-        // console.log("token: ", token);
-        // console.log("userId: ", userId);
-
+        const userId = localStorage.getItem("userId");
         const res = await axiosInstance.get(`/auth/user/${userId}`);
-
-        // setUser(res.data);
-        // console.log("User data: ", res.data);
       } catch (error) {
         console.log("Error fetching user details", error);
       }
@@ -56,13 +47,9 @@ const Logbook = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const token = window.localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
-
         const res = await axiosInstance.get(`/logbook/userLogbooks/${userId}`);
-
         setEntries(res.data);
-        // console.log("setEntries: ", res.data);
       } catch (error) {
         console.log("Error getting entries: ", error);
       }
@@ -71,16 +58,9 @@ const Logbook = () => {
     fetchEntries();
   }, []);
 
-  let week_id = 1;
-  // const weeks = [];
-
-  // useEffect(() => {
-  //   localStorage.setItem(('weeks'), JSON.stringify(weeks));
-  // }, [weeks])
-
   useEffect(() => {
-     week_id = 1;
-     const weeksArray = [];
+    let week_id = 1;
+    const weeksArray = [];
 
     if (entries) {
       entries.forEach((entry, index) => {
@@ -97,20 +77,55 @@ const Logbook = () => {
     }
   }, [entries]);
 
+  const toggleDropdown = () => {
+    setDropDown(!dropDown);
+  };
 
-  if (!entries){
-    return <Loading  className='absolute'/>
+  const handleScroll = (id) => {
+    const week = document.getElementById(id);
+    if (week) {
+      week.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  if (!entries) {
+    return <Loading className='absolute' />;
   }
 
   return (
     <div className="overflow-x-auto ">
-      <div className=" flex flex-col  p-4">
+      <div className="flex justify-between items-center p-4">
         <div className="flex justify-end">
           <Link to="/create" className="text-3xl my-8 ">
             <MdOutlineAddBox className="text-4xl text-sky-800 " />
           </Link>
         </div>
-
+        <div className="relative">
+          <button
+            className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+            onClick={toggleDropdown}
+          >
+            Weeks
+          </button>
+          {dropDown && (
+            <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
+              {weeks?.map((wk, index) => (
+                <button
+                  key={index}
+                  className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
+                  onClick={() => {
+                    handleScroll(wk);
+                    toggleDropdown();
+                  }}
+                >
+                  Week {wk}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col p-4">
         <table className="w-full border border-separate border-spacing-2 table-auto">
           <thead>
             <tr>
@@ -124,21 +139,14 @@ const Logbook = () => {
           </thead>
           <tbody>
             {entries?.map((entry, index) => {
-              if (index > 0 && index % 5 == 0) {
-                week_id++;
-              }
-              if (!weeks.includes(week_id)) {
-                weeks.push(week_id);
-              }
               return (
                 <React.Fragment key={entry._id}>
-                  {index > 0 && index % 5 == 0 && (
+                  {index > 0 && index % 5 === 0 && (
                     <tr>
                       <td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td>
                     </tr>
                   )}
-                  <tr id={week_id}>
-                    {/* <tr>Week {week_id}</tr> */}
+                  <tr id={Math.floor(index / 5) + 1}>
                     <td className="border border-slate-700 rounded-md text-center">
                       {index % 5 + 1}
                     </td>
@@ -161,11 +169,9 @@ const Logbook = () => {
                         <Link onClick={() => openDeleteModal(entry._id, entry.day)} className="text-2x1 text-red-600">
                           <MdOutlineDelete />
                         </Link>
-
                       </div>
                     </td>
                   </tr>
-                  {/* {isDeleteModalOpen && (<DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} onDelete={handleDelete}  />)} */}
                   <DeleteModal
                     isOpen={isDeleteModalOpen}
                     onClose={closeDeleteModal}
