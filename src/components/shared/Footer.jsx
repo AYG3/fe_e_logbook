@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/3 mb-4 md:mb-0">
             <h2 className="text-lg font-bold mb-1">Your Company</h2>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm p-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
             </p>
           </div>
