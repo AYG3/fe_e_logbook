@@ -17,12 +17,19 @@ import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
 import UserProfile from './pages/UserProfile';
+import UserAuthContext from './context/user/UserAuthContext';
+import AdminAuthContext from './context/admin/AdminAuthContext';
+import AdminNavbar from './components/shared/AdminNavbar';
+import UserNavbar from './components/shared/UserNavbar';
 
 const App = () => {
+  const { isAdmin } = useContext(AdminAuthContext)
+  const { isLoggedIn } = useContext(UserAuthContext)
   return (
     <>
     <Toaster />
     <Layout>
+      {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null}
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/navbar' element={<Navbar/>} />
