@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) =>{
       const savedIsAdmin = localStorage.getItem('isAdmin');
       return savedIsAdmin === 'true';
     });
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,11 +44,11 @@ export const AuthProvider = ({ children }) =>{
   const adminLogin = async (formData) => {
     try {
       const res = await axiosInstance.post(`/auth/adminLogin`, formData)
-      const { token, _id} = res.data;
+      const { token, id} = res.data;
       localStorage.setItem('token', token)
-      localStorage.setItem('adminId', _id)
-      setAdminId(_id)
-      console.log("Succesfully logged in");
+      localStorage.setItem('adminId', id)
+      setAdminId(id)
+      console.log("Succesfully logged in, AdminId: ", id);
       console.log(res.data);
       setIsAdmin(true);
       setAdminName(res.data.fname + " " + res.data.lname)
