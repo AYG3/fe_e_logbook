@@ -11,7 +11,7 @@ const Layout = ( {children}) => {
 
   return (
     <div className='flex flex-col min-h-screen'>
-        {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null}
+        {isAdmin ? <AdminNavbar /> : isLoggedIn ? <UserNavbar /> : null}
         <div className='flex-grow'>
             {children}
         </div>
