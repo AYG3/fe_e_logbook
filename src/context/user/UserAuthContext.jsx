@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosConfig";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 // import { AdminAuthContext } from '../admin/AdminAuthContext'
 
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn)
+    Cookies.set('isLoggedIn', isLoggedIn)
     localStorage.setItem('userName', userName);
   }, [isLoggedIn, userName])
 
