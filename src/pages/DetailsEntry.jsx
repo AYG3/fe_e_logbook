@@ -30,6 +30,20 @@ const DetailsEntry = () => {
   const [editComment, setEditComment] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+  
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+  
+  const handleDelete = async () => {
+    await handleDeleteEntry(entryId, navigate);
+    closeDeleteModal();
+  };
+  
   //Fetches initial entry
   useEffect(() => {
     const fetchEntry = async () => {
@@ -224,7 +238,12 @@ const DetailsEntry = () => {
   </form>
 )}
       </div>
-      {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entryId, navigate)}/> )}
+      {/* {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entryId, navigate)}/> )} */}
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onDelete={handleDelete}
+      />
     </div>
   );
 };

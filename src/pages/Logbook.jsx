@@ -161,10 +161,10 @@ const Logbook = () => {
                           <MdOutlineDelete />
                         </Link>
 
-                        <DeleteModal isOpen={isDeleteModalOpen} isClose={closeDeleteModal} onDelete={handleDelete}  />
                       </div>
                     </td>
                   </tr>
+                  {isDeleteModalOpen && (<DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} onDelete={handleDelete}  />)}
                 </React.Fragment>
               );
             })}
