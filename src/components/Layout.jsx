@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Footer from './shared/Footer'
-import Navbar from './shared/navbar'
+import UserNavbar from './shared/UserNavbar'
+import AdminNavbar from './shared/AdminNavbar'
 import UserAuthContext from '../context/user/UserAuthContext'
 import AdminAuthContext from '../context/admin/AdminAuthContext'
 
