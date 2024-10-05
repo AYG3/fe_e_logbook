@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -14,7 +13,6 @@ import { Toaster } from 'sonner';
 import AdminSignUp from './pages/admin/adminSignup';
 import UsersList from './pages/admin/UsersList';
 import StudentLogbook from './pages/admin/studentLogbook';
-import Navbar from './components/shared/navbar';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
 import UserProfile from './pages/UserProfile';
