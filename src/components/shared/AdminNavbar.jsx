@@ -15,6 +15,12 @@ const AdminNavbar = () => {
         <div className="text-white text-lg font-bold">
           <Link to="/adminHome">E-Logbook</Link>
         </div>
+        <Link
+          to="/users"
+          className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+        >
+          All Students
+        </Link>
         <div className="flex items-center space-x-4">
           <button
             onClick={adminLogout}
@@ -26,12 +32,6 @@ const AdminNavbar = () => {
             {adminName}
           </Link>
         </div>
-        <Link
-          to="/users"
-          className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-        >
-          All Students
-        </Link>
       </div>
     </nav>
   );
