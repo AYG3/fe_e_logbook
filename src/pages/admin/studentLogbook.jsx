@@ -67,7 +67,7 @@ const StudentLogbook = () => {
                     <td className="border border-slate-700 rounded-md text-center">
                       <div className="flex justify-center gap-4">
                         <Link
-                          to={`/details/${entry._id}/${index}`}
+                          to={`/adminDetails/${entry._id}/${index}`}
                           className="text-2x1 text-green-800"
                         >
                           <BsInfoCircle />

@@ -41,7 +41,7 @@ const App = () => {
         <Route path='/users' element={< UsersList />}/>
         <Route path='/confirmUserDelete/:userId' element={<ConfirmUserDelete />}/>
         <Route path='/userslogbook/:userId/:userName' element={< StudentLogbook />}/>
-        <Route path='/AdminUserDetails/:entryId/:rIndex' element={<DetailsEntry/>}/>
+        <Route path='/adminDetails/:entryId/:rIndex' element={<DetailsEntry/>}/>
       </Routes>
       {/* <UploadWidget /> */}
     </Layout>
