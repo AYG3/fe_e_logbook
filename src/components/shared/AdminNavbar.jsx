@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
 
 const AdminNavbar = () => {
-  const location = useLocation();
-  const current_url = location.pathname;
 
-  const navigate = useNavigate();
   const { adminLogout, adminName, adminId } = useContext(AdminAuthContext);
 
+  useEffect(() => {
+    const fetchAdminDetail = async () =>{
+        console.log("adminId: ", adminId);
+    }
+    fetchAdminDetail();
+  })
   return (
     <nav className="bg-gray-800 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
@@ -28,7 +31,7 @@ const AdminNavbar = () => {
           >
             Admin Logout
           </button>
-          <Link to={`/profile/${adminId}`} className="text-white text-lg font-semibold">
+          <Link to={`/adminprofile/${adminId}`} className="text-white text-lg font-semibold">
             {adminName}
           </Link>
         </div>
