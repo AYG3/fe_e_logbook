@@ -16,6 +16,7 @@ import StudentLogbook from './pages/admin/studentLogbook';
 import ConfirmUserDelete from './pages/admin/ConfirmUserDelete';
 import AdminHome from './pages/admin/AdminHome';
 import UserProfile from './pages/UserProfile';
+import AdminDetailsEntry from './pages/admin/AdminDetailsEntry';
 
 const App = () => {
   
@@ -41,7 +42,7 @@ const App = () => {
         <Route path='/users' element={< UsersList />}/>
         <Route path='/confirmUserDelete/:userId' element={<ConfirmUserDelete />}/>
         <Route path='/userslogbook/:userId/:userName' element={< StudentLogbook />}/>
-        <Route path='/adminDetails/:entryId/:rIndex' element={<DetailsEntry/>}/>
+        <Route path='/adminDetails/:entryId/:rIndex' element={<AdminDetailsEntry/>}/>
       </Routes>
       {/* <UploadWidget /> */}
     </Layout>
