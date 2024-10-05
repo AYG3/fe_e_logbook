@@ -44,16 +44,27 @@ export const AuthProvider = ({ children }) =>{
   const adminLogin = async (formData) => {
     try {
       const res = await axiosInstance.post(`/auth/adminLogin`, formData)
-      const { token, id} = res.data;
-      localStorage.setItem('token', token)
-      localStorage.setItem('adminId', id)
-      setAdminId(id)
-      console.log("Succesfully logged in, AdminId: ", id);
-      console.log(res.data);
-      setIsAdmin(true);
-      setAdminName(res.data.fname + " " + res.data.lname)
-      toast.success(res?.data?.message || "Admin Login up successful!");
-      navigate("/users"); 
+      const { token, id, role} = res.data;
+
+      if (role == 'admin'){
+        localStorage.setItem('token', token)
+        localStorage.setItem('adminId', id)
+        setAdminId(id)
+        console.log("Succesfully logged in, AdminId: ", id);
+        console.log(res.data);
+        setIsAdmin(true);
+        setAdminName(res.data.fname + " " + res.data.lname)
+        toast.success(res?.data?.message || "Admin Login up successful!");
+        navigate("/users"); 
+      }
+      else if (role=='user'){
+        toast.error("Not An Admin");
+        navigate('/login');
+      }
+      else{
+        toast.error('Error');
+        navigate('/')
+      }
     } catch (error) {
       console.log(error)
       navigate('/adminlogin')

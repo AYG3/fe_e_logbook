@@ -10,7 +10,7 @@ const AdminProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axiosInstance.get(`/logbook/userDetails/${id}`);
+        const res = await axiosInstance.get(`/logbook/adminDetails/${id}`);
         console.log("API Response:", res.data);
         setUser(res.data);
       } catch (error) {
