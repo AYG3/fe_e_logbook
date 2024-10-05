@@ -17,8 +17,6 @@ const UsersList = () => {
     const getUsers = async () => {
       try {
         const res = await axiosInstance.get(`/admin/users`);
-        // console.log(res.data);
-
         setUsers(res.data);
       } catch (error) {
         console.log(error);
