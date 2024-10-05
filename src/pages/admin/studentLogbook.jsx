@@ -73,12 +73,6 @@ const StudentLogbook = () => {
                           <BsInfoCircle />
                         </Link>
                         <Link
-                          to={`/edit/${entry._id}`}
-                          className="text-2x1 text-yellow-600"
-                        >
-                          <AiOutlineEdit />
-                        </Link>
-                        <Link
                           to={`/delete/${entry._id}`}
                           className="text-2x1 text-red-600"
                         >
