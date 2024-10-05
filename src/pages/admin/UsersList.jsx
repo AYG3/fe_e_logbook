@@ -3,7 +3,7 @@ import axiosInstance from '../../utils/axiosConfig';
 import { formatDate } from '../../utils/dateTimeUtils';
 import { Link } from 'react-router-dom';
 import { MdOutlineDelete } from "react-icons/md";
-import Modal from '../../components/Modal';
+import Modal from '../../components/Modals/Modal';
 import ConfirmUserDelete from './ConfirmUserDelete';
 
 

@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -29,7 +30,7 @@ const App = () => {
     <>
     <Toaster />
     <Layout>
-      {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null}
+      {/* {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null} */}
       <Routes>
         <Route path='/' element={<Home/>} />
         {/* <Route path='/navbar' element={<Navbar/>} /> */}
