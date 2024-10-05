@@ -11,7 +11,7 @@ const AdminProfile = () => {
     const fetchUser = async () => {
       try {
         const res = await axiosInstance.get(`/logbook/userDetails/${id}`);
-        // console.log("API Response:", res.data);
+        console.log("API Response:", res.data);
         setUser(res.data);
       } catch (error) {
         console.error("Error fetching user in profile: ", error);
@@ -40,8 +40,8 @@ const AdminProfile = () => {
       </div>
       <div className="mt-6 text-white">
         <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Phone:</strong> {user.phone || "N/A"}</p>
-        <p><strong>Address:</strong> {user.address || "N/A"}</p>
+        {/* <p><strong>Phone:</strong> {user.phone || "N/A"}</p>
+        <p><strong>Address:</strong> {user.address || "N/A"}</p> */}
       </div>
       <div className="flex justify-center mt-6">
         <button className="flex items-center bg-white text-blue-500 px-4 py-2 rounded-md shadow hover:bg-gray-100">
