@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Loading from "../components/shared/Loading";
 import axiosInstance from "../utils/axiosConfig";
-import UploadWidget from "../components/images/UploadWidget";
 import { handleExtra, handleEditExtra, handleDeleteExtra, handleDeleteEntry } from "../api/user";
-import { handleAdminForm, handleApprovalChange, handleCommentChange } from "../api/admin.js";
-import AdminAuthContext from "../context/admin/AdminAuthContext";
 import DeleteModal from "../components/Modals/DeleteModal.jsx";
 
 const DetailsEntry = () => {
@@ -24,12 +21,7 @@ const DetailsEntry = () => {
   const [nature_of_activities, setNAtureOfActivities] = useState("");
   const [date, setDate] = useState("");
 
-  const { isAdmin } = useContext(AdminAuthContext);
-  const [approval, setApproval] = useState('');
-  const [comment, setComment] = useState([''])
-  const [editComment, setEditComment] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -54,8 +46,6 @@ const DetailsEntry = () => {
         setDay(res.data.day);
         setNAtureOfActivities(res.data.nature_of_activities);
         setDate(res.data.date);
-        setComment(res.data.comment)
-        setApproval(res.data.approval)
         console.log("isDeleteModalOpen: ", isDeleteModalOpen);
       } catch (error) {
         console.log("Error Fetching entry: ", error);
@@ -65,8 +55,6 @@ const DetailsEntry = () => {
     fetchEntry();
   }, [entryId, token, isDeleteModalOpen]);
 
-
-
   if (!entry) {
     return (
       <div>
@@ -74,7 +62,6 @@ const DetailsEntry = () => {
       </div>
     );
   }
-
 
   return (
     <div>
@@ -153,8 +140,6 @@ const DetailsEntry = () => {
           </div>
         )}
 
-
-
         <textarea
           name="extra"
           rows="3"
@@ -171,74 +156,10 @@ const DetailsEntry = () => {
         >
           {editIndex !== null ? "Update" : "Add"}
         </button>
-
-        {/* ACCEPT THE IMAGES */}
-        {/* <div className="bg-black"> */}
-        {/* <UploadWidget className='bg-white ' /> */}
-
-        {/* </div> */}
-
-       {/* ADMIN'S SECTION */}
-
-{isAdmin ? (
-  <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3" onSubmit={(e) => handleAdminForm(e, approval, comment, entryId)}>
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value='approved' className="form-radio text-blue-600" checked={approval === 'approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-      <label htmlFor="approved" className="text-gray-700">Approved</label>
-    </div>
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="semi-approved" className="form-radio text-yellow-600" checked={approval === 'semi-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-      <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
-    </div>
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="not-approved" className="form-radio text-red-600" checked={approval === 'not-approved'} onChange={(e)=>handleApprovalChange(e, setApproval, entryId, comment)} />
-      <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
-    </div>
-    <textarea
-      className="border border-slate-800 p-2 rounded-md w-full bg-white"
-      onChange={(e)=>{handleCommentChange(e, setComment); setEditComment(true)}}
-      value={comment}
-      placeholder="Supervisor's comment"
-    ></textarea>
-    <button
-      type="submit"
-      onClick={()=>setEditComment(false)}
-      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-    >
-      {editComment ? 'Update': 'Comment'}
-    </button>
-  </form>
-) : (
-  <form className="flex flex-col space-y-4 border border-red-800 p-4 rounded-md shadow-md bg-gray-50 w-full md:w-2/3">
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value='approved' className="form-radio text-blue-600" checked={approval === 'approved'} disabled />
-      <label htmlFor="approved" className="text-gray-700">Approved</label>
-    </div>
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="semi-approved" className="form-radio text-yellow-600" checked={approval === 'semi-approved'} disabled />
-      <label htmlFor="semi-approved" className="text-gray-700">Semi-approved</label>
-    </div>
-    <div className="flex items-center space-x-2">
-      <input type="radio" name="approval" value="not-approved" className="form-radio text-red-600" checked={approval === 'not-approved'} disabled />
-      <label htmlFor="not-approved" className="text-gray-700">Not approved</label>
-    </div>
-    <textarea
-      className="border border-slate-800 p-2 rounded-md w-full bg-white"
-      value={comment}
-      placeholder="Supervisor's comment"
-      disabled
-    ></textarea>
-    <button
-      type="button"
-      className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-not-allowed opacity-50"
-      disabled
-    >
-      {editComment ? 'Update': 'Comment'}
-    </button>
-  </form>
-)}
       </div>
-      {/* {isDeleteModalOpen && ( <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={()=>handleDeleteEntry(entryId, navigate)}/> )} */}
+      
+      
+
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
