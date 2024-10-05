@@ -45,32 +45,30 @@ const UserNavbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex space-x-4">
-          {isLoggedIn && (
-            <div className="relative">
-              <button
-                className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
-                onClick={toggleDropdown}
-              >
-                Weeks
-              </button>
-              {dropDown && (
-                <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
-                  {weeks?.map((wk, index) => (
-                    <button
-                      key={index}
-                      className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
-                      onClick={() => {
-                        handleScroll(wk);
-                        toggleDropdown();
-                      }}
-                    >
-                      Week {wk}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+          <div className="relative">
+            <button
+              className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+              onClick={toggleDropdown}
+            >
+              Weeks
+            </button>
+            {dropDown && (
+              <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
+                {weeks?.map((wk, index) => (
+                  <button
+                    key={index}
+                    className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
+                    onClick={() => {
+                      handleScroll(wk);
+                      toggleDropdown();
+                    }}
+                  >
+                    Week {wk}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex items-center space-x-4">
           {isLoggedIn ? (
@@ -81,20 +79,16 @@ const UserNavbar = () => {
               Logout
             </button>
           ) : (
-            current_url !== `/login` && (
-              <button
-                onClick={handleLoginRedirect}
-                className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
-              >
-                Login
-              </button>
-            )
+            <button
+              onClick={handleLoginRedirect}
+              className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
+            >
+              Login
+            </button>
           )}
-          {isLoggedIn && userName && (
-            <Link to={`/userprofile/${userId}`} className="text-white text-lg font-semibold">
-              {userName}
-            </Link>
-          )}
+          <Link to={`/userprofile/${userId}`} className="text-white text-lg font-semibold">
+            {userName}
+          </Link>
         </div>
       </div>
     </nav>
