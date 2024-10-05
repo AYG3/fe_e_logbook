@@ -24,13 +24,11 @@ import AdminNavbar from './components/shared/AdminNavbar';
 import UserNavbar from './components/shared/UserNavbar';
 
 const App = () => {
-  const { isAdmin } = useContext(AdminAuthContext)
-  const { isLoggedIn } = useContext(UserAuthContext)
+  
   return (
     <>
     <Toaster />
     <Layout>
-      {/* {isAdmin ? AdminNavbar : isLoggedIn ? UserNavbar : null} */}
       <Routes>
         <Route path='/' element={<Home/>} />
         {/* <Route path='/navbar' element={<Navbar/>} /> */}
