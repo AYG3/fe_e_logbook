@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaSun, FaMoon } from 'react-icons/fa';
 
 const ThemeToggle = () => {
-    const [theme, setTheme] = useState( localStorage.getItem('theme') || 'light' );
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
     useEffect(() => {
         if (theme === 'dark'){
@@ -11,6 +11,8 @@ const ThemeToggle = () => {
             document.documentElement.classList.remove('dark')
         }
         localStorage.setItem('theme', theme);
+        localStorage.removeItem('theme');
+        console.log('Current Theme: ', theme);
     }, [theme]);
 
     const toggleTheme = () => {
