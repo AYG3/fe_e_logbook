@@ -26,6 +26,7 @@ const AdminNavbar = () => {
           All Students
         </Link>
         <div className="flex items-center space-x-4">
+        <ThemeToggle />
           <button
             onClick={adminLogout}
             className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
