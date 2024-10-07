@@ -22,7 +22,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center"
+      className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center duration-100"
       aria-label="Toggle Dark Mode"
     >
       {theme === 'dark' ? (
