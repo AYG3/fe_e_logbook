@@ -10,7 +10,7 @@ const ThemeToggle = () => {
             document.documentElement.classList.remove('dark')
         }
         localStorage.setItem('theme', theme);
-    }, [theme])
+    }, [theme]);
 
   return (
     <div>
