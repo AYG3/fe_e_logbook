@@ -26,6 +26,7 @@ const GuestNavbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex items-center space-x-4">
+        <ThemeToggle />
           {current_url !== `/login` && (
             <button
               onClick={handleLoginRedirect}
