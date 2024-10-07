@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import ThemeToggle from "../ThemeToggle";
 
 const GuestNavbar = () => {
   const location = useLocation();
