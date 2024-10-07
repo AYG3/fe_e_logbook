@@ -25,12 +25,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
 
     // Check if the user is already logged in by checking the cookie
-    const loggedIn = Cookies.get('isLoggedIn') === 'true';
-    const name = Cookies.get('userName');
-    const id = Cookies.get('userId');
+    // const loggedIn = Cookies.get('isLoggedIn') === 'true';
+    // const name = Cookies.get('userName');
+    // const id = Cookies.get('userId');
 
-    // localStorage.setItem('isLoggedIn', isLoggedIn)
-    // localStorage.setItem('userName', userName);
+    localStorage.setItem('isLoggedIn', isLoggedIn)
+    localStorage.setItem('userName', userName);
 
   }, [isLoggedIn, userName])
 
@@ -59,9 +59,9 @@ export const AuthProvider = ({ children }) => {
       setUserName(response.data.fname + " " + response.data.lname);
       setUserId(id);
       // Set cookies
-      Cookies.set('isLoggedIn', true, { expires: 7 }); // Expires in 7 days
-      Cookies.set('userName', name, { expires: 7 });
-      Cookies.set('userId', id, { expires: 7 });
+      // Cookies.set('isLoggedIn', true, { expires: 7 }); // Expires in 7 days
+      // Cookies.set('userName', name, { expires: 7 });
+      // Cookies.set('userId', id, { expires: 7 });
 
 
       localStorage.setItem("token", token); // Save token in local storage
