@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserAuthContext } from "../../context/user/UserAuthContext";
+import ThemeToggle from "../ThemeToggle";
 
 const UserNavbar = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const UserNavbar = () => {
           <Link to="/">E-Logbook</Link>
         </div>
         <div className="flex items-center space-x-4">
+        <ThemeToggle />
           <button
             onClick={userLogout}
             className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
