@@ -29,7 +29,7 @@ const AdminNavbar = () => {
             onClick={adminLogout}
             className="bg-slate-500 px-4 py-2 rounded text-white hover:bg-slate-600"
           >
-            Admin Logout
+            Admin Logout.
           </button>
           <Link to={`/adminprofile/${adminId}`} className="text-white text-lg font-semibold">
             {adminName}
