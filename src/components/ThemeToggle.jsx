@@ -13,8 +13,8 @@ const ThemeToggle = () => {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const toggleTheme = () =>{
-        setTheme(theme === 'dark' ? 'dark' : 'light')
+    const toggleTheme = () => {
+      setTheme(theme === 'dark' ? 'dark' : 'light')
     };
 
   return (
