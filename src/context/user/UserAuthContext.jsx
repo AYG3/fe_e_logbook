@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Sign up failed:", error);
       toast.error(error?.response?.data?.message || "Sign up failed. Try again.");
+      navigate('/signup')
     }
   }
 
@@ -53,11 +54,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axiosInstance.post("/auth/login", formData);
       // console.log("Login response data", response.data)
-      const { token,  id } = response.data;
+      const { token, _id } = response.data;
       
-      setIsLoggedIn(true);
-      setUserName(response.data.fname + " " + response.data.lname);
-      setUserId(id);
+      // setIsLoggedIn(true);
+      // setUserName(response.data.fname + " " + response.data.lname);
+      // setUserId(_id);
       // Set cookies
       // Cookies.set('isLoggedIn', true, { expires: 7 }); // Expires in 7 days
       // Cookies.set('userName', name, { expires: 7 });
@@ -73,8 +74,8 @@ export const AuthProvider = ({ children }) => {
       navigate("/logbooks"); // Redirect to logbooks after successful login
     } catch (error) {
       console.error("Login failed:", error);
-      navigate('/login')
       toast.error(error?.response?.data?.message || "Login failed. Try again.");
+      navigate('/login')
     }
   };
 
