@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AdminAuthContext } from "../../context/admin/AdminAuthContext";
+import ThemeToggle from "../ThemeToggle";
 
 const AdminNavbar = () => {
 
