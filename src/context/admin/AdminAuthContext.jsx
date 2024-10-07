@@ -44,11 +44,11 @@ export const AuthProvider = ({ children }) =>{
   const adminLogin = async (formData) => {
     try {
       const res = await axiosInstance.post(`/auth/adminLogin`, formData)
-      const { token, id, role} = res.data;
+      const { token, _id, role} = res.data;
 
       if (role == 'admin'){
         localStorage.setItem('token', token)
-        localStorage.setItem('adminId', id)
+        localStorage.setItem('adminId', _id)
         setAdminId(id)
         console.log("Succesfully logged in, AdminId: ", id);
         console.log(res.data);

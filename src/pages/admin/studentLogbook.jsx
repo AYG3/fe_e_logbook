@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loading from "../../components/shared/Loading.jsx"
-import axiosInstance from "../utils/axiosConfig";
-import DeleteModal from "../components/Modals/DeleteModal";
-import { handleDeleteEntry } from "../api/user";
+import axiosInstance from "../../utils/axiosConfig";
+import DeleteModal from "../../components/Modals/DeleteModal";
+import { handleDeleteEntry } from "../../api/user";
 
 const StudentLogbook = () => {
   const [entries, setEntries] = useState(null);
@@ -15,6 +15,7 @@ const StudentLogbook = () => {
   const [selectedEntryId, setSelectedEntryId] = useState(null);
   const [dropDown, setDropDown] = useState(false);
   const navigate = useNavigate();
+  const {userId} = useParams();
 
   const openDeleteModal = (entryId) => {
     setSelectedEntryId(entryId);
@@ -34,21 +35,19 @@ const StudentLogbook = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userId = localStorage.getItem("userId");
         const res = await axiosInstance.get(`/auth/user/${userId}`);
       } catch (error) {
         console.log("Error fetching user details", error);
       }
     };
 
-    fetchUserData();
+    fetchUserData();  
   }, []);
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const userId = localStorage.getItem("userId");
-        const res = await axiosInstance.get(`/logbook/userLogbooks/${userId}`);
+        const res = await axiosInstance.get(`/admin/user/logbooks/${userId}`);
         setEntries(res.data);
       } catch (error) {
         console.log("Error getting entries: ", error);
@@ -162,12 +161,6 @@ const StudentLogbook = () => {
                       <div className="flex justify-center gap-4">
                         <Link to={`/details/${entry._id}/${index}`} className="text-2x1 text-green-800 dark:text-green-400">
                           <BsInfoCircle />
-                        </Link>
-                        <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600 dark:text-yellow-400">
-                          <AiOutlineEdit />
-                        </Link>
-                        <Link onClick={() => openDeleteModal(entry._id, entry.day)} className="text-2x1 text-red-600 dark:text-red-400">
-                          <MdOutlineDelete />
                         </Link>
                       </div>
                     </td>
