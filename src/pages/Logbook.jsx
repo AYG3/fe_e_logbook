@@ -93,26 +93,26 @@ const Logbook = () => {
   }
 
   return (
-    <div className="overflow-x-auto ">
+    <div className="overflow-x-auto">
       <div className="flex justify-between items-center p-4">
         <div className="flex justify-end">
-          <Link to="/create" className="text-3xl my-8 ">
-            <MdOutlineAddBox className="text-4xl text-sky-800 " />
+          <Link to="/create" className="text-3xl my-8">
+            <MdOutlineAddBox className="text-4xl text-sky-800 dark:text-sky-400" />
           </Link>
         </div>
         <div className="relative">
           <button
-            className="text-gray-300 hover:text-white px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 border border-gray-600"
+            className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 px-4 py-2 rounded-md bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 border border-gray-600 dark:border-gray-700"
             onClick={toggleDropdown}
           >
             Weeks
           </button>
           {dropDown && (
-            <div className="absolute bg-gray-800 text-white mt-2 rounded-xl shadow-lg w-48 z-10">
+            <div className="absolute bg-gray-800 dark:bg-gray-900 text-white dark:text-gray-200 mt-2 rounded-xl shadow-lg w-48 z-10">
               {weeks?.map((wk, index) => (
                 <button
                   key={index}
-                  className="block px-4 py-2 text-left hover:bg-gray-700 w-full"
+                  className="block px-4 py-2 text-left hover:bg-gray-700 dark:hover:bg-gray-800 w-full"
                   onClick={() => {
                     handleScroll(wk);
                     toggleDropdown();
@@ -129,12 +129,12 @@ const Logbook = () => {
         <table className="w-full border border-separate border-spacing-2 table-auto">
           <thead>
             <tr>
-              <th className="border border-slate-600 rounded-md">No</th>
-              <th className="border border-slate-600 rounded-md">Day</th>
-              <th className="border border-slate-600 rounded-md w-max">
+              <th className="border border-slate-600 dark:border-slate-700 rounded-md">No</th>
+              <th className="border border-slate-600 dark:border-slate-700 rounded-md">Day</th>
+              <th className="border border-slate-600 dark:border-slate-700 rounded-md w-max">
                 Nature of Activities
               </th>
-              <th className="border border-slate-600 rounded-md">Operations</th>
+              <th className="border border-slate-600 dark:border-slate-700 rounded-md">Operations</th>
             </tr>
           </thead>
           <tbody>
@@ -143,30 +143,30 @@ const Logbook = () => {
                 <React.Fragment key={entry._id}>
                   {index > 0 && index % 5 === 0 && (
                     <tr>
-                      <td colSpan={4} className="border h-16 bg-slate-800 text-center rounded-md text-white font-bold"></td>
+                      <td colSpan={4} className="border h-16 bg-slate-800 dark:bg-slate-900 text-center rounded-md text-white dark:text-gray-200 font-bold"></td>
                     </tr>
                   )}
                   <tr id={Math.floor(index / 5) + 1}>
-                    <td className="border border-slate-700 rounded-md text-center">
+                    <td className="border border-slate-700 dark:border-slate-800 rounded-md text-center">
                       {index % 5 + 1}
                     </td>
-                    <td className="border border-slate-700 rounded-md text-center">
+                    <td className="border border-slate-700 dark:border-slate-800 rounded-md text-center">
                       {entry.day}
                       <br />
                       {entry.date}
                     </td>
-                    <td className="border border-slate-700 rounded-md whitespace-pre-wrap max-w-fit pl-4">
+                    <td className="border border-slate-700 dark:border-slate-800 rounded-md whitespace-pre-wrap max-w-fit pl-4">
                       {entry.nature_of_activities}
                     </td>
-                    <td className="border border-slate-700 rounded-md text-center">
+                    <td className="border border-slate-700 dark:border-slate-800 rounded-md text-center">
                       <div className="flex justify-center gap-4">
-                        <Link to={`/details/${entry._id}/${index}`} className="text-2x1 text-green-800">
+                        <Link to={`/details/${entry._id}/${index}`} className="text-2x1 text-green-800 dark:text-green-400">
                           <BsInfoCircle />
                         </Link>
-                        <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600">
+                        <Link to={`/edit/${entry._id}`} className="text-2x1 text-yellow-600 dark:text-yellow-400">
                           <AiOutlineEdit />
                         </Link>
-                        <Link onClick={() => openDeleteModal(entry._id, entry.day)} className="text-2x1 text-red-600">
+                        <Link onClick={() => openDeleteModal(entry._id, entry.day)} className="text-2x1 text-red-600 dark:text-red-400">
                           <MdOutlineDelete />
                         </Link>
                       </div>
